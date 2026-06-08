@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyTails — Hero C (bento-коллаж)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<section class="hero hero--c">
+  <div class="hero__bg-grad"></div>
+
+  <header class="nav">
+    <div class="brand"><img src="assets/logo-mark.svg" alt="MyTails"></div>
+    <nav class="lang"><a class="active">ES</a><a>EN</a><a>RU</a></nav>
+  </header>
+
+  <div class="row">
+    <div class="col-text reveal">
+      <span class="counter"><span class="dot"></span> Занято 23 из 100 мест</span>
+      <div class="eyebrow">🐾 Скоро запуск в Мадриде · первые 100 ситтеров</div>
+      <h1>Любите животных?<br>Они в Мадриде <span class="hl">уже ждут вас</span>.</h1>
+      <p class="subtitle">Гибкий график, честные выплаты и помощь на каждом шаге.</p>
+      <p class="income"><span class="num">От €200 в месяц</span> на свободном графике — вы сами выбираете заказы.</p>
+
+      <form class="form" onsubmit="return false">
+        <div class="row2">
+          <input type="text" placeholder="Имя (необязательно)" aria-label="Имя">
+          <input type="email" placeholder="Ваш email" aria-label="Email" required>
+        </div>
+        <button class="btn btn--block" type="submit">Хочу в первые 100 →</button>
+        <label class="consent"><input type="checkbox" required>
+          <span>Я согласен(на) получать письма о запуске MyTails и принимаю <a href="#">Политику конфиденциальности</a>. Отписаться можно в любой момент.</span></label>
+        <p class="micro">Бесплатно. Без обязательств.</p>
+      </form>
+    </div>
+
+    <div class="bento floaty">
+      <div class="tile tall"><img src="assets/pet-hug.jpg" alt=""></div>
+      <div class="tile"><img src="assets/pet-dog.jpg" alt=""></div>
+      <div class="tile"><img src="assets/pet-cat.jpg" alt=""></div>
+      <div class="tile badge" style="grid-column:span 2"><img src="assets/hero-petduo.jpg" alt=""></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
