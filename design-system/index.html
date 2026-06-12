@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyTails — Design System Preview «Тёплый дом»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=DM+Sans:opsz,wght@9..40,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF6EF;
+  --surface: #FFFFFF;
+  --surface-warm: #F3ECE0;
+  --ink: #3B342C;
+  --ink-muted: #7A7064;
+  --primary: #E2705B;
+  --primary-hover: #D45A44;
+  --primary-soft: #FBE3DD;
+  --sage: #7A9B76;
+  --sage-soft: #E5EDE3;
+  --gold: #E8B84B;
+  --gold-soft: #FBF1D9;
+  --success: #5B8C5A;
+  --warning: #D99A2B;
+  --error: #C75146;
+  --info: #5B7E9E;
+  --border: #E8DFD0;
+  --shadow: 0 4px 24px rgba(59, 52, 44, 0.08);
+  --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-pill: 9999px;
+}
+[data-theme="dark"] {
+  --bg: #262119;
+  --surface: #322B22;
+  --surface-warm: #3B342C;
+  --ink: #F3ECE0;
+  --ink-muted: #B5AA99;
+  --primary: #E8836F;
+  --primary-hover: #EE9886;
+  --primary-soft: #4A332D;
+  --sage: #8FAE8B;
+  --sage-soft: #333D31;
+  --gold: #E8B84B;
+  --gold-soft: #423923;
+  --border: #4A4136;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px; line-height: 1.6;
+  transition: background .3s, color .3s;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+h1,h2,h3,.display { font-family: "Fraunces", serif; font-optical-sizing: auto; line-height: 1.15; font-weight: 560; letter-spacing: -0.01em; }
+section { padding: 64px 0; }
+.section-label {
+  display:inline-block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--primary); background: var(--primary-soft); padding: 6px 14px; border-radius: var(--r-pill); margin-bottom: 16px;
+}
+.section-title { font-size: 36px; margin-bottom: 12px; }
+.section-sub { color: var(--ink-muted); max-width: 640px; margin-bottom: 36px; }
+
+/* top bar */
+.topbar {
+  position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+}
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
+.logo { font-family: "Fraunces", serif; font-weight: 640; font-size: 22px; display: flex; align-items: center; gap: 8px; }
+.logo .paw { font-size: 20px; }
+.theme-toggle {
+  border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  border-radius: var(--r-pill); padding: 8px 18px; font-family: inherit; font-weight: 600; font-size: 14px; cursor: pointer;
+}
+
+/* hero */
+.hero { padding: 96px 0 72px; text-align: center; position: relative; overflow: hidden; }
+.hero h1 { font-size: clamp(44px, 7vw, 76px); font-weight: 600; }
+.hero h1 em { font-style: italic; color: var(--primary); font-weight: 500; }
+.hero p { font-size: 19px; color: var(--ink-muted); margin: 20px auto 0; max-width: 560px; }
+.paw-path { font-size: 18px; letter-spacing: 18px; opacity: .35; margin-top: 28px; user-select: none; }
+
+/* swatches */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.swatch { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+.swatch .chip { height: 88px; }
+.swatch .meta { padding: 12px 14px; font-size: 13px; }
+.swatch .meta b { display: block; font-size: 14px; }
+.swatch .meta code { color: var(--ink-muted); font-family: ui-monospace, monospace; font-size: 12px; }
+
+/* typography specimen */
+.spec-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
+.spec-role { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); margin-bottom: 14px; }
+.spec-display { font-family: "Fraunces", serif; font-size: 42px; line-height: 1.1; font-weight: 560; }
+.spec-display-alt { font-family: "Instrument Serif", serif; font-size: 44px; line-height: 1.1; font-weight: 400; }
+.spec-body-alt { font-family: "DM Sans", sans-serif; }
+.spec-note { margin-top: 12px; font-size: 13px; color: var(--ink-muted); }
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px){ .vs { grid-template-columns: 1fr; } }
+.price { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+/* buttons & components */
+.btn { font-family: inherit; font-weight: 700; font-size: 15px; border-radius: var(--r-pill); padding: 13px 28px; cursor: pointer; border: none; transition: all .2s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-secondary { background: var(--sage-soft); color: var(--sage); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.input {
+  font-family: inherit; font-size: 15px; padding: 13px 18px; border-radius: var(--r-md);
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); min-width: 200px;
+}
+.input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+.alert { border-radius: var(--r-md); padding: 13px 18px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.alert-success { background: #E7F0E6; color: #3D6B3C; }
+.alert-warning { background: #FAF0DA; color: #8A6116; }
+.alert-error { background: #F8E4E1; color: #963A30; }
+.alert-info { background: #E3EBF2; color: #3D5B77; }
+[data-theme="dark"] .alert-success { background:#2E3A2D; color:#A9C9A7; }
+[data-theme="dark"] .alert-warning { background:#403521; color:#E3BC6E; }
+[data-theme="dark"] .alert-error { background:#432C29; color:#E89B90; }
+[data-theme="dark"] .alert-info { background:#2A3641; color:#9FBBD4; }
+
+/* landing mockup */
+.mock { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); background: var(--surface); }
+.mock-hero { background: linear-gradient(160deg, var(--surface-warm), var(--bg)); padding: 56px 48px; text-align: center; position: relative; }
+.mock-hero h3 { font-size: 40px; font-weight: 600; max-width: 620px; margin: 0 auto; }
+.mock-hero h3 em { font-style: italic; color: var(--primary); }
+.mock-hero p { color: var(--ink-muted); margin-top: 12px; }
+.search-bar {
+  margin: 28px auto 0; max-width: 720px; background: var(--surface); border-radius: var(--r-pill);
+  box-shadow: var(--shadow); display: flex; align-items: center; padding: 8px 8px 8px 24px; gap: 4px; border: 1px solid var(--border);
+}
+.search-bar .field { flex: 1; text-align: left; padding: 6px 16px; border-right: 1px solid var(--border); }
+.search-bar .field:last-of-type { border-right: none; }
+.search-bar .field b { display: block; font-size: 12px; }
+.search-bar .field span { font-size: 13px; color: var(--ink-muted); }
+.search-bar .btn { padding: 14px 26px; white-space: nowrap; }
+.trust-row { display: flex; justify-content: center; gap: 28px; margin-top: 24px; font-size: 13.5px; font-weight: 600; color: var(--ink-muted); flex-wrap: wrap; }
+.trust-row span::before { content: "✓ "; color: var(--sage); font-weight: 800; }
+.wavy { display:block; width:100%; height:28px; }
+
+/* sitter cards */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 36px 40px 44px; }
+@media (max-width: 860px){ .cards { grid-template-columns: 1fr; } }
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: transform .25s, box-shadow .25s; }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.card img { width: 100%; height: 170px; object-fit: cover; display: block; }
+.card .pad { padding: 18px; }
+.card .name { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 17px; }
+.card .name .rate { font-size: 14px; color: var(--gold); white-space: nowrap; }
+.card .sub { font-size: 13.5px; color: var(--ink-muted); margin-top: 3px; }
+.badges { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.badge { font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: var(--r-pill); }
+.badge-sage { background: var(--sage-soft); color: var(--sage); }
+.badge-gold { background: var(--gold-soft); color: #9C7415; }
+[data-theme="dark"] .badge-gold { color: var(--gold); }
+.card .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+.card .foot .from { font-size: 12.5px; color: var(--ink-muted); }
+.card .foot .from b { display:block; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.btn-sm { padding: 9px 18px; font-size: 13.5px; }
+
+/* photo report mockup */
+.report { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; align-items: center; }
+@media (max-width: 860px){ .report { grid-template-columns: 1fr; } }
+.report .text { padding: 48px; }
+.report h3 { font-size: 32px; margin-bottom: 14px; }
+.report p { color: var(--ink-muted); }
+.chat { background: var(--surface-warm); padding: 40px 36px; display: flex; flex-direction: column; gap: 12px; min-height: 100%; }
+.bubble { background: var(--surface); border-radius: var(--r-lg); border-bottom-left-radius: 6px; padding: 14px 16px; max-width: 320px; box-shadow: var(--shadow); font-size: 14px; }
+.bubble img { width: 100%; border-radius: var(--r-md); margin-bottom: 8px; display:block; }
+.bubble .time { font-size: 11.5px; color: var(--ink-muted); margin-top: 6px; }
+.bubble.owner { align-self: flex-end; background: var(--primary); color: #fff; border-radius: var(--r-lg); border-bottom-right-radius: 6px; }
+
+/* booking form mockup */
+.booking { display: grid; grid-template-columns: 1fr 360px; gap: 28px; padding: 40px; }
+@media (max-width: 860px){ .booking { grid-template-columns: 1fr; } }
+.fgroup { margin-bottom: 18px; }
+.fgroup label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 7px; }
+.fgroup .input { width: 100%; min-width: 0; }
+.check { display: flex; align-items: center; gap: 10px; font-size: 14.5px; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; background: var(--surface); }
+.check input { accent-color: var(--primary); width: 17px; height: 17px; }
+.check .p { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+.summary { background: var(--surface-warm); border-radius: var(--r-lg); padding: 26px; height: fit-content; }
+.summary h4 { font-family: "Fraunces", serif; font-size: 20px; margin-bottom: 16px; }
+.sline { display: flex; justify-content: space-between; font-size: 14.5px; padding: 7px 0; color: var(--ink-muted); }
+.sline.total { border-top: 1.5px solid var(--border); margin-top: 10px; padding-top: 14px; font-weight: 800; font-size: 17px; color: var(--ink); }
+.sline span:last-child { font-variant-numeric: tabular-nums; }
+.summary .btn { width: 100%; margin-top: 18px; }
+
+footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: center; color: var(--ink-muted); font-size: 13.5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"><span class="paw">🐾</span> MyTails <span style="font-family:'Plus Jakarta Sans';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">design system preview</span></div>
+    <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️ Тема</button>
+  </div>
+</div>
+
+<div class="hero wrap">
+  <h1>Тёплый дом<br><em>для тех, кто ждёт вас</em></h1>
+  <p>Дизайн-система MyTails: кремовые поверхности, терракота и шалфей, Fraunces + Plus Jakarta Sans. Якорь — «тепло и доверие».</p>
+  <div class="paw-path">🐾 🐾 🐾 🐾 🐾</div>
+</div>
+
+<section class="wrap" id="colors">
+  <span class="section-label">01 · Цвет</span>
+  <h2 class="section-title">Палитра «Тёплый дом»</h2>
+  <p class="section-sub">Тёплая земляная палитра 2026: крем вместо стерильного белого, терракота-коралл как голос бренда, шалфей как спокойствие. Переключи тёмную тему кнопкой сверху.</p>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="chip" style="background:#FAF6EF;border-bottom:1px solid var(--border)"></div><div class="meta"><b>Cream</b><code>#FAF6EF · фон</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#F3ECE0"></div><div class="meta"><b>Sand</b><code>#F3ECE0 · поверхности</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#E2705B"></div><div class="meta"><b>Terracotta</b><code>#E2705B · primary</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#7A9B76"></div><div class="meta"><b>Sage</b><code>#7A9B76 · secondary</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#E8B84B"></div><div class="meta"><b>Honey</b><code>#E8B84B · рейтинги</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#3B342C"></div><div class="meta"><b>Warm Ink</b><code>#3B342C · текст</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#5B8C5A"></div><div class="meta"><b>Success</b><code>#5B8C5A</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#C75146"></div><div class="meta"><b>Error</b><code>#C75146</code></div></div>
+  </div>
+  <div style="margin-top:32px">
+    <div class="alert alert-success">✓ Бронирование подтверждено — María уже ждёт Бруно!</div>
+    <div class="alert alert-warning">⚠ Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
+    <div class="alert alert-error">✕ Оплата не прошла. Проверьте карту и попробуйте снова.</div>
+    <div class="alert alert-info">ℹ Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
+  </div>
+</section>
+
+<section class="wrap" id="type">
+  <span class="section-label">02 · Типографика</span>
+  <h2 class="section-title">Fraunces + Plus Jakarta Sans</h2>
+  <p class="section-sub">Серифа в заголовках нет ни у одного pet-маркетплейса — это наш риск №1 и главная отстройка. Ниже — сравнение с альтернативами, чтобы выбрать глазами.</p>
+
+  <div class="vs">
+    <div class="spec-card">
+      <div class="spec-role">Display — Fraunces (предложение)</div>
+      <div class="spec-display">Loving Care, While You're Not There</div>
+      <div class="spec-display" style="margin-top:8px">Забота, пока вас нет рядом</div>
+      <p class="spec-note">Мягкая «тёплая» антиква с характером. Variable: от текстовой до жирной плакатной. Кириллица — полная.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-role">Display — Instrument Serif (альтернатива)</div>
+      <div class="spec-display-alt">Loving Care, While You're Not There</div>
+      <div class="spec-display-alt" style="margin-top:8px">Забота, пока вас нет рядом</div>
+      <p class="spec-note">Легче и «журнальнее», но одна насечка веса и слабее кириллица. Менее гибкая для UI.</p>
+    </div>
+  </div>
+
+  <div class="vs">
+    <div class="spec-card">
+      <div class="spec-role">Body — Plus Jakarta Sans (предложение)</div>
+      <p>María присматривает за собаками в районе Чамбери уже четыре года. У неё дома просторная терраса, а рядом — парк Ретиро. Ваш питомец получит прогулки утром и вечером, фото-отчёты каждый день и столько обнимашек, сколько захочет.</p>
+      <p style="margin-top:10px"><span class="price">€24/ночь · 4.9 ★ · 127 отзывов</span></p>
+      <p class="spec-note">Дружелюбная геометрия, мягкие терминалы, tabular-nums для цен.</p>
+    </div>
+    <div class="spec-card">
+      <div class="spec-role">Body — DM Sans (альтернатива)</div>
+      <p class="spec-body-alt">María присматривает за собаками в районе Чамбери уже четыре года. У неё дома просторная терраса, а рядом — парк Ретиро. Ваш питомец получит прогулки утром и вечером, фото-отчёты каждый день и столько обнимашек, сколько захочет.</p>
+      <p class="spec-body-alt" style="margin-top:10px"><span class="price">€24/ночь · 4.9 ★ · 127 отзывов</span></p>
+      <p class="spec-note">Нейтральнее и компактнее; чуть меньше «характера», зато строже в таблицах.</p>
+    </div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-role">Шкала</div>
+    <div style="font-family:'Fraunces',serif;font-size:48px;font-weight:600">H1 · 48px Hero</div>
+    <div style="font-family:'Fraunces',serif;font-size:34px;font-weight:580;margin-top:6px">H2 · 34px Section</div>
+    <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:560;margin-top:6px">H3 · 24px Card title</div>
+    <div style="font-size:16px;margin-top:10px">Body · 16px — основной текст интерфейса</div>
+    <div style="font-size:14px;color:var(--ink-muted);margin-top:4px">Small · 14px — подписи и метаданные</div>
+    <div style="font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-muted);margin-top:6px">Label · 12.5px uppercase</div>
+  </div>
+</section>
+
+<section class="wrap" id="components">
+  <span class="section-label">03 · Компоненты</span>
+  <h2 class="section-title">Кнопки, поля, формы</h2>
+  <p class="section-sub">Pill-кнопки, поля 12px, карточки 20px — скругления иерархичные, а не «всё пузырём».</p>
+  <div class="spec-card">
+    <div class="row" style="margin-bottom:22px">
+      <button class="btn btn-primary">Найти ситтера</button>
+      <button class="btn btn-secondary">Стать ситтером</button>
+      <button class="btn btn-ghost">Подробнее</button>
+    </div>
+    <div class="row">
+      <input class="input" placeholder="Город — Мадрид" />
+      <input class="input" placeholder="Даты — 14–18 июня" />
+      <select class="input"><option>Передержка</option><option>Дневной уход</option><option>Выгул</option></select>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="mock-landing">
+  <span class="section-label">04 · Мокап · Лендинг</span>
+  <h2 class="section-title">Первый экран mytails.eu</h2>
+  <p class="section-sub">Hero как у Napo: тепло + trust-сигналы сразу. Поиск — главное действие.</p>
+  <div class="mock">
+    <div class="mock-hero">
+      <h3>Любящие руки для вашего питомца, <em>пока вы в отъезде</em></h3>
+      <p>Проверенные ситтеры рядом с вами в Мадриде</p>
+      <div class="search-bar">
+        <div class="field"><b>Где</b><span>Мадрид</span></div>
+        <div class="field"><b>Услуга</b><span>Передержка</span></div>
+        <div class="field"><b>Даты</b><span>14 – 18 июня</span></div>
+        <button class="btn btn-primary">🔍 Найти</button>
+      </div>
+      <div class="trust-row">
+        <span>Ситтеры проверены вручную</span>
+        <span>Фото-отчёты каждый день</span>
+        <span>Безопасная оплата</span>
+      </div>
+    </div>
+    <svg class="wavy" viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0,14 C150,28 300,0 450,14 C600,28 750,0 900,14 C1050,28 1150,7 1200,14 L1200,28 L0,28 Z" fill="var(--surface)"/></svg>
+    <div class="cards">
+      <div class="card">
+        <img src="https://placedog.net/420/260?id=12" alt="">
+        <div class="pad">
+          <div class="name">María G. <span class="rate">★ 4.9 (127)</span></div>
+          <div class="sub">Чамбери, Мадрид · 1.2 км от вас</div>
+          <div class="badges"><span class="badge badge-sage">Проверена</span><span class="badge badge-gold">Founding Sitter</span></div>
+          <div class="foot"><div class="from">за ночь<b>€24</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placedog.net/420/260?id=33" alt="">
+        <div class="pad">
+          <div class="name">Carlos R. <span class="rate">★ 4.8 (89)</span></div>
+          <div class="sub">Ла-Латина, Мадрид · 2.5 км от вас</div>
+          <div class="badges"><span class="badge badge-sage">Проверен</span><span class="badge badge-sage">С двором</span></div>
+          <div class="foot"><div class="from">за ночь<b>€21</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placedog.net/420/260?id=54" alt="">
+        <div class="pad">
+          <div class="name">Lucía M. <span class="rate">★ 5.0 (64)</span></div>
+          <div class="sub">Саламанка, Мадрид · 3.1 км от вас</div>
+          <div class="badges"><span class="badge badge-sage">Проверена</span><span class="badge badge-gold">Founding Sitter</span></div>
+          <div class="foot"><div class="from">за ночь<b>€28</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="mock-report">
+  <span class="section-label">05 · Мокап · Фото-отчёты</span>
+  <h2 class="section-title">«Я вижу своего питомца»</h2>
+  <div class="mock report">
+    <div class="text">
+      <h3>Фото-отчёты каждый день</h3>
+      <p>Ситтер присылает фото и заметки о прогулках, еде и настроении. Вы спокойны — питомец в любящих руках, и вы это видите.</p>
+      <div style="margin-top:22px"><button class="btn btn-primary">Как это работает</button></div>
+    </div>
+    <div class="chat">
+      <div class="bubble">
+        <img src="https://placedog.net/320/200?id=78" alt="">
+        Бруно отлично погулял в Ретиро — два часа и ни одной несъеденной палки! 🐶
+        <div class="time">María · 12:40</div>
+      </div>
+      <div class="bubble owner">Спасибо! Какой он довольный 🧡<div class="time" style="color:rgba(255,255,255,.7)">Вы · 12:43</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="mock-booking">
+  <span class="section-label">06 · Мокап · Бронирование</span>
+  <h2 class="section-title">Форма заказа с допуслугами</h2>
+  <div class="mock booking">
+    <div>
+      <div class="fgroup"><label>Питомец</label><select class="input"><option>Бруно · бигль, 4 года</option></select></div>
+      <div class="fgroup"><label>Даты передержки</label><input class="input" value="14 – 18 июня 2026" /></div>
+      <div class="fgroup"><label>Дополнительно</label>
+        <div class="check"><input type="checkbox" checked> Забрать питомца (Pickup) <span class="p">€10</span></div>
+        <div class="check"><input type="checkbox"> Привезти обратно (Return) <span class="p">€10</span></div>
+      </div>
+      <div class="fgroup"><label>Пожелания для María</label><input class="input" placeholder="Бруно боится грозы, любит морковку…" /></div>
+    </div>
+    <div class="summary">
+      <h4>Ваш заказ</h4>
+      <div class="sline"><span>Передержка · 4 ночи × €24</span><span>€96</span></div>
+      <div class="sline"><span>Pickup</span><span>€10</span></div>
+      <div class="sline"><span>Сервисный сбор</span><span>€0</span></div>
+      <div class="sline total"><span>Итого</span><span>€106</span></div>
+      <button class="btn btn-primary">Забронировать</button>
+      <p style="font-size:12.5px;color:var(--ink-muted);margin-top:12px;text-align:center">Оплата спишется после подтверждения ситтером</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  MyTails design system preview · «Тёплый дом» · Fraunces + Plus Jakarta Sans · сгенерировано /design-consultation
+</footer>
+
+</body>
+</html>

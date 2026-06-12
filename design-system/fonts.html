@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyTails — Шрифты EN/ES/RU (OFL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Manrope:wght@300..800&family=Nunito:ital,wght@0,300..900;1,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF6EF; --surface: #FFFFFF; --surface-warm: #F3ECE0;
+  --ink: #3B342C; --ink-muted: #7A7064;
+  --primary: #E2705B; --primary-soft: #FBE3DD;
+  --sage: #7A9B76; --sage-soft: #E5EDE3;
+  --gold: #E8B84B; --border: #E8DFD0;
+  --shadow: 0 4px 24px rgba(59,52,44,.08);
+  --r-md: 12px; --r-lg: 20px; --r-pill: 9999px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif; line-height:1.6; font-size:16px; }
+.wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+section { padding:52px 0; }
+.label { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--primary); background:var(--primary-soft); padding:6px 14px; border-radius:var(--r-pill); margin-bottom:14px; }
+.h-sec { font-size:32px; font-weight:800; margin-bottom:8px; }
+.sub { color:var(--ink-muted); max-width:680px; margin-bottom:30px; }
+.hero { text-align:center; padding:64px 0 40px; }
+.hero h1 { font-family:"Vollkorn",serif; font-size:clamp(36px,5.5vw,56px); font-weight:600; }
+.hero h1 em { font-style:italic; color:var(--primary); }
+.hero p { color:var(--ink-muted); margin-top:14px; max-width:640px; margin-left:auto; margin-right:auto; }
+.ofl { display:inline-block; font-size:12px; font-weight:700; background:var(--sage-soft); color:var(--sage); padding:3px 10px; border-radius:var(--r-pill); margin-left:8px; vertical-align:middle; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px 32px; margin-bottom:22px; box-shadow:var(--shadow); }
+.fname { display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+.fname b { font-size:19px; font-weight:800; }
+.fnote { font-size:13.5px; color:var(--ink-muted); margin-bottom:20px; }
+.lang { display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:baseline; padding:10px 0; border-top:1px dashed var(--border); }
+.lang:first-of-type { border-top:none; }
+.lang .tag { font-size:11.5px; font-weight:800; letter-spacing:.06em; color:var(--ink-muted); text-transform:uppercase; padding-top:6px; }
+.disp { font-size:32px; line-height:1.2; font-weight:600; }
+.v-vollkorn .disp { font-family:"Vollkorn",serif; }
+.v-lora .disp { font-family:"Lora",serif; }
+.v-alegreya .disp { font-family:"Alegreya",serif; }
+.v-playfair .disp { font-family:"Playfair Display",serif; }
+.bodytxt { font-size:16px; }
+.b-manrope .bodytxt { font-family:"Manrope",sans-serif; }
+.b-nunito .bodytxt { font-family:"Nunito",sans-serif; }
+.b-rubik .bodytxt { font-family:"Rubik",sans-serif; }
+.nums { margin-top:14px; padding:12px 16px; background:var(--surface-warm); border-radius:var(--r-md); font-variant-numeric:tabular-nums; font-size:15px; display:flex; gap:28px; flex-wrap:wrap; }
+.nums b { font-weight:800; }
+.reco { border:2px solid var(--primary); position:relative; }
+.reco-tag { position:absolute; top:-12px; left:24px; background:var(--primary); color:#fff; font-size:12px; font-weight:800; padding:4px 14px; border-radius:var(--r-pill); }
+/* pairing mockups */
+.pair-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media (max-width:900px){ .pair-grid { grid-template-columns:1fr; } }
+.mini { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow); }
+.mini .mhero { background:var(--surface-warm); padding:24px 22px 20px; }
+.mini .mhero h4 { font-size:21px; line-height:1.25; font-weight:600; }
+.mini .mhero h4 em { font-style:italic; color:var(--primary); }
+.mini .mbody { padding:18px 22px 22px; }
+.mini .mbody p { font-size:13.5px; color:var(--ink-muted); }
+.mini .sline { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+.mini .price { font-weight:800; font-variant-numeric:tabular-nums; font-size:16px; }
+.mini .star { color:var(--gold); font-size:13px; font-weight:700; }
+.mini .btn { display:inline-block; background:var(--primary); color:#fff; font-size:13px; font-weight:700; padding:9px 18px; border-radius:var(--r-pill); }
+.p1 .mhero h4 { font-family:"Vollkorn",serif; } .p1 .mbody, .p1 .btn { font-family:"Manrope",sans-serif; }
+.p2 .mhero h4 { font-family:"Lora",serif; } .p2 .mbody, .p2 .btn { font-family:"Nunito",sans-serif; }
+.p3 .mhero h4 { font-family:"Alegreya",serif; } .p3 .mbody, .p3 .btn { font-family:"Rubik",sans-serif; }
+.pair-name { font-size:14px; font-weight:800; padding:12px 22px; border-top:1px solid var(--border); background:var(--bg); }
+footer { border-top:1px solid var(--border); padding:30px 0 44px; text-align:center; color:var(--ink-muted); font-size:13.5px; }
+</style>
+</head>
+<body>
+
+<div class="hero wrap">
+  <h1>Шрифты для трёх языков, <em>без нарушений лицензий</em></h1>
+  <p>Все кандидаты — Google Fonts под SIL Open Font License (бесплатно для коммерции, без атрибуции в UI). Каждый проверен на кириллицу и испанские диакритики. Fraunces и Plus Jakarta Sans из прошлого превью отпали — у них нет кириллицы.</p>
+</div>
+
+<section class="wrap">
+  <span class="label">01 · Display — тёплая антиква</span>
+  <h2 class="h-sec">Заголовки: EN · ES · RU</h2>
+  <p class="sub">Та же роль, что была у Fraunces: характер и «рукотворное тепло» против стерильных гротесков конкурентов.</p>
+
+  <div class="card v-vollkorn reco">
+    <span class="reco-tag">Рекомендация</span>
+    <div class="fname"><b>Vollkorn</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">«Цельнозерновой» — задуман как тёплая «хлебная» антиква для повседневности. Variable 400–900 + italic. Полная кириллица. Самый «домашний» характер из всех.</div>
+    <div class="lang"><span class="tag">EN</span><div class="disp">Loving Care, While You're Not There</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="disp">Cariño y atención, ¿estás de viaje? ¡Sin problema!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="disp">Забота и любовь, пока вас нет рядом</div></div>
+  </div>
+
+  <div class="card v-lora">
+    <div class="fname"><b>Lora</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">Современная антиква с каллиграфическими корнями. Мягче и нейтральнее Vollkorn — меньше характера, больше универсальности. Variable 400–700 + italic.</div>
+    <div class="lang"><span class="tag">EN</span><div class="disp">Loving Care, While You're Not There</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="disp">Cariño y atención, ¿estás de viaje? ¡Sin problema!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="disp">Забота и любовь, пока вас нет рядом</div></div>
+  </div>
+
+  <div class="card v-alegreya">
+    <div class="fname"><b>Alegreya</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">«Радость» по-испански — живая гуманистическая антиква, премия ATypI. Самая «литературная» и динамичная. Variable 400–900 + italic.</div>
+    <div class="lang"><span class="tag">EN</span><div class="disp">Loving Care, While You're Not There</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="disp">Cariño y atención, ¿estás de viaje? ¡Sin problema!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="disp">Забота и любовь, пока вас нет рядом</div></div>
+  </div>
+
+  <div class="card v-playfair">
+    <div class="fname"><b>Playfair Display</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">Контрастная «модная» антиква. Элегантно, но холоднее и заметно заезженнее остальных — для сравнения.</div>
+    <div class="lang"><span class="tag">EN</span><div class="disp">Loving Care, While You're Not There</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="disp">Cariño y atención, ¿estás de viaje? ¡Sin problema!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="disp">Забота и любовь, пока вас нет рядом</div></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="label">02 · Body — дружелюбный sans</span>
+  <h2 class="h-sec">Текст интерфейса: EN · ES · RU</h2>
+  <p class="sub">Роль Plus Jakarta Sans: читаемость, мягкость, цены с tabular-nums.</p>
+
+  <div class="card b-manrope reco">
+    <span class="reco-tag">Рекомендация</span>
+    <div class="fname"><b>Manrope</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">Современный полугеометрический sans с мягкими деталями. Отличная кириллица, variable 300–800, tabular figures. Строгости хватает для дашбордов, теплоты — для лендинга.</div>
+    <div class="lang"><span class="tag">EN</span><div class="bodytxt">María has been looking after dogs in Chamberí for four years. Your pet gets morning walks, daily photo updates and all the cuddles they ask for.</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="bodytxt">María cuida perros en Chamberí desde hace cuatro años. Tu mascota tendrá paseos cada mañana, fotos diarias y todos los mimos del mundo. ¡Garantizado!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="bodytxt">Мария присматривает за собаками в Чамбери уже четыре года. Вашего питомца ждут утренние прогулки, ежедневные фото-отчёты и столько обнимашек, сколько он захочет.</div></div>
+    <div class="nums bodytxt"><span>€24/ночь</span><span>★ 4.9 · 127 отзывов</span><span><b>Итого: €106,00</b></span><span>14–18 июня 2026</span></div>
+  </div>
+
+  <div class="card b-nunito">
+    <div class="fname"><b>Nunito</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">Скруглённые терминалы — самый «ласковый» и pet-friendly из трёх. Риск: на плотных таблицах может выглядеть слишком мягко. Variable 300–900 + italic.</div>
+    <div class="lang"><span class="tag">EN</span><div class="bodytxt">María has been looking after dogs in Chamberí for four years. Your pet gets morning walks, daily photo updates and all the cuddles they ask for.</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="bodytxt">María cuida perros en Chamberí desde hace cuatro años. Tu mascota tendrá paseos cada mañana, fotos diarias y todos los mimos del mundo. ¡Garantizado!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="bodytxt">Мария присматривает за собаками в Чамбери уже четыре года. Вашего питомца ждут утренние прогулки, ежедневные фото-отчёты и столько обнимашек, сколько он захочет.</div></div>
+    <div class="nums bodytxt"><span>€24/ночь</span><span>★ 4.9 · 127 отзывов</span><span><b>Итого: €106,00</b></span><span>14–18 июня 2026</span></div>
+  </div>
+
+  <div class="card b-rubik">
+    <div class="fname"><b>Rubik</b><span class="ofl">SIL OFL</span></div>
+    <div class="fnote">Слегка скруглённые углы букв, чуть плотнее и «массивнее». Хорош в кнопках и заголовках карточек, в длинном тексте тяжелее Manrope. Variable 300–900 + italic.</div>
+    <div class="lang"><span class="tag">EN</span><div class="bodytxt">María has been looking after dogs in Chamberí for four years. Your pet gets morning walks, daily photo updates and all the cuddles they ask for.</div></div>
+    <div class="lang"><span class="tag">ES</span><div class="bodytxt">María cuida perros en Chamberí desde hace cuatro años. Tu mascota tendrá paseos cada mañana, fotos diarias y todos los mimos del mundo. ¡Garantizado!</div></div>
+    <div class="lang"><span class="tag">RU</span><div class="bodytxt">Мария присматривает за собаками в Чамбери уже четыре года. Вашего питомца ждут утренние прогулки, ежедневные фото-отчёты и столько обнимашек, сколько он захочет.</div></div>
+    <div class="nums bodytxt"><span>€24/ночь</span><span>★ 4.9 · 127 отзывов</span><span><b>Итого: €106,00</b></span><span>14–18 июня 2026</span></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="label">03 · Пары в деле</span>
+  <h2 class="h-sec">Три связки на мини-карточках</h2>
+  <p class="sub">Как пары ощущаются вместе — hero + текст карточки ситтера, по одному языку на карточку.</p>
+  <div class="pair-grid">
+    <div class="mini p1">
+      <div class="mhero"><h4>Любящие руки, <em>пока вас нет рядом</em></h4></div>
+      <div class="mbody">
+        <p>Мария · Чамбери, Мадрид. Прогулки дважды в день, фото-отчёты, дом с террасой.</p>
+        <div class="sline"><span class="price">€24/ночь <span class="star">★ 4.9</span></span><span class="btn">Профиль</span></div>
+      </div>
+      <div class="pair-name">A · Vollkorn + Manrope — рекомендация</div>
+    </div>
+    <div class="mini p2">
+      <div class="mhero"><h4>Cariño y atención, <em>mientras no estás</em></h4></div>
+      <div class="mbody">
+        <p>Carlos · La Latina, Madrid. Paseos dos veces al día, fotos diarias, piso con patio.</p>
+        <div class="sline"><span class="price">€21/noche <span class="star">★ 4.8</span></span><span class="btn">Ver perfil</span></div>
+      </div>
+      <div class="pair-name">B · Lora + Nunito — мягче</div>
+    </div>
+    <div class="mini p3">
+      <div class="mhero"><h4>Loving care, <em>while you're not there</em></h4></div>
+      <div class="mbody">
+        <p>Lucía · Salamanca, Madrid. Two walks a day, daily photo updates, sunny flat.</p>
+        <div class="sline"><span class="price">€28/night <span class="star">★ 5.0</span></span><span class="btn">View profile</span></div>
+      </div>
+      <div class="pair-name">C · Alegreya + Rubik — живее</div>
+    </div>
+  </div>
+</section>
+
+<footer>MyTails font preview · все шрифты Google Fonts, SIL Open Font License (free for commercial use) · self-host через next/font/google</footer>
+
+</body>
+</html>
