@@ -128,7 +128,7 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 /* 05 bookings list */
 .bk-list { display:flex; flex-direction:column; gap:12px; }
 .bk { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:auto 1.2fr 1fr 1fr auto; gap:var(--sp-md); align-items:center; }
-@media (max-width:860px){ .bk { grid-template-columns:auto 1fr; row-gap:10px; } .bk .cell-act { grid-column:1 / -1; } }
+@media (max-width:860px){ .bk { grid-template-columns:auto 1fr; row-gap:10px; overflow:hidden; } .bk .cell-act { grid-column:1 / -1; } .bk .who { min-width:0; } .bk .who b, .bk .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } }
 .bk img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .bk .who b { display:block; font-size:15px; }
 .bk .who span { font-size:12.5px; color:var(--ink-muted); }
