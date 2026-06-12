@@ -198,6 +198,17 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 .ch-input .send { width:42px; height:42px; border-radius:50%; border:none; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background .2s; }
 .ch-input .send:hover { background:var(--primary-hover); }
 .unread-badge { display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 6px; border-radius:var(--r-pill); background:var(--primary); color:#fff; font-size:11.5px; font-weight:800; }
+
+/* мобайл */
+@media (max-width:560px) {
+  .topbar .logo > span:last-child { display:none; }
+  .topbar .wrap { flex-wrap:wrap; gap:8px; }
+  .topnav { gap:10px; font-size:12.5px; }
+  .ml { grid-template-columns:auto 1fr; }
+  .ml .stats { grid-column:1 / -1; flex-wrap:wrap; gap:12px; }
+  .ml .who { min-width:0; }
+  .ml .who b, .ml .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; }
+}
 </style>
 </head>
 <body>
