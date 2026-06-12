@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyTails — Алерты: 5 вариантов</title>
+<title>MyTails — Алерты: решение</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
@@ -38,114 +38,65 @@ h1 { font-family:"Lora",serif; font-size:34px; font-weight:600; }
 .intro { color:var(--ink-muted); max-width:640px; margin-bottom:8px; }
 section { padding:34px 0 6px; }
 .vname { font-family:"Lora",serif; font-size:22px; font-weight:600; margin-bottom:4px; }
-.vnote { font-size:13.5px; color:var(--ink-muted); margin-bottom:18px; max-width:640px; }
-.reco { display:inline-block; background:var(--primary); color:#fff; font-size:11.5px; font-weight:800; padding:3px 12px; border-radius:var(--r-pill); margin-left:8px; vertical-align:3px; }
+.vnote { font-size:13.5px; color:var(--ink-muted); margin-bottom:18px; max-width:680px; }
+.tag { display:inline-block; background:var(--sage); color:#fff; font-size:11.5px; font-weight:800; padding:3px 12px; border-radius:var(--r-pill); margin-left:8px; vertical-align:3px; }
 .stack > * { margin-bottom:10px; }
 
-/* A — текущий bootstrap-tint */
-.a { border-radius:var(--r-md); padding:13px 18px; font-size:14px; font-weight:600; }
-.a-s { background:var(--success-soft); color:#3D6B3C; }
-.a-w { background:var(--warning-soft); color:#8A6116; }
-.a-e { background:var(--error-soft); color:#963A30; }
-.a-i { background:var(--info-soft); color:#3D5B77; }
-[data-theme="dark"] .a-s{color:#A9C9A7} [data-theme="dark"] .a-w{color:#E3BC6E}
-[data-theme="dark"] .a-e{color:#E89B90} [data-theme="dark"] .a-i{color:#9FBBD4}
+/* единый набор иконок */
+.ico { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
 
-/* B — цветной бордер */
-.b { border-radius:var(--r-md); padding:12px 18px; font-size:14.5px; background:var(--surface); border:1.5px solid; display:flex; gap:10px; align-items:baseline; }
-.b .ic { font-weight:800; }
-.b-s { border-color:var(--success); } .b-s .ic{ color:var(--success); }
-.b-w { border-color:var(--warning); } .b-w .ic{ color:var(--warning); }
-.b-e { border-color:var(--error); } .b-e .ic{ color:var(--error); }
-.b-i { border-color:var(--info); } .b-i .ic{ color:var(--info); }
+/* TOAST (вариант D) — всплывающие уведомления */
+.toast { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow-toast); display:flex; gap:14px; align-items:flex-start; }
+.toast .chip { flex:0 0 38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
+.toast b { display:block; font-size:14.5px; }
+.toast span { font-size:13.5px; color:var(--ink-muted); }
+.t-s .chip { background:var(--success-soft); color:var(--success); }
+.t-w .chip { background:var(--warning-soft); color:var(--warning); }
+.t-e .chip { background:var(--error-soft); color:var(--error); }
+.t-i .chip { background:var(--info-soft); color:var(--info); }
 
-/* C — левая акцент-полоса */
-.c { border-radius:var(--r-md); padding:12px 18px 12px 16px; font-size:14.5px; background:var(--surface); border:1px solid var(--border); border-left:4px solid; display:flex; gap:10px; align-items:baseline; box-shadow:var(--shadow); }
-.c .ic { font-weight:800; }
-.c-s { border-left-color:var(--success); } .c-s .ic{ color:var(--success); }
-.c-w { border-left-color:var(--warning); } .c-w .ic{ color:var(--warning); }
-.c-e { border-left-color:var(--error); } .c-e .ic{ color:var(--error); }
-.c-i { border-left-color:var(--info); } .c-i .ic{ color:var(--info); }
-
-/* D — toast с иконкой-чипом */
-.d { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow-toast); display:flex; gap:14px; align-items:flex-start; }
-.d .chip { flex:0 0 38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; }
-.d b { display:block; font-size:14.5px; }
-.d span { font-size:13.5px; color:var(--ink-muted); }
-.d-s .chip { background:var(--success-soft); color:var(--success); }
-.d-w .chip { background:var(--warning-soft); color:var(--warning); }
-.d-e .chip { background:var(--error-soft); color:var(--error); }
-.d-i .chip { background:var(--info-soft); color:var(--info); }
-
-/* E — гибрид: toast на тёплой подложке */
-.e { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface-warm); border:1px solid var(--border); display:flex; gap:14px; align-items:flex-start; }
-.e .chip { flex:0 0 38px; height:38px; border-radius:var(--r-pill); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; background:var(--surface); }
-.e b { display:block; font-size:14.5px; }
-.e span { font-size:13.5px; color:var(--ink-muted); }
-.e-s .chip { color:var(--success); } .e-w .chip { color:var(--warning); }
-.e-e .chip { color:var(--error); } .e-i .chip { color:var(--info); }
+/* INLINE (вариант C) — сообщения в формах и на страницах */
+.inline { border-radius:var(--r-md); padding:12px 18px 12px 16px; font-size:14.5px; background:var(--surface); border:1px solid var(--border); border-left:4px solid; display:flex; gap:10px; align-items:center; box-shadow:var(--shadow); }
+.in-s { border-left-color:var(--success); } .in-s .ico{ color:var(--success); }
+.in-w { border-left-color:var(--warning); } .in-w .ico{ color:var(--warning); }
+.in-e { border-left-color:var(--error); } .in-e .ico{ color:var(--error); }
+.in-i { border-left-color:var(--info); } .in-i .ico{ color:var(--info); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <h1>Алерты: 5 вариантов</h1>
+    <h1>Алерты — решение</h1>
     <button class="toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️ Тема</button>
   </div>
-  <p class="intro">Один и тот же контент в пяти оформлениях. Проверь обе темы.</p>
+  <p class="intro">Иконки заменены текстовых глифов на единый SVG-набор (Lucide, 18px, stroke 2.5) — размеры больше не пляшут. Проверь обе темы.</p>
+
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 20h16a2 2 0 0 0 1.73-2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  </svg>
 
   <section>
-    <div class="vname">A · Текущий — пастельная заливка</div>
-    <div class="vnote">Baseline. Цветной фон + цветной текст — «как в Bootstrap».</div>
+    <div class="vname">Toast — всплывающие уведомления <span class="tag">✓ Утверждён (бывш. D)</span></div>
+    <div class="vnote">Белая карточка + тень, цвет только в чипе иконки, заголовок + описание обычным ink. Для push/toast-уведомлений (Sonner-паттерн).</div>
     <div class="stack">
-      <div class="a a-s">✓ Бронирование подтверждено — María уже ждёт Бруно!</div>
-      <div class="a a-w">⚠ Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
-      <div class="a a-e">✕ Оплата не прошла. Проверьте карту и попробуйте снова.</div>
-      <div class="a a-i">ℹ Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
+      <div class="toast t-s"><div class="chip"><svg class="ico"><use href="#i-check"/></svg></div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
+      <div class="toast t-w"><div class="chip"><svg class="ico"><use href="#i-warn"/></svg></div><div><b>Ждём подтверждения ситтера</b><span>Обычно это занимает пару часов — мы пришлём уведомление.</span></div></div>
+      <div class="toast t-e"><div class="chip"><svg class="ico"><use href="#i-x"/></svg></div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
+      <div class="toast t-i"><div class="chip"><svg class="ico"><use href="#i-info"/></svg></div><div><b>Новое фото от ситтера</b><span>Бруно гуляет в парке Ретиро 🐾</span></div></div>
     </div>
   </section>
 
   <section>
-    <div class="vname">B · Цветной бордер</div>
-    <div class="vnote">Твоя идея: спокойная поверхность, цвет несут рамка и иконка, текст — обычный ink.</div>
+    <div class="vname">Inline — сообщения в формах и на страницах <span class="tag">✓ Утверждён (бывш. C)</span></div>
+    <div class="vnote">Карточка с 4px цветной полосой слева, иконка в цвет полосы, текст ink. Для статичных сообщений в потоке страницы.</div>
     <div class="stack">
-      <div class="b b-s"><span class="ic">✓</span>Бронирование подтверждено — María уже ждёт Бруно!</div>
-      <div class="b b-w"><span class="ic">⚠</span>Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
-      <div class="b b-e"><span class="ic">✕</span>Оплата не прошла. Проверьте карту и попробуйте снова.</div>
-      <div class="b b-i"><span class="ic">ℹ</span>Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="vname">C · Левая акцент-полоса</div>
-    <div class="vnote">Белая карточка, 4px цветная полоса слева. Стиль Stripe/Linear — строгий, инлайн в формах.</div>
-    <div class="stack">
-      <div class="c c-s"><span class="ic">✓</span>Бронирование подтверждено — María уже ждёт Бруно!</div>
-      <div class="c c-w"><span class="ic">⚠</span>Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
-      <div class="c c-e"><span class="ic">✕</span>Оплата не прошла. Проверьте карту и попробуйте снова.</div>
-      <div class="c c-i"><span class="ic">ℹ</span>Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="vname">D · Toast с иконкой-чипом <span class="reco">Рекомендация</span></div>
-    <div class="vnote">Белая карточка + тень, цвет только в чипе иконки, заголовок + описание. Современный паттерн (Sonner); радиус 20px — наш, «тёплый».</div>
-    <div class="stack">
-      <div class="d d-s"><div class="chip">✓</div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
-      <div class="d d-w"><div class="chip">⚠</div><div><b>Ждём подтверждения ситтера</b><span>Обычно это занимает пару часов — мы пришлём уведомление.</span></div></div>
-      <div class="d d-e"><div class="chip">✕</div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
-      <div class="d d-i"><div class="chip">ℹ</div><div><b>Новое фото от ситтера</b><span>Бруно гуляет в парке Ретиро 🐾</span></div></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="vname">E · Гибрид на тёплой подложке</div>
-    <div class="vnote">Как D, но подложка sand вместо белого и без тени — мягче, для инлайн-блоков внутри страниц.</div>
-    <div class="stack">
-      <div class="e e-s"><div class="chip">✓</div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
-      <div class="e e-w"><div class="chip">⚠</div><div><b>Ждём подтверждения ситтера</b><span>Обычно это занимает пару часов — мы пришлём уведомление.</span></div></div>
-      <div class="e e-e"><div class="chip">✕</div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
-      <div class="e e-i"><div class="chip">ℹ</div><div><b>Новое фото от ситтера</b><span>Бруно гуляет в парке Ретиро 🐾</span></div></div>
+      <div class="inline in-s"><svg class="ico"><use href="#i-check"/></svg>Бронирование подтверждено — María уже ждёт Бруно!</div>
+      <div class="inline in-w"><svg class="ico"><use href="#i-warn"/></svg>Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
+      <div class="inline in-e"><svg class="ico"><use href="#i-x"/></svg>Оплата не прошла. Проверьте карту и попробуйте снова.</div>
+      <div class="inline in-i"><svg class="ico"><use href="#i-info"/></svg>Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
     </div>
   </section>
 </div>
