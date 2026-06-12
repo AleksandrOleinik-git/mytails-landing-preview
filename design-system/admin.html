@@ -64,7 +64,8 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 @media (max-width:560px){ .stats { grid-template-columns:1fr; } }
 .stat { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:18px 20px 14px; }
 .stat .lbl { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-muted); }
-.stat .val { font-family:"Lora",serif; font-size:30px; font-weight:600; font-variant-numeric:tabular-nums; margin-top:4px; }
+.stat .val { font-family:"Lora",serif; font-size:26px; font-weight:600; font-variant-numeric:tabular-nums; margin-top:4px; white-space:nowrap; }
+.stat .spark { flex-shrink:1; min-width:0; }
 .stat .row { display:flex; align-items:flex-end; justify-content:space-between; gap:10px; }
 .delta { display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:800; padding:2px 9px; border-radius:var(--r-pill); margin-top:8px; }
 .d-up { background:var(--success-soft); color:#3D6B3C; } [data-theme="dark"] .d-up { color:var(--success); }
