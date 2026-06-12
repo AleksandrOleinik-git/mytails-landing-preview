@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyTails — Компоненты продукта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAF6EF; --surface:#FFFFFF; --surface-warm:#F3ECE0;
+  --ink:#3B342C; --ink-muted:#7A7064;
+  --primary:#E2705B; --primary-hover:#D45A44; --primary-soft:#FBE3DD;
+  --sage:#7A9B76; --sage-soft:#E5EDE3; --gold:#E8B84B; --gold-soft:#FBF1D9;
+  --success:#5B8C5A; --success-soft:#E7F0E6;
+  --warning:#D99A2B; --warning-soft:#FAF0DA;
+  --error:#C75146; --error-soft:#F8E4E1;
+  --info:#5B7E9E; --info-soft:#E3EBF2;
+  --border:#E8DFD0;
+  --shadow:0 4px 24px rgba(59,52,44,.08); --shadow-toast:0 8px 30px rgba(59,52,44,.12);
+  --r-sm:8px; --r-md:12px; --r-lg:20px; --r-pill:9999px;
+  --sp-2xs:2px; --sp-xs:4px; --sp-sm:8px; --sp-md:16px; --sp-lg:24px; --sp-xl:32px; --sp-2xl:48px; --sp-3xl:64px;
+  --sp-section:clamp(56px,9vw,96px); --sp-block:clamp(24px,4vw,44px); --sp-gutter:24px; --sp-card:clamp(16px,2.5vw,24px);
+}
+[data-theme="dark"] {
+  --bg:#262119; --surface:#322B22; --surface-warm:#3B342C;
+  --ink:#F3ECE0; --ink-muted:#B5AA99;
+  --primary:#E8836F; --primary-hover:#EE9886; --primary-soft:#4A332D;
+  --sage:#8FAE8B; --sage-soft:#333D31; --gold:#E8B84B; --gold-soft:#423923;
+  --success:#8FBC8D; --success-soft:#2E3A2D;
+  --warning:#E3BC6E; --warning-soft:#403521;
+  --error:#E89B90; --error-soft:#432C29;
+  --info:#9FBBD4; --info-soft:#2A3641;
+  --border:#4A4136;
+  --shadow:0 4px 24px rgba(0,0,0,.3); --shadow-toast:0 8px 30px rgba(0,0,0,.4);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif; font-size:16px; line-height:1.6; }
+.wrap { max-width:1080px; margin-inline:auto; padding:0 var(--sp-gutter); }
+h1,h2,h3 { font-family:"Lora",serif; line-height:1.15; font-weight:600; letter-spacing:-.01em; }
+section { margin-top: var(--sp-section); }
+footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padding:36px 0 48px; text-align:center; color:var(--ink-muted); font-size:13.5px; }
+.section-label { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--primary); background:var(--primary-soft); padding:6px 14px; border-radius:var(--r-pill); margin-bottom:16px; }
+.section-title { font-size:36px; margin-bottom:12px; }
+.section-sub { color:var(--ink-muted); max-width:680px; margin-bottom:var(--sp-block); }
+.topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+.topbar .wrap { display:flex; align-items:center; justify-content:space-between; padding-block:14px; }
+.logo { font-family:"Lora",serif; font-weight:700; font-size:22px; display:flex; align-items:center; gap:8px; }
+.topnav { display:flex; gap:14px; align-items:center; font-size:13.5px; font-weight:700; }
+.topnav a { color:var(--primary); text-decoration:none; }
+.theme-toggle { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:var(--r-pill); padding:8px 18px; font-family:inherit; font-weight:600; font-size:14px; cursor:pointer; }
+.hero { padding: var(--sp-section) 0 0; text-align:center; }
+.hero h1 { font-size:clamp(36px,5.5vw,56px); }
+.hero h1 em { font-style:italic; color:var(--primary); }
+.hero p { color:var(--ink-muted); margin-top:14px; }
+.ico { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.btn { font-family:inherit; font-weight:700; font-size:15px; border-radius:var(--r-pill); padding:13px 28px; cursor:pointer; border:none; transition:all .2s; }
+.btn-primary { background:var(--primary); color:#fff; }
+.btn-primary:hover { background:var(--primary-hover); transform:translateY(-1px); }
+.btn-secondary { background:var(--sage-soft); color:var(--sage); }
+.btn-secondary:hover { background:var(--sage); color:#fff; transform:translateY(-1px); }
+.btn-ghost { background:transparent; color:var(--ink); border:1.5px solid var(--border); }
+.btn-ghost:hover { background:var(--surface-warm); border-color:var(--ink-muted); transform:translateY(-1px); }
+.btn-sm { padding:9px 18px; font-size:13.5px; }
+.badge { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; padding:4px 12px; border-radius:var(--r-pill); }
+.badge .bdot { width:7px; height:7px; border-radius:50%; background:currentColor; }
+.b-warn { background:var(--warning-soft); color:#8A6116; } [data-theme="dark"] .b-warn { color:var(--warning); }
+.b-ok { background:var(--success-soft); color:#3D6B3C; } [data-theme="dark"] .b-ok { color:var(--success); }
+.b-err { background:var(--error-soft); color:#963A30; } [data-theme="dark"] .b-err { color:var(--error); }
+.b-info { background:var(--info-soft); color:#3D5B77; } [data-theme="dark"] .b-info { color:var(--info); }
+.b-muted { background:var(--surface-warm); color:var(--ink-muted); }
+
+/* 01 blog */
+.blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-lg); }
+@media (max-width:860px){ .blog-grid { grid-template-columns:1fr; } }
+.bcard { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; transition:transform .2s, box-shadow .2s; cursor:pointer; display:flex; flex-direction:column; }
+.bcard:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+.bcard img { width:100%; height:180px; object-fit:cover; display:block; }
+.bcard .pad { padding:var(--sp-card); display:flex; flex-direction:column; flex:1; }
+.bcard .cat { align-self:flex-start; font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--sage); background:var(--sage-soft); padding:3px 11px; border-radius:var(--r-pill); }
+.bcard h3 { font-size:20px; margin:12px 0 8px; }
+.bcard p { font-size:14px; color:var(--ink-muted); flex:1; }
+.bcard .meta { display:flex; align-items:center; gap:8px; margin-top:14px; font-size:12.5px; color:var(--ink-muted); }
+.bcard .meta img { width:24px; height:24px; border-radius:50%; }
+
+/* 02 lost pets */
+.lost-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-lg); }
+@media (max-width:860px){ .lost-grid { grid-template-columns:1fr; } }
+.lcard { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
+.lcard .photo { position:relative; }
+.lcard img { width:100%; height:170px; object-fit:cover; display:block; }
+.lcard .urgent { position:absolute; top:12px; left:12px; }
+.lcard .pad { padding:var(--sp-card); }
+.lcard .nrow { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.lcard .nrow b { font-family:"Lora",serif; font-size:19px; }
+.lcard .place { display:flex; gap:7px; align-items:center; font-size:13px; color:var(--ink-muted); margin-top:8px; }
+.lcard .place .ico { width:15px; height:15px; color:var(--primary); }
+.lcard .desc { font-size:13.5px; color:var(--ink-muted); margin-top:8px; }
+.lcard .reward { font-size:13.5px; font-weight:800; margin-top:10px; }
+.lcard .btn { width:100%; margin-top:14px; }
+
+/* 03 advantages */
+.adv { display:grid; grid-template-columns:1.25fr 1fr; gap:var(--sp-lg); }
+@media (max-width:860px){ .adv { grid-template-columns:1fr; } }
+.adv .col { display:flex; flex-direction:column; gap:var(--sp-lg); }
+.acard { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-xl); }
+.acard .chip { width:44px; height:44px; border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.acard h3 { font-size:22px; margin-bottom:8px; }
+.acard p { font-size:14.5px; color:var(--ink-muted); }
+.acard.feature { background:var(--surface-warm); display:flex; flex-direction:column; }
+.acard.feature .photo { margin-top:auto; padding-top:var(--sp-md); }
+.acard.feature .photo img { width:100%; border-radius:var(--r-md); display:block; }
+.chip-sage { background:var(--sage-soft); color:var(--sage); }
+.chip-terra { background:var(--primary-soft); color:var(--primary); }
+.chip-gold { background:var(--gold-soft); color:#9C7415; } [data-theme="dark"] .chip-gold { color:var(--gold); }
+.chip-info { background:var(--info-soft); color:var(--info); }
+
+/* 04 faq */
+.faq { max-width:760px; }
+.faq details { border-bottom:1px solid var(--border); }
+.faq summary { list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; cursor:pointer; font-family:"Lora",serif; font-size:19px; font-weight:600; }
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary .pm { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--surface-warm); display:flex; align-items:center; justify-content:center; transition:transform .25s, background .25s; }
+.faq details[open] summary .pm { transform:rotate(45deg); background:var(--primary-soft); color:var(--primary); }
+.faq .a { padding:0 44px 20px 4px; color:var(--ink-muted); font-size:15px; }
+
+/* 05 bookings list */
+.bk-list { display:flex; flex-direction:column; gap:12px; }
+.bk { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:auto 1.2fr 1fr 1fr auto; gap:var(--sp-md); align-items:center; }
+@media (max-width:860px){ .bk { grid-template-columns:auto 1fr; row-gap:10px; } .bk .cell-act { grid-column:1 / -1; } }
+.bk img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
+.bk .who b { display:block; font-size:15px; }
+.bk .who span { font-size:12.5px; color:var(--ink-muted); }
+.bk .cell { font-size:13.5px; }
+.bk .cell small { display:block; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-muted); margin-bottom:2px; }
+.bk .price { font-weight:800; font-variant-numeric:tabular-nums; }
+
+/* 06 my lost pets */
+.my-lost { display:flex; flex-direction:column; gap:12px; }
+.ml { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:auto 1.4fr 1fr auto; gap:var(--sp-md); align-items:center; }
+@media (max-width:860px){ .ml { grid-template-columns:auto 1fr; } .ml .cell-act { grid-column:1 / -1; display:flex; gap:10px; } }
+.ml img { width:56px; height:56px; border-radius:var(--r-md); object-fit:cover; }
+.ml .who b { display:block; font-size:15px; }
+.ml .who span { font-size:12.5px; color:var(--ink-muted); }
+.ml .stats { display:flex; gap:18px; font-size:13px; color:var(--ink-muted); }
+.ml .stats span { display:inline-flex; gap:6px; align-items:center; }
+.ml .stats .ico { width:15px; height:15px; }
+.ml .cell-act { display:flex; gap:10px; }
+.pulse { position:relative; }
+.pulse::after { content:""; position:absolute; inset:-3px; border-radius:50%; border:2px solid currentColor; opacity:.4; animation:pulse 1.6s infinite; }
+@keyframes pulse { 0%{transform:scale(.7);opacity:.5} 100%{transform:scale(1.5);opacity:0} }
+
+/* 07 map */
+.mapwrap { border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow); }
+.map { position:relative; background:linear-gradient(140deg,#ECE6D6,#F4EEE2); min-height:440px; overflow:hidden; }
+[data-theme="dark"] .map { background:linear-gradient(140deg,#2E2820,#3B342C); }
+.map svg.roads { position:absolute; inset:0; width:100%; height:100%; opacity:.5; }
+.pin { position:absolute; background:var(--surface); color:var(--ink); padding:5px 13px; border-radius:var(--r-pill); font-weight:800; font-size:13px; box-shadow:var(--shadow); cursor:pointer; font-variant-numeric:tabular-nums; z-index:3; }
+.pin.active { background:var(--primary); color:#fff; }
+.dot { position:absolute; width:14px; height:14px; border-radius:50%; background:var(--primary); border:2.5px solid #fff; box-shadow:0 1px 6px rgba(0,0,0,.25); z-index:3; }
+.dot.sage { background:var(--sage); }
+.radius { position:absolute; border-radius:50%; z-index:2; }
+.radius.sitter { background:color-mix(in srgb, var(--sage) 16%, transparent); border:1.5px dashed var(--sage); }
+.radius.lost { background:color-mix(in srgb, var(--primary) 13%, transparent); border:1.5px dashed var(--primary); }
+.cluster { position:absolute; width:44px; height:44px; border-radius:50%; background:var(--surface); border:3px solid var(--sage); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; box-shadow:var(--shadow); z-index:3; cursor:pointer; }
+.map-legend { display:flex; flex-wrap:wrap; gap:18px; padding:var(--sp-md) var(--sp-card); background:var(--surface); border-top:1px solid var(--border); font-size:13px; color:var(--ink-muted); }
+.map-legend span { display:inline-flex; gap:8px; align-items:center; }
+.lg-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+.lg-ring { width:14px; height:14px; border-radius:50%; flex-shrink:0; }
+
+/* 08 chat */
+.chatpanel { max-width:560px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow); }
+.ch-head { display:flex; align-items:center; gap:12px; padding:14px var(--sp-card); border-bottom:1px solid var(--border); }
+.ch-head img { width:42px; height:42px; border-radius:50%; }
+.ch-head b { display:block; font-size:15px; }
+.ch-head .st { font-size:12.5px; color:var(--sage); display:flex; align-items:center; gap:6px; }
+.ch-head .st .on { width:8px; height:8px; border-radius:50%; background:var(--sage); }
+.ch-body { background:var(--surface-warm); padding:var(--sp-card); display:flex; flex-direction:column; gap:10px; min-height:380px; }
+.ch-div { align-self:center; font-size:11.5px; font-weight:700; color:var(--ink-muted); background:var(--surface); padding:3px 14px; border-radius:var(--r-pill); }
+.ch-div.new { color:var(--primary); background:var(--primary-soft); }
+.ch-sys { align-self:center; text-align:center; font-size:12.5px; color:var(--ink-muted); background:color-mix(in srgb, var(--surface) 70%, transparent); border:1px dashed var(--border); padding:8px 16px; border-radius:var(--r-md); max-width:85%; }
+.msg { max-width:75%; padding:11px 14px; font-size:14px; border-radius:var(--r-lg); position:relative; }
+.msg.in { align-self:flex-start; background:var(--surface); border-bottom-left-radius:6px; box-shadow:var(--shadow); }
+.msg.out { align-self:flex-end; background:var(--sage-soft); border-bottom-right-radius:6px; }
+.msg img.ph { width:100%; border-radius:var(--r-md); margin-bottom:6px; display:block; }
+.msg .t { display:flex; justify-content:flex-end; align-items:center; gap:4px; font-size:11px; color:var(--ink-muted); margin-top:4px; }
+.msg .t .ticks { color:var(--sage); font-weight:800; letter-spacing:-2px; }
+.typing { align-self:flex-start; background:var(--surface); border-radius:var(--r-lg); border-bottom-left-radius:6px; padding:14px 16px; display:flex; gap:5px; box-shadow:var(--shadow); }
+.typing i { width:7px; height:7px; border-radius:50%; background:var(--ink-muted); animation:ty 1.2s infinite; }
+.typing i:nth-child(2){ animation-delay:.2s } .typing i:nth-child(3){ animation-delay:.4s }
+@keyframes ty { 0%,60%,100%{transform:none;opacity:.45} 30%{transform:translateY(-5px);opacity:1} }
+.ch-input { display:flex; gap:10px; align-items:center; padding:12px var(--sp-card); border-top:1px solid var(--border); }
+.ch-input .att { width:42px; height:42px; border-radius:50%; border:1.5px solid var(--border); background:var(--surface); color:var(--ink-muted); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; }
+.ch-input .att:hover { background:var(--surface-warm); }
+.ch-input input { flex:1; font-family:inherit; font-size:14.5px; padding:11px 16px; border-radius:var(--r-pill); border:1.5px solid var(--border); background:var(--surface); color:var(--ink); min-width:0; }
+.ch-input input:focus { outline:none; border-color:var(--sage); box-shadow:0 0 0 3px var(--sage-soft); }
+.ch-input .send { width:42px; height:42px; border-radius:50%; border:none; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background .2s; }
+.ch-input .send:hover { background:var(--primary-hover); }
+.unread-badge { display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 6px; border-radius:var(--r-pill); background:var(--primary); color:#fff; font-size:11.5px; font-weight:800; }
+</style>
+</head>
+<body>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"><span>🐾</span> MyTails <span style="font-family:'Manrope';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">компоненты продукта</span></div>
+    <div class="topnav">
+      <a href="index.html">← Система</a>
+      <a href="admin.html">Админка →</a>
+      <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero wrap">
+  <h1>Компоненты <em>продукта</em></h1>
+  <p>Блог, потеряшки, преимущества, FAQ, брони, карта, чат — всё в системе «Тёплый дом».</p>
+</div>
+
+<section class="wrap" id="blog">
+  <span class="section-label">01 · Блог</span>
+  <h2 class="section-title">Карточки статей</h2>
+  <p class="section-sub">Обложка, категория, заголовок Lora, выдержка, мета с автором.</p>
+  <div class="blog-grid">
+    <article class="bcard">
+      <img src="https://placedog.net/440/280?id=101" alt="">
+      <div class="pad">
+        <span class="cat">Уход</span>
+        <h3>Как подготовить собаку к первой передержке</h3>
+        <p>Чек-лист из 9 шагов: от знакомства с ситтером до любимой игрушки в сумке.</p>
+        <div class="meta"><img src="https://i.pravatar.cc/48?img=47" alt=""> Наталья · 8 июня · 6 мин</div>
+      </div>
+    </article>
+    <article class="bcard">
+      <img src="https://placedog.net/440/280?id=145" alt="">
+      <div class="pad">
+        <span class="cat">Мадрид</span>
+        <h3>10 pet-friendly террас Мадрида этим летом</h3>
+        <p>Где вам нальют кофе, а питомцу — миску воды: проверили лично.</p>
+        <div class="meta"><img src="https://i.pravatar.cc/48?img=32" alt=""> Lucía · 5 июня · 4 мин</div>
+      </div>
+    </article>
+    <article class="bcard">
+      <img src="https://placedog.net/440/280?id=23" alt="">
+      <div class="pad">
+        <span class="cat">Здоровье</span>
+        <h3>Жара в городе: как защитить лапы от горячего асфальта</h3>
+        <p>Простое правило семи секунд и три средства, которые реально работают.</p>
+        <div class="meta"><img src="https://i.pravatar.cc/48?img=12" alt=""> Carlos · 1 июня · 5 мин</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="wrap" id="lost">
+  <span class="section-label">02 · Потеряшки</span>
+  <h2 class="section-title">Карточки потерянных питомцев</h2>
+  <p class="section-sub">Публичный раздел: статус, место и время пропажи, вознаграждение, CTA «Я видел питомца».</p>
+  <div class="lost-grid">
+    <div class="lcard">
+      <div class="photo">
+        <img src="https://placedog.net/440/280?id=204" alt="">
+        <span class="urgent badge b-err"><span class="bdot"></span>Срочно · пропал сегодня</span>
+      </div>
+      <div class="pad">
+        <div class="nrow"><b>Бруно</b><span class="badge b-warn"><span class="bdot"></span>Ищется</span></div>
+        <div class="place"><svg class="ico"><use href="#i-pin"/></svg>Парк Ретиро, Мадрид · сегодня 14:30</div>
+        <div class="desc">Бигль, 4 года, синий ошейник с адресником. Очень дружелюбный, отзывается на имя.</div>
+        <div class="reward">Вознаграждение: €100</div>
+        <button class="btn btn-primary btn-sm">Я видел питомца</button>
+      </div>
+    </div>
+    <div class="lcard">
+      <div class="photo">
+        <img src="https://placecats.com/440/280" alt="">
+      </div>
+      <div class="pad">
+        <div class="nrow"><b>Луна</b><span class="badge b-warn"><span class="bdot"></span>Ищется</span></div>
+        <div class="place"><svg class="ico"><use href="#i-pin"/></svg>Чамбери, Мадрид · вчера 21:00</div>
+        <div class="desc">Белая кошка с рыжими пятнами, без ошейника. Пуглива, не подходит к незнакомым.</div>
+        <div class="reward" style="color:var(--ink-muted);font-weight:600">Без вознаграждения</div>
+        <button class="btn btn-primary btn-sm">Я видел питомца</button>
+      </div>
+    </div>
+    <div class="lcard">
+      <div class="photo">
+        <img src="https://placedog.net/440/280?id=88" alt="">
+      </div>
+      <div class="pad">
+        <div class="nrow"><b>Кира</b><span class="badge b-ok"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg>Найдена</span></div>
+        <div class="place"><svg class="ico"><use href="#i-pin"/></svg>Ла-Латина, Мадрид · найдена 10 июня</div>
+        <div class="desc">Вернулась домой через 2 дня — спасибо Марии, увидевшей объявление на MyTails! 🧡</div>
+        <div class="reward" style="visibility:hidden">·</div>
+        <button class="btn btn-ghost btn-sm" disabled style="opacity:.45;cursor:default">История со счастливым концом</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="why">
+  <span class="section-label">03 · Преимущества</span>
+  <h2 class="section-title">Почему MyTails</h2>
+  <p class="section-sub">Асимметричная сетка вместо «трёх колонок с кружочками»: один якорный блок с фото + три компактных.</p>
+  <div class="adv">
+    <div class="acard feature">
+      <span class="chip chip-terra" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center"><svg class="ico"><use href="#i-camera"/></svg></span>
+      <h3>Фото-отчёты каждый день</h3>
+      <p>Видите своего питомца, пока вас нет рядом: прогулки, еда, настроение — с фото и заметками от ситтера прямо в чате.</p>
+      <div class="photo"><img src="https://placedog.net/640/300?id=78" alt=""></div>
+    </div>
+    <div class="col">
+      <div class="acard">
+        <span class="chip chip-sage"><svg class="ico"><use href="#i-shield"/></svg></span>
+        <h3>Ситтеры проверены вручную</h3>
+        <p>Документы, видео-интервью и легальный статус — до первого заказа.</p>
+      </div>
+      <div class="acard">
+        <span class="chip chip-gold"><svg class="ico"><use href="#i-heart"/></svg></span>
+        <h3>Свой человек рядом</h3>
+        <p>Ситтеры вашего района: знакомая прогулка, меньше стресса для питомца.</p>
+      </div>
+      <div class="acard">
+        <span class="chip chip-info"><svg class="ico"><use href="#i-clock"/></svg></span>
+        <h3>Оплата после подтверждения</h3>
+        <p>Деньги списываются только когда ситтер принял заказ. Отмена — по честным правилам.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="faq">
+  <span class="section-label">04 · FAQ</span>
+  <h2 class="section-title">Вопрос — ответ</h2>
+  <p class="section-sub">Аккордеон: вопрос Lora, плюс поворачивается в крестик.</p>
+  <div class="faq">
+    <details open>
+      <summary>Как проверяются ситтеры?<span class="pm"><svg class="ico" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary>
+      <div class="a">Каждый ситтер проходит проверку документов, видео-интервью и подтверждение легального статуса (autónomo). Только после этого профиль появляется в поиске.</div>
+    </details>
+    <details>
+      <summary>Когда списываются деньги за бронирование?<span class="pm"><svg class="ico" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary>
+      <div class="a">Оплата резервируется при бронировании и списывается после подтверждения заказа ситтером.</div>
+    </details>
+    <details>
+      <summary>Что делать, если питомцу понадобится ветеринар?<span class="pm"><svg class="ico" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary>
+      <div class="a">Ситтер немедленно связывается с вами и с ближайшей клиникой. Контакты ветеринара указываются при бронировании.</div>
+    </details>
+    <details>
+      <summary>Можно ли познакомиться с ситтером заранее?<span class="pm"><svg class="ico" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary>
+      <div class="a">Да, рекомендуем бесплатную встречу-знакомство до первой передержки — договоритесь в чате.</div>
+    </details>
+  </div>
+</section>
+
+<section class="wrap" id="bookings">
+  <span class="section-label">05 · Брони</span>
+  <h2 class="section-title">Список бронирований</h2>
+  <p class="section-sub">Кабинет владельца: статус, ситтер, услуга, даты, сумма, действие.</p>
+  <div class="bk-list">
+    <div class="bk">
+      <img src="https://i.pravatar.cc/92?img=47" alt="">
+      <div class="who"><b>María G.</b><span>Передержка · Бруно</span></div>
+      <div class="cell"><small>Даты</small>14 – 18 июня</div>
+      <div class="cell"><small>Сумма</small><span class="price">€106,00</span></div>
+      <div class="cell-act"><span class="badge b-warn"><span class="bdot"></span>Ждёт подтверждения</span></div>
+    </div>
+    <div class="bk">
+      <img src="https://i.pravatar.cc/92?img=12" alt="">
+      <div class="who"><b>Carlos R.</b><span>Дневной уход · Бруно</span></div>
+      <div class="cell"><small>Даты</small>21 июня</div>
+      <div class="cell"><small>Сумма</small><span class="price">€25,00</span></div>
+      <div class="cell-act"><span class="badge b-ok"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg>Подтверждено</span></div>
+    </div>
+    <div class="bk">
+      <img src="https://i.pravatar.cc/92?img=32" alt="">
+      <div class="who"><b>Lucía M.</b><span>Передержка · Мурка</span></div>
+      <div class="cell"><small>Даты</small>2 – 9 мая</div>
+      <div class="cell"><small>Сумма</small><span class="price">€196,00</span></div>
+      <div class="cell-act"><span class="badge b-muted">Завершено · ★ оценить</span></div>
+    </div>
+    <div class="bk">
+      <img src="https://i.pravatar.cc/92?img=5" alt="">
+      <div class="who"><b>Ana T.</b><span>Выгул · Бруно</span></div>
+      <div class="cell"><small>Даты</small>28 апреля</div>
+      <div class="cell"><small>Сумма</small><span class="price">€15,00</span></div>
+      <div class="cell-act"><span class="badge b-err"><span class="bdot"></span>Отменено</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="mylost">
+  <span class="section-label">06 · Мои потеряшки</span>
+  <h2 class="section-title">Объявления владельца</h2>
+  <p class="section-sub">Кабинет: статус с «живой» точкой, просмотры и отклики, действия.</p>
+  <div class="my-lost">
+    <div class="ml">
+      <img src="https://placedog.net/112/112?id=204" alt="">
+      <div class="who"><b>Бруно · бигль</b><span>Создано сегодня, 14:42 · Парк Ретиро</span></div>
+      <div class="stats">
+        <span><svg class="ico"><use href="#i-eye"/></svg>312 просмотров</span>
+        <span><svg class="ico"><use href="#i-msg"/></svg>4 отклика</span>
+        <span class="badge b-warn"><span class="bdot pulse"></span>Ищется</span>
+      </div>
+      <div class="cell-act">
+        <button class="btn btn-ghost btn-sm"><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-pencil"/></svg> Изменить</button>
+        <button class="btn btn-secondary btn-sm">Нашёлся!</button>
+      </div>
+    </div>
+    <div class="ml" style="opacity:.75">
+      <img src="https://placecats.com/112/112" alt="">
+      <div class="who"><b>Луна · кошка</b><span>Создано 3 мая · Чамбери</span></div>
+      <div class="stats">
+        <span><svg class="ico"><use href="#i-eye"/></svg>1 204 просмотра</span>
+        <span><svg class="ico"><use href="#i-msg"/></svg>11 откликов</span>
+        <span class="badge b-ok"><svg class="ico" style="width:13px;height:13px"><use href="#i-check"/></svg>Найдена</span>
+      </div>
+      <div class="cell-act">
+        <button class="btn btn-ghost btn-sm">В архив</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="map">
+  <span class="section-label">07 · Карта</span>
+  <h2 class="section-title">Точки, радиусы, кластеры</h2>
+  <p class="section-sub">Слои MapLibre/MapTiler: точное место ситтер не раскрывает — показываем радиус приватности; у потеряшки — радиус последнего места. Легенда внизу.</p>
+  <div class="mapwrap">
+    <div class="map">
+      <svg class="roads" viewBox="0 0 1000 440" preserveAspectRatio="none" fill="none">
+        <path d="M0,110 C280,90 440,170 1000,140" stroke="#DBD2BE" stroke-width="10"/>
+        <path d="M160,0 C240,150 120,290 280,440" stroke="#DBD2BE" stroke-width="8"/>
+        <path d="M0,310 C360,290 640,360 1000,300" stroke="#DBD2BE" stroke-width="12"/>
+        <path d="M640,0 C600,140 760,300 660,440" stroke="#E3DAC6" stroke-width="7"/>
+        <circle cx="490" cy="205" r="64" fill="#DFE8DA" opacity=".7"/>
+      </svg>
+      <!-- ситтер: радиус приватности + точка -->
+      <span class="radius sitter" style="width:170px;height:170px;top:12%;left:8%"></span>
+      <span class="dot sage" style="top:30%;left:16%"></span>
+      <span class="pin" style="top:34%;left:13%">María · €24</span>
+      <!-- активный ситтер -->
+      <span class="radius sitter" style="width:150px;height:150px;top:38%;left:44%"></span>
+      <span class="pin active" style="top:50%;left:47%">Carlos · €21</span>
+      <!-- кластер -->
+      <span class="cluster" style="top:18%;left:72%">12</span>
+      <!-- потеряшка: радиус последнего места -->
+      <span class="radius lost" style="width:200px;height:200px;top:48%;left:66%"></span>
+      <span class="dot" style="top:70%;left:75%"></span>
+      <span class="pin" style="top:74%;left:71%; color:var(--primary)">Бруно · ищется</span>
+      <div class="zoom" style="position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:6px">
+        <button style="width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)">+</button>
+        <button style="width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)">−</button>
+      </div>
+    </div>
+    <div class="map-legend">
+      <span><span class="lg-dot" style="background:var(--sage)"></span>Ситтер (точка скрыта радиусом)</span>
+      <span><span class="lg-ring" style="background:color-mix(in srgb, var(--sage) 16%, transparent);border:1.5px dashed var(--sage)"></span>Радиус приватности ситтера</span>
+      <span><span class="lg-dot" style="background:var(--primary)"></span>Потеряшка — последнее место</span>
+      <span><span class="lg-ring" style="background:color-mix(in srgb, var(--primary) 13%, transparent);border:1.5px dashed var(--primary)"></span>Радиус поиска</span>
+      <span><span class="lg-ring" style="border:3px solid var(--sage)"></span>Кластер (зум по клику)</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="chat">
+  <span class="section-label">08 · Чат</span>
+  <h2 class="section-title">Элементы переписки</h2>
+  <p class="section-sub">Шапка со статусом, системные события брони, входящие/исходящие, фото, прочитанность ✓✓, «печатает…», разделитель новых, поле ввода.</p>
+  <div class="chatpanel">
+    <div class="ch-head">
+      <img src="https://i.pravatar.cc/84?img=47" alt="">
+      <div style="flex:1"><b>María G.</b><span class="st"><span class="on"></span>онлайн</span></div>
+      <span class="unread-badge">3</span>
+    </div>
+    <div class="ch-body">
+      <div class="ch-div">Сегодня</div>
+      <div class="ch-sys">✓ Бронирование подтверждено · Передержка 14–18 июня · €106</div>
+      <div class="msg in">¡Hola! Заберу Бруно в субботу к 10:00, всё в силе?<div class="t">10:02</div></div>
+      <div class="msg out">Да! Я приготовила его корм и любимую игрушку 🦴<div class="t">10:05 <span class="ticks">✓✓</span></div></div>
+      <div class="msg in">
+        <img class="ph" src="https://placedog.net/360/220?id=78" alt="">
+        Бруно уже освоился — двор ему нравится!
+        <div class="t">12:40</div>
+      </div>
+      <div class="ch-div new">Новые сообщения</div>
+      <div class="msg in">Вечером пришлю фото с прогулки 🐾<div class="t">12:41</div></div>
+      <div class="typing"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ch-input">
+      <button class="att"><svg class="ico"><use href="#i-clip"/></svg></button>
+      <input placeholder="Сообщение…" />
+      <button class="send"><svg class="ico" style="width:17px;height:17px"><use href="#i-send"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer>MyTails design system · компоненты продукта · Lora + Manrope</footer>
+
+</body>
+</html>
