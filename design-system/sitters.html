@@ -36,20 +36,29 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 /* hero */
 .hero {
-  position:relative;
+  position:relative; overflow:hidden;
   background:
-    linear-gradient(rgba(40,33,24,.16), rgba(40,33,24,.24)),
-    url("assets/index2.webp") center 58% / cover no-repeat;
+    radial-gradient(640px 420px at 10% -12%, var(--gold-soft), transparent 70%),
+    radial-gradient(760px 500px at 98% 14%, var(--sage-soft), transparent 72%),
+    radial-gradient(560px 440px at 68% 112%, var(--primary-soft), transparent 70%),
+    linear-gradient(165deg, var(--surface-warm), var(--bg));
   padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(48px,7vw,84px);
 }
+/* рисованная «тропинка следов» — SVG, не эмодзи */
+.hero::after {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600' fill='%237A9B76' fill-opacity='.16'%3E%3Cg transform='translate(80,470) rotate(-18)'%3E%3Cellipse cx='0' cy='0' rx='13' ry='17'/%3E%3Cellipse cx='-16' cy='-20' rx='6' ry='8'/%3E%3Cellipse cx='-2' cy='-26' rx='6' ry='8'/%3E%3Cellipse cx='13' cy='-19' rx='6' ry='8'/%3E%3C/g%3E%3Cg transform='translate(190,520) rotate(8)'%3E%3Cellipse cx='0' cy='0' rx='13' ry='17'/%3E%3Cellipse cx='-16' cy='-20' rx='6' ry='8'/%3E%3Cellipse cx='-2' cy='-26' rx='6' ry='8'/%3E%3Cellipse cx='13' cy='-19' rx='6' ry='8'/%3E%3C/g%3E%3Cg transform='translate(300,475) rotate(-10)'%3E%3Cellipse cx='0' cy='0' rx='13' ry='17'/%3E%3Cellipse cx='-16' cy='-20' rx='6' ry='8'/%3E%3Cellipse cx='-2' cy='-26' rx='6' ry='8'/%3E%3Cellipse cx='13' cy='-19' rx='6' ry='8'/%3E%3C/g%3E%3Cg transform='translate(1020,120) rotate(14)' fill='%23E2705B' fill-opacity='.13'%3E%3Cellipse cx='0' cy='0' rx='13' ry='17'/%3E%3Cellipse cx='-16' cy='-20' rx='6' ry='8'/%3E%3Cellipse cx='-2' cy='-26' rx='6' ry='8'/%3E%3Cellipse cx='13' cy='-19' rx='6' ry='8'/%3E%3C/g%3E%3Cg transform='translate(1110,190) rotate(30)' fill='%23E2705B' fill-opacity='.13'%3E%3Cellipse cx='0' cy='0' rx='13' ry='17'/%3E%3Cellipse cx='-16' cy='-20' rx='6' ry='8'/%3E%3Cellipse cx='-2' cy='-26' rx='6' ry='8'/%3E%3Cellipse cx='13' cy='-19' rx='6' ry='8'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:1200px 600px; background-position:center bottom; background-repeat:no-repeat;
+}
+.hero .inner { position:relative; z-index:1; }
 .hero .inner { max-width:1080px; margin-inline:auto; display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
 @media (max-width:920px){ .hero .inner { grid-template-columns:1fr; } }
 
 .hcard {
-  background:color-mix(in srgb, var(--bg) 84%, transparent);
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  border:1px solid color-mix(in srgb, var(--surface) 45%, transparent);
+  background:var(--surface);
+  border:1px solid var(--border);
   border-radius:var(--r-lg);
+  box-shadow:var(--shadow);
   padding:clamp(24px,3.5vw,40px);
 }
 .eyebrow { display:inline-flex; gap:8px; align-items:center; font-size:13px; font-weight:800; color:var(--primary); background:var(--primary-soft); padding:6px 16px; border-radius:14px; }
@@ -74,10 +83,10 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 /* founding card — понятная акция */
 .fcard {
-  background:color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  background:var(--surface);
   border:2px solid var(--gold);
   border-radius:var(--r-lg);
+  box-shadow:var(--shadow-toast);
   padding:clamp(22px,3vw,30px);
   display:flex; flex-direction:column;
 }

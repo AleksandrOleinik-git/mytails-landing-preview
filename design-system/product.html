@@ -128,7 +128,15 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 /* 05 bookings list */
 .bk-list { display:flex; flex-direction:column; gap:12px; }
 .bk { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:46px minmax(0,1.5fr) 150px 120px 210px; gap:var(--sp-md); align-items:center; }
-@media (max-width:860px){ .bk { grid-template-columns:auto 1fr; row-gap:10px; overflow:hidden; } .bk .cell-act { grid-column:1 / -1; } .bk .who { min-width:0; } .bk .who b, .bk .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } }
+@media (max-width:860px){
+  /* первая колонка всегда = аватар, весь контент во второй — строки не «плывут» */
+  .bk { grid-template-columns:46px minmax(0,1fr); row-gap:8px; overflow:hidden; }
+  .bk .cell, .bk .cell-act { grid-column:2; }
+  .bk .cell { display:inline-flex; gap:6px; align-items:baseline; }
+  .bk .cell small { margin-bottom:0; }
+  .bk .who { min-width:0; }
+  .bk .who b, .bk .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+}
 .bk img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .bk .who b { display:block; font-size:15px; }
 .bk .who span { font-size:12.5px; color:var(--ink-muted); }
@@ -139,7 +147,14 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 /* 06 my lost pets */
 .my-lost { display:flex; flex-direction:column; gap:12px; }
 .ml { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.4fr) 240px; gap:var(--sp-md); align-items:center; }
-@media (max-width:860px){ .ml { grid-template-columns:auto 1fr; } .ml .cell-act { grid-column:1 / -1; display:flex; gap:10px; } }
+@media (max-width:860px){
+  .ml { grid-template-columns:56px minmax(0,1fr); row-gap:8px; overflow:hidden; }
+  .ml .stats, .ml .cell-act { grid-column:2; }
+  .ml .stats { flex-wrap:wrap; gap:10px 16px; }
+  .ml .cell-act { display:flex; gap:10px; }
+  .ml .who { min-width:0; }
+  .ml .who b, .ml .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; }
+}
 .ml img { width:56px; height:56px; border-radius:var(--r-md); object-fit:cover; }
 .ml .who b { display:block; font-size:15px; }
 .ml .who span { font-size:12.5px; color:var(--ink-muted); }
@@ -204,10 +219,6 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
   .topbar .logo > span:last-child { display:none; }
   .topbar .wrap { flex-wrap:wrap; gap:8px; }
   .topnav { gap:10px; font-size:12.5px; }
-  .ml { grid-template-columns:auto 1fr; }
-  .ml .stats { grid-column:1 / -1; flex-wrap:wrap; gap:12px; }
-  .ml .who { min-width:0; }
-  .ml .who b, .ml .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; }
 }
 
 .logo-light{display:block} .logo-dark{display:none}
