@@ -96,7 +96,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .counter .of { font-size:15px; font-weight:700; color:var(--ink-muted); }
 .counter .left { margin-left:auto; font-size:13px; font-weight:800; color:var(--sage); }
 .bar { height:10px; border-radius:var(--r-pill); background:var(--surface-warm); margin-top:10px; overflow:hidden; }
-.bar i { display:block; height:100%; width:0; border-radius:var(--r-pill); background:linear-gradient(90deg, var(--gold), var(--primary)); transition:width 1.4s cubic-bezier(.22,.8,.36,1); }
+.bar i { display:block; height:100%; width:0; border-radius:var(--r-pill); background:linear-gradient(90deg, var(--gold), var(--primary)); transition:width 2.4s cubic-bezier(.22,.8,.36,1); }
 .counter .cap { font-size:12.5px; color:var(--ink-muted); margin-top:8px; }
 
 /* trust bar */
@@ -113,6 +113,10 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 .note { max-width:1080px; margin:28px auto 56px; padding:0 var(--sp-gutter); color:var(--ink-muted); font-size:13.5px; }
 @media (prefers-reduced-motion: reduce) { .bar i { transition:none; } }
+
+.logo-light{display:block} .logo-dark{display:none}
+[data-theme="dark"] .logo-light{display:none!important}
+[data-theme="dark"] .logo-dark{display:block!important}
 </style>
 </head>
 <body>
@@ -129,7 +133,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 <div class="topbar">
   <div class="inner">
-    <div class="logo">🐾 MyTails <span style="font-family:Manrope;font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">hero · лендинг ситтеров (Мадрид)</span></div>
+    <a class="logo" href="index.html" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
     <div class="topnav">
       <a href="index.html">← Система</a>
       <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️</button>
@@ -141,7 +145,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   <div class="inner">
 
     <div class="hcard">
-      <span class="eyebrow">🐾 Скоро запуск в Мадриде · первые 100 ситтеров</span>
+      <span class="eyebrow">Скоро запуск в Мадриде · первые 100 ситтеров</span>
       <h1>Любите животных? <em>Они в Мадриде уже ждут вас.</em></h1>
       <p class="sub">Гибкий график, честные выплаты и помощь на каждом шаге.</p>
       <div class="income">
@@ -207,9 +211,9 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
     requestAnimationFrame(tick);
   }
   window.addEventListener('load', () => {
-    countUp(document.getElementById('cnt-income'), 1200);
-    countUp(document.getElementById('cnt-claimed'), 1400);
-    countUp(document.getElementById('cnt-left'), 1400);
+    countUp(document.getElementById('cnt-income'), 2200);
+    countUp(document.getElementById('cnt-claimed'), 2600);
+    countUp(document.getElementById('cnt-left'), 2600);
     const bar = document.getElementById('bar-fill');
     requestAnimationFrame(() => { bar.style.width = bar.dataset.width + '%'; });
   });

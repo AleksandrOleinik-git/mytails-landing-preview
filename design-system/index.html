@@ -95,7 +95,6 @@ footer { margin-top: var(--sp-section); }
 .hero h1 { font-size: clamp(44px, 7vw, 76px); }
 .hero h1 em { font-style: italic; color: var(--primary); font-weight: 500; }
 .hero p { font-size: 19px; color: var(--ink-muted); margin: 20px auto 0; max-width: 560px; }
-.paw-path { font-size: 18px; letter-spacing: 18px; opacity: .35; margin-top: 28px; user-select: none; }
 
 /* swatches */
 .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
@@ -377,6 +376,10 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
   .report .text { padding-inline: 0; }
   .scard { background: var(--surface); }
 }
+
+.logo-light{display:block} .logo-dark{display:none}
+[data-theme="dark"] .logo-light{display:none!important}
+[data-theme="dark"] .logo-dark{display:block!important}
 </style>
 </head>
 <body>
@@ -390,7 +393,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 
 <div class="topbar">
   <div class="wrap">
-    <div class="logo"><span>🐾</span> MyTails <span style="font-family:'Manrope';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">design system preview</span></div>
+    <a class="logo" href="index.html" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
     <div style="display:flex;gap:14px;align-items:center;font-size:13.5px;font-weight:700">
       <a href="product.html" style="color:var(--primary);text-decoration:none">Продукт</a>
       <a href="admin.html" style="color:var(--primary);text-decoration:none">Админка</a>
@@ -403,7 +406,6 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 <div class="hero wrap">
   <h1>Тёплый дом<br><em>для тех, кто ждёт вас</em></h1>
   <p>Дизайн-система MyTails: кремовые поверхности, терракота и шалфей, Lora + Manrope (EN/ES/RU, SIL OFL). Якорь — «тепло и доверие».</p>
-  <div class="paw-path">🐾 🐾 🐾 🐾 🐾</div>
 </div>
 
 <section class="wrap" id="colors">
@@ -438,8 +440,8 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
   <div class="spec-card">
     <div class="spec-role">Display — Lora</div>
     <div class="spec-display">Loving Care, While You're Not There</div>
-    <div class="spec-display" style="margin-top:8px">Забота и любовь, пока вас нет рядом</div>
-    <div class="spec-display" style="margin-top:8px">Cariño y atención, ¿estás de viaje?</div>
+    <div class="spec-display" style="margin-top:8px">Тёплый дом для вашего питомца в Мадриде</div>
+    <div class="spec-display" style="margin-top:8px">Cariño y atención para tu mascota, cada día</div>
   </div>
 
   <div class="spec-card">

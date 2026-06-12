@@ -127,7 +127,7 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 
 /* 05 bookings list */
 .bk-list { display:flex; flex-direction:column; gap:12px; }
-.bk { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:auto 1.2fr 1fr 1fr auto; gap:var(--sp-md); align-items:center; }
+.bk { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:46px minmax(0,1.5fr) 150px 120px 210px; gap:var(--sp-md); align-items:center; }
 @media (max-width:860px){ .bk { grid-template-columns:auto 1fr; row-gap:10px; overflow:hidden; } .bk .cell-act { grid-column:1 / -1; } .bk .who { min-width:0; } .bk .who b, .bk .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } }
 .bk img { width:46px; height:46px; border-radius:50%; object-fit:cover; }
 .bk .who b { display:block; font-size:15px; }
@@ -138,7 +138,7 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 
 /* 06 my lost pets */
 .my-lost { display:flex; flex-direction:column; gap:12px; }
-.ml { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:auto 1.4fr 1fr auto; gap:var(--sp-md); align-items:center; }
+.ml { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--sp-md) var(--sp-card); display:grid; grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.4fr) 240px; gap:var(--sp-md); align-items:center; }
 @media (max-width:860px){ .ml { grid-template-columns:auto 1fr; } .ml .cell-act { grid-column:1 / -1; display:flex; gap:10px; } }
 .ml img { width:56px; height:56px; border-radius:var(--r-md); object-fit:cover; }
 .ml .who b { display:block; font-size:15px; }
@@ -209,6 +209,10 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
   .ml .who { min-width:0; }
   .ml .who b, .ml .who span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; }
 }
+
+.logo-light{display:block} .logo-dark{display:none}
+[data-theme="dark"] .logo-light{display:none!important}
+[data-theme="dark"] .logo-dark{display:block!important}
 </style>
 </head>
 <body>
@@ -230,7 +234,7 @@ footer { margin-top: var(--sp-section); border-top:1px solid var(--border); padd
 
 <div class="topbar">
   <div class="wrap">
-    <div class="logo"><span>🐾</span> MyTails <span style="font-family:'Manrope';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">компоненты продукта</span></div>
+    <a class="logo" href="index.html" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
     <div class="topnav">
       <a href="index.html">← Система</a>
       <a href="admin.html">Админка →</a>
