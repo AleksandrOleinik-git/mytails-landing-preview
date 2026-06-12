@@ -757,7 +757,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
       if (r ? same(d, r.start) : same(d, sel)) cls += ' start';
       if (r && same(d, r.end)) cls += ' end';
       cells += `<span class="${cls}" data-iso="${iso(d)}" ${muted || past ? '' : 'data-pick'}>${d.getDate()}</span>`;
-      if (i === 41 && dayN >= dim) break;
+      if (dayN >= dim && i % 7 === 6) break;
     }
     pop.innerHTML = `
       <div class="cal-head">
