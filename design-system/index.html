@@ -6,7 +6,7 @@
 <title>MyTails — Design System Preview «Тёплый дом»</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&family=DM+Sans:opsz,wght@9..40,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #FAF6EF;
@@ -21,13 +21,17 @@
   --sage-soft: #E5EDE3;
   --gold: #E8B84B;
   --gold-soft: #FBF1D9;
-  --success: #5B8C5A;
-  --warning: #D99A2B;
-  --error: #C75146;
-  --info: #5B7E9E;
+  --success: #5B8C5A; --success-soft:#E7F0E6;
+  --warning: #D99A2B; --warning-soft:#FAF0DA;
+  --error: #C75146;   --error-soft:#F8E4E1;
+  --info: #5B7E9E;    --info-soft:#E3EBF2;
   --border: #E8DFD0;
   --shadow: 0 4px 24px rgba(59, 52, 44, 0.08);
+  --shadow-toast: 0 8px 30px rgba(59,52,44,.12);
   --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-pill: 9999px;
+  /* отступы между крупными блоками — адаптивные */
+  --sp-section: clamp(48px, 9vw, 96px);
+  --sp-block: clamp(24px, 4vw, 44px);
 }
 [data-theme="dark"] {
   --bg: #262119;
@@ -42,8 +46,13 @@
   --sage-soft: #333D31;
   --gold: #E8B84B;
   --gold-soft: #423923;
+  --success:#8FBC8D; --success-soft:#2E3A2D;
+  --warning:#E3BC6E; --warning-soft:#403521;
+  --error:#E89B90;   --error-soft:#432C29;
+  --info:#9FBBD4;    --info-soft:#2A3641;
   --border: #4A4136;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-toast: 0 8px 30px rgba(0,0,0,.4);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -53,14 +62,14 @@ body {
   transition: background .3s, color .3s;
 }
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-h1,h2,h3,.display { font-family: "Lora", serif; line-height: 1.15; font-weight: 560; letter-spacing: -0.01em; }
-section { padding: 64px 0; }
+h1,h2,h3,.display { font-family: "Lora", serif; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
+section { padding: calc(var(--sp-section) / 2) 0; }
 .section-label {
   display:inline-block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
   color: var(--primary); background: var(--primary-soft); padding: 6px 14px; border-radius: var(--r-pill); margin-bottom: 16px;
 }
 .section-title { font-size: 36px; margin-bottom: 12px; }
-.section-sub { color: var(--ink-muted); max-width: 640px; margin-bottom: 36px; }
+.section-sub { color: var(--ink-muted); max-width: 640px; margin-bottom: var(--sp-block); }
 
 /* top bar */
 .topbar {
@@ -68,16 +77,15 @@ section { padding: 64px 0; }
   backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
 }
 .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
-.logo { font-family: "Lora", serif; font-weight: 640; font-size: 22px; display: flex; align-items: center; gap: 8px; }
-.logo .paw { font-size: 20px; }
+.logo { font-family: "Lora", serif; font-weight: 700; font-size: 22px; display: flex; align-items: center; gap: 8px; }
 .theme-toggle {
   border: 1px solid var(--border); background: var(--surface); color: var(--ink);
   border-radius: var(--r-pill); padding: 8px 18px; font-family: inherit; font-weight: 600; font-size: 14px; cursor: pointer;
 }
 
 /* hero */
-.hero { padding: 96px 0 72px; text-align: center; position: relative; overflow: hidden; }
-.hero h1 { font-size: clamp(44px, 7vw, 76px); font-weight: 600; }
+.hero { padding: var(--sp-section) 0 calc(var(--sp-section) * .7); text-align: center; }
+.hero h1 { font-size: clamp(44px, 7vw, 76px); }
 .hero h1 em { font-style: italic; color: var(--primary); font-weight: 500; }
 .hero p { font-size: 19px; color: var(--ink-muted); margin: 20px auto 0; max-width: 560px; }
 .paw-path { font-size: 18px; letter-spacing: 18px; opacity: .35; margin-top: 28px; user-select: none; }
@@ -93,15 +101,10 @@ section { padding: 64px 0; }
 /* typography specimen */
 .spec-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
 .spec-role { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); margin-bottom: 14px; }
-.spec-display { font-family: "Lora", serif; font-size: 42px; line-height: 1.1; font-weight: 560; }
-.spec-display-alt { font-family: "Instrument Serif", serif; font-size: 44px; line-height: 1.1; font-weight: 400; }
-.spec-body-alt { font-family: "DM Sans", sans-serif; }
-.spec-note { margin-top: 12px; font-size: 13px; color: var(--ink-muted); }
-.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-@media (max-width: 760px){ .vs { grid-template-columns: 1fr; } }
+.spec-display { font-family: "Lora", serif; font-size: 42px; line-height: 1.1; }
 .price { font-variant-numeric: tabular-nums; font-weight: 700; }
 
-/* buttons & components */
+/* buttons */
 .btn { font-family: inherit; font-weight: 700; font-size: 15px; border-radius: var(--r-pill); padding: 13px 28px; cursor: pointer; border: none; transition: all .2s; }
 .btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
@@ -109,12 +112,21 @@ section { padding: 64px 0; }
 .btn-secondary:hover { background: var(--sage); color: #fff; transform: translateY(-1px); }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
 .btn-ghost:hover { background: var(--surface-warm); border-color: var(--ink-muted); transform: translateY(-1px); }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none !important; }
 .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* inputs */
 .input {
   font-family: inherit; font-size: 15px; padding: 13px 18px; border-radius: var(--r-md);
-  border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); min-width: 200px;
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); min-width: 0; width: 100%;
+  transition: border-color .15s, box-shadow .15s;
 }
 .input:focus { outline: none; border-color: var(--sage); box-shadow: 0 0 0 3px var(--sage-soft); }
+.input:disabled { background: var(--surface-warm); color: var(--ink-muted); cursor: not-allowed; }
+.input.error { border-color: var(--error); }
+.input.error:focus { box-shadow: 0 0 0 3px var(--error-soft); }
+.err-msg { display:flex; gap:6px; align-items:center; font-size: 13px; color: var(--error); font-weight: 600; margin-top: 6px; }
+.hint { font-size: 13px; color: var(--ink-muted); margin-top: 6px; }
 select.input {
   appearance: none; -webkit-appearance: none;
   padding-right: 44px;
@@ -125,16 +137,56 @@ select.input {
 [data-theme="dark"] select.input {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B5AA99' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
-/* alerts: toast (всплывающие) + inline (в потоке страницы); единые SVG-иконки 18px */
-:root {
-  --success-soft:#E7F0E6; --warning-soft:#FAF0DA; --error-soft:#F8E4E1; --info-soft:#E3EBF2;
-  --shadow-toast:0 8px 30px rgba(59,52,44,.12);
+textarea.input { resize: vertical; min-height: 92px; }
+input[type="date"].input { min-height: 49px; }
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.85); }
+
+/* checkbox / radio / switch — вся строка кликабельна через label */
+.opt { display: flex; gap: 11px; align-items: center; cursor: pointer; font-size: 14.5px; user-select: none; }
+.opt.disabled { opacity: .5; cursor: not-allowed; }
+.cb {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0;
+  width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 6px;
+  background: var(--surface); cursor: pointer; transition: all .15s; margin: 0;
 }
-[data-theme="dark"] {
-  --success:#8FBC8D; --warning:#E3BC6E; --error:#E89B90; --info:#9FBBD4;
-  --success-soft:#2E3A2D; --warning-soft:#403521; --error-soft:#432C29; --info-soft:#2A3641;
-  --shadow-toast:0 8px 30px rgba(0,0,0,.4);
+.cb:checked {
+  background: var(--sage) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat;
+  border-color: var(--sage);
 }
+.cb:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--sage-soft); }
+.cb:disabled { cursor: not-allowed; background-color: var(--surface-warm); }
+.radio {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0;
+  width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 50%;
+  background: var(--surface); cursor: pointer; transition: all .15s; margin: 0;
+}
+.radio:checked { border: 6px solid var(--sage); background: #fff; }
+.radio:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--sage-soft); }
+.sw {
+  appearance: none; -webkit-appearance: none; flex-shrink: 0;
+  width: 44px; height: 26px; border-radius: var(--r-pill);
+  background: var(--border); cursor: pointer; position: relative; transition: background .2s; margin: 0;
+}
+.sw::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .2s;
+}
+.sw:checked { background: var(--sage); }
+.sw:checked::after { left: 21px; }
+.sw:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--sage-soft); }
+.sw:disabled { cursor: not-allowed; opacity: .5; }
+
+/* controls grid */
+.ctrl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.ctrl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; box-shadow: var(--shadow); }
+.ctrl-card h4 { font-family: "Manrope", sans-serif; font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-muted); margin-bottom: 16px; }
+.ctrl-card .fgroup:last-child { margin-bottom: 0; }
+.fgroup { margin-bottom: 16px; }
+.fgroup label.lbl { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 7px; }
+.opt-stack > .opt, .opt-stack > .check { margin-bottom: 12px; }
+.opt-stack > :last-child { margin-bottom: 0; }
+
+/* alerts (утверждено) */
 .ico { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
 .toast { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow-toast); display:flex; gap:14px; align-items:flex-start; margin-bottom:10px; }
 .toast .chip { flex:0 0 38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
@@ -148,63 +200,72 @@ select.input {
 
 /* landing mockup */
 .mock { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); background: var(--surface); }
-.mock-hero { background: linear-gradient(160deg, var(--surface-warm), var(--bg)); padding: 56px 48px; text-align: center; position: relative; }
-.mock-hero h3 { font-size: 40px; font-weight: 600; max-width: 620px; margin: 0 auto; }
+.mock-hero { background: linear-gradient(160deg, var(--surface-warm), var(--bg)); padding: var(--sp-block) clamp(20px, 5vw, 48px) calc(var(--sp-block) * 1.2); text-align: center; }
+.mock-hero h3 { font-size: clamp(26px, 4vw, 40px); max-width: 680px; margin: 0 auto; }
 .mock-hero h3 em { font-style: italic; color: var(--primary); }
 .mock-hero p { color: var(--ink-muted); margin-top: 12px; }
 .search-bar {
-  margin: 28px auto 0; max-width: 720px; background: var(--surface); border-radius: var(--r-pill);
-  box-shadow: var(--shadow); display: flex; align-items: center; padding: 8px 8px 8px 24px; gap: 4px; border: 1px solid var(--border);
+  margin: 28px auto 0; max-width: 760px; background: var(--surface); border-radius: 16px;
+  box-shadow: var(--shadow); display: flex; align-items: stretch; padding: 8px; gap: 8px; border: 1px solid var(--border);
+  text-align: left;
 }
-.search-bar .field { flex: 1; text-align: left; padding: 6px 16px; border-right: 1px solid var(--border); }
-.search-bar .field:last-of-type { border-right: none; }
-.search-bar .field b { display: block; font-size: 12px; }
-.search-bar .field span { font-size: 13px; color: var(--ink-muted); }
-.search-bar .btn { padding: 14px 26px; white-space: nowrap; }
+.search-bar .sfield { flex: 1; min-width: 0; }
+.search-bar .sfield b { display: block; font-size: 12px; margin: 2px 0 4px 4px; }
+.search-bar .sfield .input { padding: 9px 14px; font-size: 14px; }
+.search-bar select.input { padding-right: 38px; background-position: right 12px center; }
+.search-bar .btn { align-self: flex-end; padding: 11px 24px; white-space: nowrap; }
+@media (max-width: 720px) { .search-bar { flex-direction: column; } .search-bar .btn { align-self: stretch; } }
 .trust-row { display: flex; justify-content: center; gap: 28px; margin-top: 24px; font-size: 13.5px; font-weight: 600; color: var(--ink-muted); flex-wrap: wrap; }
 .trust-row span::before { content: "✓ "; color: var(--sage); font-weight: 800; }
 .wavy { display:block; width:100%; height:28px; }
 
-/* sitter cards */
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 36px 40px 44px; }
-@media (max-width: 860px){ .cards { grid-template-columns: 1fr; } }
-.card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: transform .25s, box-shadow .25s; }
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.card img { width: 100%; height: 170px; object-fit: cover; display: block; }
-.card .pad { padding: 18px; }
-.card .name { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 17px; }
-.card .name .rate { font-size: 14px; color: var(--gold); white-space: nowrap; }
-.card .sub { font-size: 13.5px; color: var(--ink-muted); margin-top: 3px; }
-.badges { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
-.badge { font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: var(--r-pill); }
-.badge-sage { background: var(--sage-soft); color: var(--sage); }
-.badge-gold { background: var(--gold-soft); color: #9C7415; }
-[data-theme="dark"] .badge-gold { color: var(--gold); }
-.card .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
-.card .foot .from { font-size: 12.5px; color: var(--ink-muted); }
-.card .foot .from b { display:block; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
-.btn-sm { padding: 9px 18px; font-size: 13.5px; }
+/* sitter cards — реальная анатомия с сайта */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2.5vw, 20px); padding: var(--sp-block) clamp(16px, 4vw, 40px) calc(var(--sp-block) * 1.1); }
+@media (max-width: 900px){ .cards { grid-template-columns: 1fr; } }
+.scard {
+  background: var(--bg); border: 2px solid transparent; outline: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 16px; transition: border-color .2s, box-shadow .2s, transform .2s; cursor: pointer; display: flex; gap: 14px;
+}
+.scard:hover { border-color: var(--sage); box-shadow: var(--shadow); transform: translateY(-2px); }
+.scard .ava { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.scard .body { flex: 1; min-width: 0; }
+.scard .nrow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.scard .nrow b { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.scard .rate { font-size: 13px; color: var(--ink); white-space: nowrap; }
+.scard .rate .star { color: var(--gold); }
+.scard .loc { font-size: 12px; color: var(--ink-muted); }
+.scard .greet { font-size: 13.5px; font-style: italic; margin-top: 4px; }
+.scard .bio { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.scard .prow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 8px; }
+.scard .from { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.scard .from small { font-size: 11px; font-weight: 600; color: var(--ink-muted); }
+.scard .bookings { font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
+.scard .svc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.scard .svc li { list-style: none; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: var(--r-pill); background: var(--sage-soft); color: var(--ink); }
 
 /* photo report mockup */
 .report { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; align-items: center; }
 @media (max-width: 860px){ .report { grid-template-columns: 1fr; } }
-.report .text { padding: 48px; }
+.report .text { padding: var(--sp-block) clamp(20px, 5vw, 48px); }
 .report h3 { font-size: 32px; margin-bottom: 14px; }
 .report p { color: var(--ink-muted); }
-.chat { background: var(--surface-warm); padding: 40px 36px; display: flex; flex-direction: column; gap: 12px; min-height: 100%; }
+.chat { background: var(--surface-warm); padding: var(--sp-block) clamp(20px, 4vw, 36px); display: flex; flex-direction: column; gap: 12px; min-height: 100%; }
 .bubble { background: var(--surface); border-radius: var(--r-lg); border-bottom-left-radius: 6px; padding: 14px 16px; max-width: 320px; box-shadow: var(--shadow); font-size: 14px; }
 .bubble img { width: 100%; border-radius: var(--r-md); margin-bottom: 8px; display:block; }
 .bubble .time { font-size: 11.5px; color: var(--ink-muted); margin-top: 6px; }
 .bubble.owner { align-self: flex-end; background: var(--primary); color: #fff; border-radius: var(--r-lg); border-bottom-right-radius: 6px; }
 
 /* booking form mockup */
-.booking { display: grid; grid-template-columns: 1fr 360px; gap: 28px; padding: 40px; }
+.booking { display: grid; grid-template-columns: 1fr 360px; gap: clamp(20px, 3vw, 28px); padding: var(--sp-block) clamp(20px, 4vw, 40px); }
 @media (max-width: 860px){ .booking { grid-template-columns: 1fr; } }
-.fgroup { margin-bottom: 18px; }
-.fgroup label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 7px; }
-.fgroup .input { width: 100%; min-width: 0; }
-.check { display: flex; align-items: center; gap: 10px; font-size: 14.5px; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; background: var(--surface); }
-.check input { accent-color: var(--primary); width: 17px; height: 17px; }
+.dates2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.check {
+  display: flex; align-items: center; gap: 11px; font-size: 14.5px; padding: 12px 16px;
+  border: 1.5px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px;
+  background: var(--surface); cursor: pointer; user-select: none; transition: border-color .15s, background .15s;
+}
+.check:hover { border-color: var(--sage); }
+.check:has(.cb:checked) { border-color: var(--sage); background: color-mix(in srgb, var(--sage-soft) 45%, var(--surface)); }
 .check .p { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
 .summary { background: var(--surface-warm); border-radius: var(--r-lg); padding: 26px; height: fit-content; }
 .summary h4 { font-family: "Lora", serif; font-size: 20px; margin-bottom: 16px; }
@@ -218,9 +279,16 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 </head>
 <body>
 
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 20h16a2 2 0 0 0 1.73-2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+</svg>
+
 <div class="topbar">
   <div class="wrap">
-    <div class="logo"><span class="paw">🐾</span> MyTails <span style="font-family:'Manrope';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">design system preview</span></div>
+    <div class="logo"><span>🐾</span> MyTails <span style="font-family:'Manrope';font-size:12px;font-weight:600;color:var(--ink-muted);margin-left:6px;">design system preview</span></div>
     <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️ Тема</button>
   </div>
 </div>
@@ -245,13 +313,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
     <div class="swatch"><div class="chip" style="background:#5B8C5A"></div><div class="meta"><b>Success</b><code>#5B8C5A</code></div></div>
     <div class="swatch"><div class="chip" style="background:#C75146"></div><div class="meta"><b>Error</b><code>#C75146</code></div></div>
   </div>
-  <div style="margin-top:32px">
-    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-      <symbol id="i-warn" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 20h16a2 2 0 0 0 1.73-2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
-      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
-      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
-    </svg>
+  <div style="margin-top:var(--sp-block)">
     <p style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-muted);margin-bottom:10px">Toast — всплывающие уведомления</p>
     <div class="toast t-s"><div class="chip"><svg class="ico"><use href="#i-check"/></svg></div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
     <div class="toast t-e"><div class="chip"><svg class="ico"><use href="#i-x"/></svg></div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
@@ -264,43 +326,26 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 <section class="wrap" id="type">
   <span class="section-label">02 · Типографика</span>
   <h2 class="section-title">Lora + Manrope</h2>
-  <p class="section-sub">Серифа в заголовках нет ни у одного pet-маркетплейса — это наш риск №1 и главная отстройка. Ниже — сравнение с альтернативами, чтобы выбрать глазами.</p>
+  <p class="section-sub">Утверждено: display — Lora (lining figures, ровные цифры), body — Manrope. Полная кириллица, SIL OFL.</p>
 
-  <div class="vs">
-    <div class="spec-card">
-      <div class="spec-role">Display — Lora (утверждён)</div>
-      <div class="spec-display">Loving Care, While You're Not There</div>
-      <div class="spec-display" style="margin-top:8px">Забота, пока вас нет рядом</div>
-      <p class="spec-note">Мягкая «тёплая» антиква с характером. Variable: от текстовой до жирной плакатной. Кириллица — полная.</p>
-    </div>
-    <div class="spec-card">
-      <div class="spec-role">Display — Instrument Serif (альтернатива)</div>
-      <div class="spec-display-alt">Loving Care, While You're Not There</div>
-      <div class="spec-display-alt" style="margin-top:8px">Забота, пока вас нет рядом</div>
-      <p class="spec-note">Легче и «журнальнее», но одна насечка веса и слабее кириллица. Менее гибкая для UI.</p>
-    </div>
+  <div class="spec-card">
+    <div class="spec-role">Display — Lora</div>
+    <div class="spec-display">Loving Care, While You're Not There</div>
+    <div class="spec-display" style="margin-top:8px">Забота и любовь, пока вас нет рядом</div>
+    <div class="spec-display" style="margin-top:8px">Cariño y atención, ¿estás de viaje?</div>
   </div>
 
-  <div class="vs">
-    <div class="spec-card">
-      <div class="spec-role">Body — Manrope (утверждён)</div>
-      <p>María присматривает за собаками в районе Чамбери уже четыре года. У неё дома просторная терраса, а рядом — парк Ретиро. Ваш питомец получит прогулки утром и вечером, фото-отчёты каждый день и столько обнимашек, сколько захочет.</p>
-      <p style="margin-top:10px"><span class="price">€24/ночь · 4.9 ★ · 127 отзывов</span></p>
-      <p class="spec-note">Дружелюбная геометрия, мягкие терминалы, tabular-nums для цен.</p>
-    </div>
-    <div class="spec-card">
-      <div class="spec-role">Body — DM Sans (альтернатива)</div>
-      <p class="spec-body-alt">María присматривает за собаками в районе Чамбери уже четыре года. У неё дома просторная терраса, а рядом — парк Ретиро. Ваш питомец получит прогулки утром и вечером, фото-отчёты каждый день и столько обнимашек, сколько захочет.</p>
-      <p class="spec-body-alt" style="margin-top:10px"><span class="price">€24/ночь · 4.9 ★ · 127 отзывов</span></p>
-      <p class="spec-note">Нейтральнее и компактнее; чуть меньше «характера», зато строже в таблицах.</p>
-    </div>
+  <div class="spec-card">
+    <div class="spec-role">Body — Manrope</div>
+    <p>María присматривает за собаками в районе Чамбери уже четыре года. У неё дома просторная терраса, а рядом — парк Ретиро. Ваш питомец получит прогулки утром и вечером, фото-отчёты каждый день и столько обнимашек, сколько захочет.</p>
+    <p style="margin-top:10px"><span class="price">€24/ночь · 4.9 ★ · 127 отзывов · итого €106,00</span></p>
   </div>
 
   <div class="spec-card">
     <div class="spec-role">Шкала</div>
     <div style="font-family:'Lora',serif;font-size:48px;font-weight:600">H1 · 48px Hero</div>
-    <div style="font-family:'Lora',serif;font-size:34px;font-weight:580;margin-top:6px">H2 · 34px Section</div>
-    <div style="font-family:'Lora',serif;font-size:24px;font-weight:560;margin-top:6px">H3 · 24px Card title</div>
+    <div style="font-family:'Lora',serif;font-size:34px;font-weight:600;margin-top:6px">H2 · 34px Section</div>
+    <div style="font-family:'Lora',serif;font-size:24px;font-weight:600;margin-top:6px">H3 · 24px Card title</div>
     <div style="font-size:16px;margin-top:10px">Body · 16px — основной текст интерфейса</div>
     <div style="font-size:14px;color:var(--ink-muted);margin-top:4px">Small · 14px — подписи и метаданные</div>
     <div style="font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-muted);margin-top:6px">Label · 12.5px uppercase</div>
@@ -308,19 +353,69 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 </section>
 
 <section class="wrap" id="components">
-  <span class="section-label">03 · Компоненты</span>
-  <h2 class="section-title">Кнопки, поля, формы</h2>
-  <p class="section-sub">Pill-кнопки, поля 12px, карточки 20px — скругления иерархичные, а не «всё пузырём».</p>
-  <div class="spec-card">
-    <div class="row" style="margin-bottom:22px">
+  <span class="section-label">03 · Контролы</span>
+  <h2 class="section-title">Все поля и состояния</h2>
+  <p class="section-sub">Каждый контрол во всех состояниях. Чекбоксы, радио и свичи кликаются по всей строке (label-обёртка). Focus — sage, error — терракота.</p>
+
+  <div class="ctrl-card" style="margin-bottom:20px">
+    <h4>Кнопки</h4>
+    <div class="row">
       <button class="btn btn-primary">Найти ситтера</button>
       <button class="btn btn-secondary">Стать ситтером</button>
       <button class="btn btn-ghost">Подробнее</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
     </div>
-    <div class="row">
-      <input class="input" placeholder="Город — Мадрид" />
-      <input class="input" placeholder="Даты — 14–18 июня" />
-      <select class="input"><option>Передержка</option><option>Дневной уход</option><option>Выгул</option></select>
+  </div>
+
+  <div class="ctrl-grid">
+    <div class="ctrl-card">
+      <h4>Текстовые поля</h4>
+      <div class="fgroup"><label class="lbl">Обычное</label><input class="input" placeholder="Имя питомца" /></div>
+      <div class="fgroup"><label class="lbl">Заполненное</label><input class="input" value="Бруно" /></div>
+      <div class="fgroup"><label class="lbl">Disabled</label><input class="input" value="Мадрид" disabled /><div class="hint">Пока доступен только Мадрид</div></div>
+      <div class="fgroup"><label class="lbl">Ошибка</label><input class="input error" value="brunomail" /><div class="err-msg"><svg class="ico" style="width:14px;height:14px"><use href="#i-warn"/></svg>Похоже, это не email — забыли @?</div></div>
+      <div class="fgroup"><label class="lbl">Textarea</label><textarea class="input" placeholder="Бруно боится грозы, любит морковку…"></textarea></div>
+    </div>
+
+    <div class="ctrl-card">
+      <h4>Select и даты</h4>
+      <div class="fgroup"><label class="lbl">Select</label><select class="input"><option>Передержка</option><option>Дневной уход</option><option>Выгул</option></select></div>
+      <div class="fgroup"><label class="lbl">Select disabled</label><select class="input" disabled><option>Мадрид</option></select></div>
+      <div class="fgroup"><label class="lbl">Дата (нативный датапикер)</label><input type="date" class="input" value="2026-06-14" min="2026-06-12" /></div>
+      <div class="fgroup"><label class="lbl">Период</label>
+        <div class="dates2">
+          <input type="date" class="input" value="2026-06-14" min="2026-06-12" />
+          <input type="date" class="input" value="2026-06-18" min="2026-06-12" />
+        </div>
+      </div>
+    </div>
+
+    <div class="ctrl-card">
+      <h4>Чекбоксы</h4>
+      <div class="opt-stack">
+        <label class="opt"><input type="checkbox" class="cb" /> Не отмечен</label>
+        <label class="opt"><input type="checkbox" class="cb" checked /> Отмечен</label>
+        <label class="opt disabled"><input type="checkbox" class="cb" disabled /> Disabled</label>
+        <label class="opt disabled"><input type="checkbox" class="cb" checked disabled /> Disabled + отмечен</label>
+      </div>
+    </div>
+
+    <div class="ctrl-card">
+      <h4>Радио</h4>
+      <div class="opt-stack">
+        <label class="opt"><input type="radio" name="r1" class="radio" checked /> Собака</label>
+        <label class="opt"><input type="radio" name="r1" class="radio" /> Кошка</label>
+        <label class="opt disabled"><input type="radio" name="r2" class="radio" disabled /> Disabled</label>
+      </div>
+    </div>
+
+    <div class="ctrl-card">
+      <h4>Свичи</h4>
+      <div class="opt-stack">
+        <label class="opt"><input type="checkbox" class="sw" checked /> Email-уведомления</label>
+        <label class="opt"><input type="checkbox" class="sw" /> Push-уведомления</label>
+        <label class="opt disabled"><input type="checkbox" class="sw" checked disabled /> Disabled</label>
+      </div>
     </div>
   </div>
 </section>
@@ -328,17 +423,18 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
 <section class="wrap" id="mock-landing">
   <span class="section-label">04 · Мокап · Лендинг</span>
   <h2 class="section-title">Первый экран mytails.eu</h2>
-  <p class="section-sub">Hero как у Napo: тепло + trust-сигналы сразу. Поиск — главное действие.</p>
+  <p class="section-sub">Слоган всегда на английском (не переводится). Поля поиска живые: город задизейблен (пока только Мадрид), даты — с нативным датапикером.</p>
   <div class="mock">
     <div class="mock-hero">
-      <h3>Любящие руки для вашего питомца, <em>пока вы в отъезде</em></h3>
+      <h3>Loving Care, <em>While You're Not There</em></h3>
       <p>Проверенные ситтеры рядом с вами в Мадриде</p>
-      <div class="search-bar">
-        <div class="field"><b>Где</b><span>Мадрид</span></div>
-        <div class="field"><b>Услуга</b><span>Передержка</span></div>
-        <div class="field"><b>Даты</b><span>14 – 18 июня</span></div>
-        <button class="btn btn-primary">🔍 Найти</button>
-      </div>
+      <form class="search-bar" onsubmit="return false">
+        <div class="sfield"><b>Где</b><select class="input" disabled><option>Мадрид</option></select></div>
+        <div class="sfield"><b>Услуга</b><select class="input"><option>Передержка</option><option>Дневной уход</option><option>Выгул</option></select></div>
+        <div class="sfield"><b>С</b><input type="date" class="input" value="2026-06-14" min="2026-06-12" /></div>
+        <div class="sfield"><b>По</b><input type="date" class="input" value="2026-06-18" min="2026-06-12" /></div>
+        <button class="btn btn-primary" type="submit">Найти</button>
+      </form>
       <div class="trust-row">
         <span>Ситтеры проверены вручную</span>
         <span>Фото-отчёты каждый день</span>
@@ -347,31 +443,37 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
     </div>
     <svg class="wavy" viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0,14 C150,28 300,0 450,14 C600,28 750,0 900,14 C1050,28 1150,7 1200,14 L1200,28 L0,28 Z" fill="var(--surface)"/></svg>
     <div class="cards">
-      <div class="card">
-        <img src="https://placedog.net/420/260?id=12" alt="">
-        <div class="pad">
-          <div class="name">María G. <span class="rate">★ 4.9 (127)</span></div>
-          <div class="sub">Чамбери, Мадрид · 1.2 км от вас</div>
-          <div class="badges"><span class="badge badge-sage">Проверена</span><span class="badge badge-gold">Founding Sitter</span></div>
-          <div class="foot"><div class="from">за ночь<b>€24</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+      <div class="scard">
+        <img class="ava" src="https://i.pravatar.cc/112?img=47" alt="">
+        <div class="body">
+          <div class="nrow"><b>María G.</b><span class="rate"><span class="star">★</span> 4.9 (127)</span></div>
+          <div class="loc">Чамбери, Мадрид</div>
+          <div class="greet">«Ваш питомец будет окружён заботой, как дома»</div>
+          <div class="bio">Присматриваю за собаками четыре года. Дома просторная терраса, рядом парк Ретиро, гуляем дважды в день…</div>
+          <div class="prow"><span class="from">от €24 <small>(IVA inc.)</small></span><span class="bookings">63 заказа</span></div>
+          <ul class="svc"><li>Передержка 🐕</li><li>Выгул 🐕</li></ul>
         </div>
       </div>
-      <div class="card">
-        <img src="https://placedog.net/420/260?id=33" alt="">
-        <div class="pad">
-          <div class="name">Carlos R. <span class="rate">★ 4.8 (89)</span></div>
-          <div class="sub">Ла-Латина, Мадрид · 2.5 км от вас</div>
-          <div class="badges"><span class="badge badge-sage">Проверен</span><span class="badge badge-sage">С двором</span></div>
-          <div class="foot"><div class="from">за ночь<b>€21</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+      <div class="scard">
+        <img class="ava" src="https://i.pravatar.cc/112?img=12" alt="">
+        <div class="body">
+          <div class="nrow"><b>Carlos R.</b><span class="rate"><span class="star">★</span> 4.8 (89)</span></div>
+          <div class="loc">Ла-Латина, Мадрид</div>
+          <div class="greet">«Двор, мячики и много внимания»</div>
+          <div class="bio">Работаю из дома, питомцы всегда под присмотром. Свой двор, опыт с крупными породами, аптечка…</div>
+          <div class="prow"><span class="from">от €21 <small>(IVA inc.)</small></span><span class="bookings">41 заказ</span></div>
+          <ul class="svc"><li>Передержка 🐕</li><li>Дневной уход 🐕 🐈</li></ul>
         </div>
       </div>
-      <div class="card">
-        <img src="https://placedog.net/420/260?id=54" alt="">
-        <div class="pad">
-          <div class="name">Lucía M. <span class="rate">★ 5.0 (64)</span></div>
-          <div class="sub">Саламанка, Мадрид · 3.1 км от вас</div>
-          <div class="badges"><span class="badge badge-sage">Проверена</span><span class="badge badge-gold">Founding Sitter</span></div>
-          <div class="foot"><div class="from">за ночь<b>€28</b></div><button class="btn btn-primary btn-sm">Профиль</button></div>
+      <div class="scard">
+        <img class="ava" src="https://i.pravatar.cc/112?img=32" alt="">
+        <div class="body">
+          <div class="nrow"><b>Lucía M.</b><span class="rate"><span class="star">★</span> 5.0 (64)</span></div>
+          <div class="loc">Саламанка, Мадрид</div>
+          <div class="greet">«Солнечная квартира и нежность без лимита»</div>
+          <div class="bio">Ветеринарный ассистент. Принимаю кошек и небольших собак, фото-отчёты утром и вечером…</div>
+          <div class="prow"><span class="from">от €28 <small>(IVA inc.)</small></span><span class="bookings">52 заказа</span></div>
+          <ul class="svc"><li>Передержка 🐈</li><li>Визиты 🐈</li></ul>
         </div>
       </div>
     </div>
@@ -403,13 +505,18 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
   <h2 class="section-title">Форма заказа с допуслугами</h2>
   <div class="mock booking">
     <div>
-      <div class="fgroup"><label>Питомец</label><select class="input"><option>Бруно · бигль, 4 года</option></select></div>
-      <div class="fgroup"><label>Даты передержки</label><input class="input" value="14 – 18 июня 2026" /></div>
-      <div class="fgroup"><label>Дополнительно</label>
-        <div class="check"><input type="checkbox" checked> Забрать питомца (Pickup) <span class="p">€10</span></div>
-        <div class="check"><input type="checkbox"> Привезти обратно (Return) <span class="p">€10</span></div>
+      <div class="fgroup"><label class="lbl">Питомец</label><select class="input"><option>Бруно · бигль, 4 года</option></select></div>
+      <div class="fgroup"><label class="lbl">Даты передержки</label>
+        <div class="dates2">
+          <input type="date" class="input" value="2026-06-14" min="2026-06-12" />
+          <input type="date" class="input" value="2026-06-18" min="2026-06-12" />
+        </div>
       </div>
-      <div class="fgroup"><label>Пожелания для María</label><input class="input" placeholder="Бруно боится грозы, любит морковку…" /></div>
+      <div class="fgroup"><label class="lbl">Дополнительно</label>
+        <label class="check"><input type="checkbox" class="cb" checked> Забрать питомца (Pickup) <span class="p">€10</span></label>
+        <label class="check"><input type="checkbox" class="cb"> Привезти обратно (Return) <span class="p">€10</span></label>
+      </div>
+      <div class="fgroup"><label class="lbl">Пожелания для María</label><input class="input" placeholder="Бруно боится грозы, любит морковку…" /></div>
     </div>
     <div class="summary">
       <h4>Ваш заказ</h4>
