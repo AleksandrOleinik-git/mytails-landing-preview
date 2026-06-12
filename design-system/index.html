@@ -138,7 +138,8 @@ select.input {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B5AA99' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 textarea.input { resize: vertical; min-height: 92px; }
-input[type="date"].input { min-height: 49px; }
+input[type="date"].input { min-height: 49px; padding: 12px 10px 12px 12px; font-size: 14px; font-variant-numeric: tabular-nums; }
+input[type="date"].input::-webkit-calendar-picker-indicator { margin-left: 2px; opacity: .65; }
 [data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.85); }
 
 /* checkbox / radio / switch — вся строка кликабельна через label */
@@ -154,7 +155,9 @@ input[type="date"].input { min-height: 49px; }
   border-color: var(--sage);
 }
 .cb:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--sage-soft); }
-.cb:disabled { cursor: not-allowed; background-color: var(--surface-warm); }
+.cb:disabled { cursor: not-allowed; }
+.cb:disabled:not(:checked) { background-color: var(--surface-warm); }
+/* disabled+checked сохраняет sage-фон — галка остаётся видимой, блеклость даёт opacity строки */
 .radio {
   appearance: none; -webkit-appearance: none; flex-shrink: 0;
   width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 50%;
@@ -216,7 +219,8 @@ input[type="date"].input { min-height: 49px; }
 .search-bar .btn { align-self: flex-end; padding: 11px 24px; white-space: nowrap; }
 @media (max-width: 720px) { .search-bar { flex-direction: column; } .search-bar .btn { align-self: stretch; } }
 .trust-row { display: flex; justify-content: center; gap: 28px; margin-top: 24px; font-size: 13.5px; font-weight: 600; color: var(--ink-muted); flex-wrap: wrap; }
-.trust-row span::before { content: "✓ "; color: var(--sage); font-weight: 800; }
+.trust-row span { display: inline-flex; align-items: center; gap: 8px; }
+.trust-row span::before { content: "✓"; color: var(--sage); font-weight: 800; }
 .wavy { display:block; width:100%; height:28px; }
 
 /* sitter cards — реальная анатомия с сайта */
@@ -240,8 +244,47 @@ input[type="date"].input { min-height: 49px; }
 .scard .from { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .scard .from small { font-size: 11px; font-weight: 600; color: var(--ink-muted); }
 .scard .bookings { font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
-.scard .svc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
-.scard .svc li { list-style: none; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: var(--r-pill); background: var(--sage-soft); color: var(--ink); }
+
+/* datepicker calendar — дизайн кастомного календаря */
+.cal { max-width: 320px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-toast); padding: 18px; }
+.cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.cal-head b { font-family: "Lora", serif; font-size: 16px; font-weight: 600; }
+.cal-nav { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); cursor: pointer; color: var(--ink); font-size: 14px; line-height: 1; transition: background .15s; }
+.cal-nav:hover { background: var(--surface-warm); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; text-align: center; }
+.cal-wd { font-size: 10.5px; font-weight: 800; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; padding: 6px 0; }
+.cal-d { font-size: 13.5px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; font-variant-numeric: tabular-nums; transition: background .12s; }
+.cal-d:hover { background: var(--surface-warm); }
+.cal-d.muted { color: var(--ink-muted); opacity: .4; cursor: default; }
+.cal-d.muted:hover { background: transparent; }
+.cal-d.today { box-shadow: inset 0 0 0 1.5px var(--sage); }
+.cal-d.in { background: var(--sage-soft); border-radius: 0; }
+.cal-d.start, .cal-d.end { background: var(--primary); color: #fff; font-weight: 700; }
+.cal-d.start { border-radius: 50% 0 0 50%; }
+.cal-d.end { border-radius: 0 50% 50% 0; }
+.cal-foot { font-size: 12.5px; color: var(--ink-muted); margin-top: 12px; text-align: center; }
+
+/* service chips — вид и цвет по виду питомца */
+.svc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.svc li { list-style: none; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; padding: 3px 11px; border-radius: var(--r-pill); color: var(--ink); }
+.svc .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.sv-dog { background: var(--sage-soft); } .sv-dog .dot { background: var(--sage); }
+.sv-cat { background: var(--gold-soft); } .sv-cat .dot { background: var(--gold); }
+.sv-both { background: var(--surface-warm); }
+.sv-both .dot { background: var(--sage); box-shadow: 12px 0 0 var(--gold); margin-right: 12px; }
+
+/* split: список горизонтальных карточек + карта (реальная пропорция поиска) */
+.split { display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 860px){ .split { grid-template-columns: 1fr; } .map { min-height: 260px; } }
+.split .list { padding: clamp(16px, 2.5vw, 24px); display: flex; flex-direction: column; gap: 14px; background: var(--surface); }
+.map { position: relative; background: linear-gradient(140deg, #ECE6D6, #F4EEE2); min-height: 480px; overflow: hidden; }
+[data-theme="dark"] .map { background: linear-gradient(140deg, #2E2820, #3B342C); }
+.map svg.roads { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; }
+.pin { position: absolute; background: var(--surface); color: var(--ink); padding: 5px 13px; border-radius: var(--r-pill); font-weight: 800; font-size: 13px; box-shadow: var(--shadow); cursor: pointer; transition: transform .15s; font-variant-numeric: tabular-nums; }
+.pin:hover { transform: scale(1.08); }
+.pin.active { background: var(--primary); color: #fff; }
+.map .zoom { position: absolute; right: 14px; top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.map .zoom button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: var(--shadow); }
 
 /* photo report mockup */
 .report { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; align-items: center; }
@@ -253,7 +296,7 @@ input[type="date"].input { min-height: 49px; }
 .bubble { background: var(--surface); border-radius: var(--r-lg); border-bottom-left-radius: 6px; padding: 14px 16px; max-width: 320px; box-shadow: var(--shadow); font-size: 14px; }
 .bubble img { width: 100%; border-radius: var(--r-md); margin-bottom: 8px; display:block; }
 .bubble .time { font-size: 11.5px; color: var(--ink-muted); margin-top: 6px; }
-.bubble.owner { align-self: flex-end; background: var(--primary); color: #fff; border-radius: var(--r-lg); border-bottom-right-radius: 6px; }
+.bubble.owner { align-self: flex-end; background: var(--sage-soft); color: var(--ink); border-radius: var(--r-lg); border-bottom-right-radius: 6px; box-shadow: none; }
 
 /* booking form mockup */
 .booking { display: grid; grid-template-columns: 1fr 360px; gap: clamp(20px, 3vw, 28px); padding: var(--sp-block) clamp(20px, 4vw, 40px); }
@@ -391,6 +434,27 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
     </div>
 
     <div class="ctrl-card">
+      <h4>Датапикер — дизайн календаря</h4>
+      <div class="cal">
+        <div class="cal-head">
+          <button class="cal-nav">‹</button>
+          <b>Июнь 2026</b>
+          <button class="cal-nav">›</button>
+        </div>
+        <div class="cal-grid">
+          <span class="cal-wd">Пн</span><span class="cal-wd">Вт</span><span class="cal-wd">Ср</span><span class="cal-wd">Чт</span><span class="cal-wd">Пт</span><span class="cal-wd">Сб</span><span class="cal-wd">Вс</span>
+          <span class="cal-d muted">1</span><span class="cal-d muted">2</span><span class="cal-d muted">3</span><span class="cal-d muted">4</span><span class="cal-d muted">5</span><span class="cal-d muted">6</span><span class="cal-d muted">7</span>
+          <span class="cal-d muted">8</span><span class="cal-d muted">9</span><span class="cal-d muted">10</span><span class="cal-d muted">11</span><span class="cal-d today">12</span><span class="cal-d">13</span><span class="cal-d start">14</span>
+          <span class="cal-d in">15</span><span class="cal-d in">16</span><span class="cal-d in">17</span><span class="cal-d end">18</span><span class="cal-d">19</span><span class="cal-d">20</span><span class="cal-d">21</span>
+          <span class="cal-d">22</span><span class="cal-d">23</span><span class="cal-d">24</span><span class="cal-d">25</span><span class="cal-d">26</span><span class="cal-d">27</span><span class="cal-d">28</span>
+          <span class="cal-d">29</span><span class="cal-d">30</span><span class="cal-d muted">1</span><span class="cal-d muted">2</span><span class="cal-d muted">3</span><span class="cal-d muted">4</span><span class="cal-d muted">5</span>
+        </div>
+        <div class="cal-foot">14 – 18 июня · 4 ночи</div>
+      </div>
+      <div class="hint" style="margin-top:12px">Кастомный календарь (react-day-picker с этими стилями). Прошедшие дни — muted, сегодня — sage-кольцо, границы периода — терракота, внутри — sage-подложка. Нативный пикер в полях — временно.</div>
+    </div>
+
+    <div class="ctrl-card">
       <h4>Чекбоксы</h4>
       <div class="opt-stack">
         <label class="opt"><input type="checkbox" class="cb" /> Не отмечен</label>
@@ -451,7 +515,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
           <div class="greet">«Ваш питомец будет окружён заботой, как дома»</div>
           <div class="bio">Присматриваю за собаками четыре года. Дома просторная терраса, рядом парк Ретиро, гуляем дважды в день…</div>
           <div class="prow"><span class="from">от €24 <small>(IVA inc.)</small></span><span class="bookings">63 заказа</span></div>
-          <ul class="svc"><li>Передержка 🐕</li><li>Выгул 🐕</li></ul>
+          <ul class="svc"><li class="sv-dog"><span class="dot"></span>Передержка · собаки</li><li class="sv-dog"><span class="dot"></span>Выгул · собаки</li></ul>
         </div>
       </div>
       <div class="scard">
@@ -462,7 +526,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
           <div class="greet">«Двор, мячики и много внимания»</div>
           <div class="bio">Работаю из дома, питомцы всегда под присмотром. Свой двор, опыт с крупными породами, аптечка…</div>
           <div class="prow"><span class="from">от €21 <small>(IVA inc.)</small></span><span class="bookings">41 заказ</span></div>
-          <ul class="svc"><li>Передержка 🐕</li><li>Дневной уход 🐕 🐈</li></ul>
+          <ul class="svc"><li class="sv-dog"><span class="dot"></span>Передержка · собаки</li><li class="sv-both"><span class="dot"></span>Дневной уход · собаки и кошки</li></ul>
         </div>
       </div>
       <div class="scard">
@@ -473,9 +537,66 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
           <div class="greet">«Солнечная квартира и нежность без лимита»</div>
           <div class="bio">Ветеринарный ассистент. Принимаю кошек и небольших собак, фото-отчёты утром и вечером…</div>
           <div class="prow"><span class="from">от €28 <small>(IVA inc.)</small></span><span class="bookings">52 заказа</span></div>
-          <ul class="svc"><li>Передержка 🐈</li><li>Визиты 🐈</li></ul>
+          <ul class="svc"><li class="sv-cat"><span class="dot"></span>Передержка · кошки</li><li class="sv-cat"><span class="dot"></span>Визиты · кошки</li></ul>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="mock-search">
+  <span class="section-label">04b · Мокап · Поиск: список + карта</span>
+  <h2 class="section-title">Горизонтальные карточки при карте</h2>
+  <p class="section-sub">Реальная пропорция страницы поиска: список занимает ~50% ширины, остальное — карта. Та же анатомия карточки, но в полную ширину колонки. Hover карточки и пина синхронизированы (как на проде).</p>
+  <div class="mock split">
+    <div class="list">
+      <div class="scard">
+        <img class="ava" src="https://i.pravatar.cc/112?img=47" alt="">
+        <div class="body">
+          <div class="nrow"><b>María G.</b><span class="rate"><span class="star">★</span> 4.9 (127)</span></div>
+          <div class="loc">Чамбери, Мадрид</div>
+          <div class="greet">«Ваш питомец будет окружён заботой, как дома»</div>
+          <div class="bio">Присматриваю за собаками четыре года. Дома просторная терраса, рядом парк Ретиро, гуляем дважды в день, фото-отчёты каждый вечер…</div>
+          <div class="prow"><span class="from">от €24 <small>(IVA inc.)</small></span><span class="bookings">63 заказа</span></div>
+          <ul class="svc"><li class="sv-dog"><span class="dot"></span>Передержка · собаки</li><li class="sv-dog"><span class="dot"></span>Выгул · собаки</li></ul>
+        </div>
+      </div>
+      <div class="scard" style="border-color: var(--sage); box-shadow: var(--shadow);">
+        <img class="ava" src="https://i.pravatar.cc/112?img=12" alt="">
+        <div class="body">
+          <div class="nrow"><b>Carlos R.</b><span class="rate"><span class="star">★</span> 4.8 (89)</span></div>
+          <div class="loc">Ла-Латина, Мадрид</div>
+          <div class="greet">«Двор, мячики и много внимания»</div>
+          <div class="bio">Работаю из дома, питомцы всегда под присмотром. Свой двор, опыт с крупными породами. Это состояние hover — синхронизировано с пином на карте.</div>
+          <div class="prow"><span class="from">от €21 <small>(IVA inc.)</small></span><span class="bookings">41 заказ</span></div>
+          <ul class="svc"><li class="sv-dog"><span class="dot"></span>Передержка · собаки</li><li class="sv-both"><span class="dot"></span>Дневной уход · собаки и кошки</li></ul>
+        </div>
+      </div>
+      <div class="scard">
+        <img class="ava" src="https://i.pravatar.cc/112?img=32" alt="">
+        <div class="body">
+          <div class="nrow"><b>Lucía M.</b><span class="rate"><span class="star">★</span> 5.0 (64)</span></div>
+          <div class="loc">Саламанка, Мадрид</div>
+          <div class="greet">«Солнечная квартира и нежность без лимита»</div>
+          <div class="bio">Ветеринарный ассистент. Принимаю кошек и небольших собак, фото-отчёты утром и вечером…</div>
+          <div class="prow"><span class="from">от €28 <small>(IVA inc.)</small></span><span class="bookings">52 заказа</span></div>
+          <ul class="svc"><li class="sv-cat"><span class="dot"></span>Передержка · кошки</li><li class="sv-cat"><span class="dot"></span>Визиты · кошки</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="map">
+      <svg class="roads" viewBox="0 0 500 480" preserveAspectRatio="none" fill="none">
+        <path d="M0,120 C140,100 220,180 500,150" stroke="#DBD2BE" stroke-width="10"/>
+        <path d="M80,0 C120,160 60,300 140,480" stroke="#DBD2BE" stroke-width="8"/>
+        <path d="M0,330 C180,310 320,380 500,330" stroke="#DBD2BE" stroke-width="12"/>
+        <path d="M320,0 C300,140 380,300 330,480" stroke="#E3DAC6" stroke-width="7"/>
+        <circle cx="245" cy="225" r="56" fill="#DFE8DA" opacity=".7"/>
+      </svg>
+      <span class="pin" style="top:24%; left:18%">€24</span>
+      <span class="pin active" style="top:46%; left:52%">€21</span>
+      <span class="pin" style="top:66%; left:30%">€28</span>
+      <span class="pin" style="top:32%; left:70%">€26</span>
+      <div class="zoom"><button>+</button><button>−</button></div>
     </div>
   </div>
 </section>
@@ -495,7 +616,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0 48px; text-align: 
         Бруно отлично погулял в Ретиро — два часа и ни одной несъеденной палки! 🐶
         <div class="time">María · 12:40</div>
       </div>
-      <div class="bubble owner">Спасибо! Какой он довольный 🧡<div class="time" style="color:rgba(255,255,255,.7)">Вы · 12:43</div></div>
+      <div class="bubble owner">Спасибо! Какой он довольный 🧡<div class="time">Вы · 12:43</div></div>
     </div>
   </div>
 </section>
