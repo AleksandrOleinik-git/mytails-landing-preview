@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyTails — Алерты: 5 вариантов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAF6EF; --surface:#FFFFFF; --surface-warm:#F3ECE0;
+  --ink:#3B342C; --ink-muted:#7A7064;
+  --primary:#E2705B; --sage:#7A9B76; --gold:#E8B84B; --border:#E8DFD0;
+  --success:#5B8C5A; --success-soft:#E7F0E6;
+  --warning:#D99A2B; --warning-soft:#FAF0DA;
+  --error:#C75146; --error-soft:#F8E4E1;
+  --info:#5B7E9E; --info-soft:#E3EBF2;
+  --shadow:0 4px 24px rgba(59,52,44,.08);
+  --shadow-toast:0 8px 30px rgba(59,52,44,.12);
+  --r-md:12px; --r-lg:20px; --r-pill:9999px;
+}
+[data-theme="dark"] {
+  --bg:#262119; --surface:#322B22; --surface-warm:#3B342C;
+  --ink:#F3ECE0; --ink-muted:#B5AA99; --border:#4A4136;
+  --success:#8FBC8D; --success-soft:#2E3A2D;
+  --warning:#E3BC6E; --warning-soft:#403521;
+  --error:#E89B90; --error-soft:#432C29;
+  --info:#9FBBD4; --info-soft:#2A3641;
+  --shadow:0 4px 24px rgba(0,0,0,.3); --shadow-toast:0 8px 30px rgba(0,0,0,.4);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif; font-size:16px; line-height:1.6; }
+.wrap { max-width:880px; margin:0 auto; padding:0 24px 80px; }
+.top { display:flex; justify-content:space-between; align-items:center; padding:28px 0 8px; }
+h1 { font-family:"Lora",serif; font-size:34px; font-weight:600; }
+.toggle { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:var(--r-pill); padding:8px 18px; font-family:inherit; font-weight:600; font-size:14px; cursor:pointer; }
+.intro { color:var(--ink-muted); max-width:640px; margin-bottom:8px; }
+section { padding:34px 0 6px; }
+.vname { font-family:"Lora",serif; font-size:22px; font-weight:600; margin-bottom:4px; }
+.vnote { font-size:13.5px; color:var(--ink-muted); margin-bottom:18px; max-width:640px; }
+.reco { display:inline-block; background:var(--primary); color:#fff; font-size:11.5px; font-weight:800; padding:3px 12px; border-radius:var(--r-pill); margin-left:8px; vertical-align:3px; }
+.stack > * { margin-bottom:10px; }
+
+/* A — текущий bootstrap-tint */
+.a { border-radius:var(--r-md); padding:13px 18px; font-size:14px; font-weight:600; }
+.a-s { background:var(--success-soft); color:#3D6B3C; }
+.a-w { background:var(--warning-soft); color:#8A6116; }
+.a-e { background:var(--error-soft); color:#963A30; }
+.a-i { background:var(--info-soft); color:#3D5B77; }
+[data-theme="dark"] .a-s{color:#A9C9A7} [data-theme="dark"] .a-w{color:#E3BC6E}
+[data-theme="dark"] .a-e{color:#E89B90} [data-theme="dark"] .a-i{color:#9FBBD4}
+
+/* B — цветной бордер */
+.b { border-radius:var(--r-md); padding:12px 18px; font-size:14.5px; background:var(--surface); border:1.5px solid; display:flex; gap:10px; align-items:baseline; }
+.b .ic { font-weight:800; }
+.b-s { border-color:var(--success); } .b-s .ic{ color:var(--success); }
+.b-w { border-color:var(--warning); } .b-w .ic{ color:var(--warning); }
+.b-e { border-color:var(--error); } .b-e .ic{ color:var(--error); }
+.b-i { border-color:var(--info); } .b-i .ic{ color:var(--info); }
+
+/* C — левая акцент-полоса */
+.c { border-radius:var(--r-md); padding:12px 18px 12px 16px; font-size:14.5px; background:var(--surface); border:1px solid var(--border); border-left:4px solid; display:flex; gap:10px; align-items:baseline; box-shadow:var(--shadow); }
+.c .ic { font-weight:800; }
+.c-s { border-left-color:var(--success); } .c-s .ic{ color:var(--success); }
+.c-w { border-left-color:var(--warning); } .c-w .ic{ color:var(--warning); }
+.c-e { border-left-color:var(--error); } .c-e .ic{ color:var(--error); }
+.c-i { border-left-color:var(--info); } .c-i .ic{ color:var(--info); }
+
+/* D — toast с иконкой-чипом */
+.d { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow-toast); display:flex; gap:14px; align-items:flex-start; }
+.d .chip { flex:0 0 38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; }
+.d b { display:block; font-size:14.5px; }
+.d span { font-size:13.5px; color:var(--ink-muted); }
+.d-s .chip { background:var(--success-soft); color:var(--success); }
+.d-w .chip { background:var(--warning-soft); color:var(--warning); }
+.d-e .chip { background:var(--error-soft); color:var(--error); }
+.d-i .chip { background:var(--info-soft); color:var(--info); }
+
+/* E — гибрид: toast на тёплой подложке */
+.e { border-radius:var(--r-lg); padding:14px 18px; background:var(--surface-warm); border:1px solid var(--border); display:flex; gap:14px; align-items:flex-start; }
+.e .chip { flex:0 0 38px; height:38px; border-radius:var(--r-pill); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; background:var(--surface); }
+.e b { display:block; font-size:14.5px; }
+.e span { font-size:13.5px; color:var(--ink-muted); }
+.e-s .chip { color:var(--success); } .e-w .chip { color:var(--warning); }
+.e-e .chip { color:var(--error); } .e-i .chip { color:var(--info); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Алерты: 5 вариантов</h1>
+    <button class="toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️ Тема</button>
+  </div>
+  <p class="intro">Один и тот же контент в пяти оформлениях. Проверь обе темы.</p>
+
+  <section>
+    <div class="vname">A · Текущий — пастельная заливка</div>
+    <div class="vnote">Baseline. Цветной фон + цветной текст — «как в Bootstrap».</div>
+    <div class="stack">
+      <div class="a a-s">✓ Бронирование подтверждено — María уже ждёт Бруно!</div>
+      <div class="a a-w">⚠ Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
+      <div class="a a-e">✕ Оплата не прошла. Проверьте карту и попробуйте снова.</div>
+      <div class="a a-i">ℹ Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="vname">B · Цветной бордер</div>
+    <div class="vnote">Твоя идея: спокойная поверхность, цвет несут рамка и иконка, текст — обычный ink.</div>
+    <div class="stack">
+      <div class="b b-s"><span class="ic">✓</span>Бронирование подтверждено — María уже ждёт Бруно!</div>
+      <div class="b b-w"><span class="ic">⚠</span>Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
+      <div class="b b-e"><span class="ic">✕</span>Оплата не прошла. Проверьте карту и попробуйте снова.</div>
+      <div class="b b-i"><span class="ic">ℹ</span>Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="vname">C · Левая акцент-полоса</div>
+    <div class="vnote">Белая карточка, 4px цветная полоса слева. Стиль Stripe/Linear — строгий, инлайн в формах.</div>
+    <div class="stack">
+      <div class="c c-s"><span class="ic">✓</span>Бронирование подтверждено — María уже ждёт Бруно!</div>
+      <div class="c c-w"><span class="ic">⚠</span>Ситтер ещё не подтвердил заказ — обычно это занимает пару часов.</div>
+      <div class="c c-e"><span class="ic">✕</span>Оплата не прошла. Проверьте карту и попробуйте снова.</div>
+      <div class="c c-i"><span class="ic">ℹ</span>Новое фото от ситтера: Бруно гуляет в парке Ретиро.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="vname">D · Toast с иконкой-чипом <span class="reco">Рекомендация</span></div>
+    <div class="vnote">Белая карточка + тень, цвет только в чипе иконки, заголовок + описание. Современный паттерн (Sonner); радиус 20px — наш, «тёплый».</div>
+    <div class="stack">
+      <div class="d d-s"><div class="chip">✓</div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
+      <div class="d d-w"><div class="chip">⚠</div><div><b>Ждём подтверждения ситтера</b><span>Обычно это занимает пару часов — мы пришлём уведомление.</span></div></div>
+      <div class="d d-e"><div class="chip">✕</div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
+      <div class="d d-i"><div class="chip">ℹ</div><div><b>Новое фото от ситтера</b><span>Бруно гуляет в парке Ретиро 🐾</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="vname">E · Гибрид на тёплой подложке</div>
+    <div class="vnote">Как D, но подложка sand вместо белого и без тени — мягче, для инлайн-блоков внутри страниц.</div>
+    <div class="stack">
+      <div class="e e-s"><div class="chip">✓</div><div><b>Бронирование подтверждено</b><span>María уже ждёт Бруно! Детали — в личном кабинете.</span></div></div>
+      <div class="e e-w"><div class="chip">⚠</div><div><b>Ждём подтверждения ситтера</b><span>Обычно это занимает пару часов — мы пришлём уведомление.</span></div></div>
+      <div class="e e-e"><div class="chip">✕</div><div><b>Оплата не прошла</b><span>Проверьте карту и попробуйте снова. Деньги не списаны.</span></div></div>
+      <div class="e e-i"><div class="chip">ℹ</div><div><b>Новое фото от ситтера</b><span>Бруно гуляет в парке Ретиро 🐾</span></div></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
