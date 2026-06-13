@@ -4,10 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyTails — Лендинг ситтеров (Мадрид)</title>
+<meta name="description" content="Станьте одним из первых 100 ситтеров MyTails в Мадриде — гибкий график, стабильные заказы, выплаты после каждого заказа.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Зарабатывайте, заботясь о питомцах — MyTails">
+<meta property="og:description" content="Открыт набор Founding Sitter в Мадриде — первые 100 мест. Гибкий график и стабильные заказы.">
+<meta property="og:image" content="assets/og-sitters-ru.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Зарабатывайте, заботясь о питомцах — MyTails">
+<meta name="twitter:description" content="Открыт набор Founding Sitter в Мадриде — первые 100 мест.">
+<meta name="twitter:image" content="assets/og-sitters-ru.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Нужен ли опыт работы с животными?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Главное — любовь к животным и ответственность. Опыт приветствуется, но не обязателен."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Будут ли заказы?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Мы запускаем рекламу для владельцев в Мадриде, а Founding-ситтеры получают приоритет в поиске первые 3 месяца."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как я получаю деньги?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "На вашу карту или счёт после завершения заказа."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Когда запуск?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Запускаемся в Мадриде осенью 2026. Оставьте email — сообщим первыми."
+      }
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --bg:#FAF6EF; --surface:#FFFFFF; --surface-warm:#F3ECE0;
@@ -70,14 +122,22 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .hero {
   position:relative; overflow:hidden;
   background-color:var(--surface-warm);
-  background-image: url("assets/hero-bg.webp");
+  background-image:
+    linear-gradient(rgba(243,236,224,.42), rgba(243,236,224,.42)),
+    url("assets/hero-bg.webp");
   background-position:center bottom; background-size:cover; background-repeat:no-repeat;
   padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(96px,14vw,170px);
 }
-[data-theme="dark"] .hero { background-image:none; }
+[data-theme="dark"] .hero { background-image:
+  linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
+  url("assets/hero-bg.webp"); }
 @media (max-width:680px){
-  .hero { background-image: url("assets/hero-bg-mobile.webp"); }
-  [data-theme="dark"] .hero { background-image:none; }
+  .hero { background-image:
+    linear-gradient(rgba(243,236,224,.42), rgba(243,236,224,.42)),
+    url("assets/hero-bg-mobile.webp"); }
+  [data-theme="dark"] .hero { background-image:
+    linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
+    url("assets/hero-bg-mobile.webp"); }
 }
 .hero .inner { position:relative; z-index:1; }
 .hero .inner { max-width:1080px; margin-inline:auto; display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
@@ -183,19 +243,27 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   background-color:var(--surface-warm);
   background-image:
     radial-gradient(ellipse 72% 78% at 50% 50%, var(--surface-warm) 34%, rgba(243,236,224,0) 80%),
+    linear-gradient(rgba(243,236,224,.4), rgba(243,236,224,.4)),
     url("assets/calc-bg.webp");
   background-position:center,center; background-size:cover,cover; background-repeat:no-repeat,no-repeat;
   border:1px solid var(--border); border-radius:var(--r-lg); padding:clamp(28px,4vw,48px); text-align:center; max-width:680px; margin-inline:auto;
 }
-[data-theme="dark"] .calc { background-image:none; }
+[data-theme="dark"] .calc { background-image:
+  radial-gradient(ellipse 72% 78% at 50% 50%, var(--surface-warm) 34%, rgba(59,52,44,0) 80%),
+  linear-gradient(rgba(38,33,25,.58), rgba(38,33,25,.58)),
+  url("assets/calc-bg.webp"); }
 .calc .sub, .calc .disc { max-width:440px; margin-left:auto; margin-right:auto; }
 @media (max-width:560px){
   .calc {
     background-image:
       radial-gradient(ellipse 60% 80% at 50% 50%, var(--surface-warm) 38%, rgba(243,236,224,0) 82%),
+      linear-gradient(rgba(243,236,224,.4), rgba(243,236,224,.4)),
       url("assets/calc-bg-mobile.webp");
   }
-  [data-theme="dark"] .calc { background-image:none; }
+  [data-theme="dark"] .calc { background-image:
+    radial-gradient(ellipse 60% 80% at 50% 50%, var(--surface-warm) 38%, rgba(59,52,44,0) 82%),
+    linear-gradient(rgba(38,33,25,.58), rgba(38,33,25,.58)),
+    url("assets/calc-bg-mobile.webp"); }
 }
 .calc .svc-tag { display:inline-block; font-size:13px; font-weight:800; color:var(--sage); background:var(--surface); border:1px solid var(--border); padding:7px 18px; border-radius:var(--r-pill); transition:opacity .4s; }
 .calc .formula { margin-top:22px; font-size:clamp(17px,2.2vw,21px); color:var(--ink-muted); font-weight:600; transition:opacity .4s; }
@@ -555,7 +623,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
         </ul>
       </div>
     </div>
-    <div class="copy">© 2026 MyTails · Madrid</div>
+    <div class="copy">© 2026 MyTails</div>
   </div>
 </footer>
 
