@@ -30,13 +30,40 @@
   --border:#4A4136; --shadow:0 4px 24px rgba(0,0,0,.3); --shadow-toast:0 8px 30px rgba(0,0,0,.4);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html { scroll-behavior:auto; } }
 body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif; font-size:16px; line-height:1.6;  min-width:320px;}
 .topbar { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
 .topbar .inner { max-width:1080px; margin-inline:auto; padding:14px var(--sp-gutter); display:flex; align-items:center; justify-content:space-between; }
 .logo { font-family:"Lora",serif; font-weight:700; font-size:22px; display:flex; gap:8px; align-items:center; }
-.topnav { display:flex; gap:14px; align-items:center; font-size:13.5px; font-weight:700; }
-.topnav a { color:var(--primary); text-decoration:none; }
-.theme-toggle { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:var(--r-pill); padding:8px 16px; font-family:inherit; font-weight:600; font-size:13px; cursor:pointer; }
+.mainnav { display:flex; gap:clamp(14px,2vw,28px); align-items:center; }
+.mainnav a { color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:600; white-space:nowrap; transition:color .15s; }
+.mainnav a:hover { color:var(--primary); }
+.top-actions { display:flex; gap:10px; align-items:center; }
+.theme-toggle { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background .15s; }
+.theme-toggle:hover { background:var(--surface-warm); }
+.theme-toggle svg { width:19px; height:19px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.theme-toggle .ic-moon { display:none; }
+[data-theme="dark"] .theme-toggle .ic-sun { display:none; }
+[data-theme="dark"] .theme-toggle .ic-moon { display:block; }
+/* гамбургер */
+.burger { display:none; width:40px; height:40px; border:1px solid var(--border); background:var(--surface); border-radius:var(--r-md); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex-shrink:0; }
+.burger span { display:block; width:18px; height:2px; background:var(--ink); border-radius:2px; transition:transform .25s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+/* выпадающее мобильное меню */
+.mobile-menu { display:none; flex-direction:column; gap:6px; padding:0 var(--sp-gutter) 0; max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s ease; border-top:0 solid var(--border); }
+.mobile-menu.open { max-height:360px; padding:14px var(--sp-gutter) 20px; border-top:1px solid var(--border); }
+.mobile-menu a { color:var(--ink); text-decoration:none; font-size:16px; font-weight:600; padding:11px 6px; border-bottom:1px solid var(--border); }
+.mobile-menu a:active { color:var(--primary); }
+.mobile-menu .btn { width:100%; }
+/* брейкпоинт: ниже — гамбургер вместо горизонтального меню */
+@media (max-width:860px){
+  .mainnav { display:none; }
+  .burger { display:flex; }
+}
+.sec, .founding, [id]{ scroll-margin-top:84px; }
 
 /* hero */
 .hero {
@@ -322,12 +349,30 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 <div class="topbar">
   <div class="inner">
-    <a class="logo" href="index.html" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
-    <div class="topnav">
-      <a href="index.html">← Система</a>
-      <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">🌙 / ☀️</button>
+    <a class="logo" href="#" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
+    <nav class="mainnav">
+      <a href="#how">Как это работает</a>
+      <a href="#zarabotok">Сколько заработать</a>
+      <a href="#why">Почему MyTails</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="top-actions">
+      <button class="theme-toggle" aria-label="Сменить тему" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">
+        <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+      <button class="burger" aria-label="Меню" aria-expanded="false" id="burger">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#how">Как это работает</a>
+    <a href="#zarabotok">Сколько заработать</a>
+    <a href="#why">Почему MyTails</a>
+    <a href="#faq">Вопросы</a>
+    <button class="btn js-to-form" style="margin-top:6px">Хочу в первые 100 →</button>
+  </nav>
 </div>
 
 <div class="hero">
@@ -395,7 +440,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 </section>
 
 <!-- 4 — Сколько можно зарабатывать -->
-<section class="sec">
+<section class="sec" id="zarabotok">
   <div class="sec-head">
     <h2>Вы сами устанавливаете цены</h2>
   </div>
@@ -410,7 +455,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 </section>
 
 <!-- 5 — Как это работает -->
-<section class="sec">
+<section class="sec" id="how">
   <div class="sec-head"><h2>Как это работает</h2></div>
   <div class="steps">
     <div class="step"><div class="n">1</div><b>Оставьте заявку</b><p>Профиль на MyTails создаётся за 5 минут.</p></div>
@@ -439,7 +484,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 </section>
 
 <!-- 7 — Почему MyTails -->
-<section class="sec">
+<section class="sec" id="why">
   <div class="sec-head"><h2>Почему ситтеры выбирают MyTails</h2></div>
   <div class="why">
     <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-target"/></svg></span><div><b>Заказы приходят к вам</b><p>Мы привлекаем владельцев в Мадриде через рекламу. Founding — приоритет в поиске первые 3 месяца.</p></div></div>
@@ -462,7 +507,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 </section>
 
 <!-- 9 — FAQ -->
-<section class="sec">
+<section class="sec" id="faq">
   <div class="sec-head"><h2>Вопрос — ответ</h2></div>
   <div class="faq">
     <div class="faq-item open">
@@ -591,6 +636,21 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   document.querySelectorAll('#calc-dots i').forEach((d, i) => d.addEventListener('click', () => {
     clearInterval(calcTimer); calcIdx = i; renderScenario(i);
   }));
+
+  // гамбургер-меню
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (burger) {
+    burger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // закрыть меню при клике по ссылке
+    mobileMenu.querySelectorAll('a, .btn').forEach(el => el.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
   // FAQ — toggle класса; анимацию делает CSS (grid-template-rows 0fr↔1fr), без рывков и наложений
   document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
