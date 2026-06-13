@@ -69,31 +69,15 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 /* hero */
 .hero {
   position:relative; overflow:hidden;
-  background:
-    linear-gradient(rgba(40,33,24,.06), rgba(40,33,24,.10)),
-    url("assets/sitters-hero.webp") center top / cover no-repeat,
-    var(--surface-warm);
+  background-color:var(--surface-warm);
+  background-image: url("assets/hero-bg.webp");
+  background-position:center; background-size:cover; background-repeat:no-repeat;
   padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(48px,7vw,84px);
 }
-[data-theme="dark"] .hero {
-  background:
-    linear-gradient(rgba(20,16,11,.45), rgba(20,16,11,.55)),
-    url("assets/sitters-hero.webp") center top / cover no-repeat,
-    var(--surface-warm);
-}
+[data-theme="dark"] .hero { background-image:none; }
 @media (max-width:680px){
-  .hero {
-    background:
-      linear-gradient(rgba(40,33,24,.05), rgba(40,33,24,.10)),
-      url("assets/sitters-hero-mobile.webp") center top / cover no-repeat,
-      var(--surface-warm);
-  }
-  [data-theme="dark"] .hero {
-    background:
-      linear-gradient(rgba(20,16,11,.45), rgba(20,16,11,.55)),
-      url("assets/sitters-hero-mobile.webp") center top / cover no-repeat,
-      var(--surface-warm);
-  }
+  .hero { background-image: url("assets/hero-bg-mobile.webp"); }
+  [data-theme="dark"] .hero { background-image:none; }
 }
 .hero .inner { position:relative; z-index:1; }
 .hero .inner { max-width:1080px; margin-inline:auto; display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
@@ -352,8 +336,9 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   <div class="inner">
     <a class="logo" href="#" style="display:inline-flex;align-items:center"><img src="assets/logo-mark.svg" alt="MyTails" class="logo-light" style="height:34px;display:block"><img src="assets/logo-mark-cream.svg" alt="MyTails" class="logo-dark" style="height:34px;display:none"></a>
     <nav class="mainnav">
-      <a href="#how">Как это работает</a>
+      <a href="#foryou">Для кого</a>
       <a href="#zarabotok">Сколько заработать</a>
+      <a href="#how">Как это работает</a>
       <a href="#why">Почему MyTails</a>
       <a href="#faq">Вопросы</a>
     </nav>
@@ -368,8 +353,9 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu">
-    <a href="#how">Как это работает</a>
+    <a href="#foryou">Для кого</a>
     <a href="#zarabotok">Сколько заработать</a>
+    <a href="#how">Как это работает</a>
     <a href="#why">Почему MyTails</a>
     <a href="#faq">Вопросы</a>
     <button class="btn js-to-form" style="margin-top:6px">Хочу в первые 100 →</button>
@@ -427,7 +413,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 </div>
 
 <!-- 3 — Это для вас, если… -->
-<section class="sec">
+<section class="sec" id="foryou">
   <div class="sec-head">
     <h2>Это для вас, если…</h2>
   </div>
