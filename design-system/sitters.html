@@ -228,12 +228,16 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 /* 9 — FAQ */
 .faq { max-width:760px; margin-inline:auto; }
-.faq details { border-bottom:1px solid var(--border); }
-.faq summary { list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; cursor:pointer; font-family:"Lora",serif; font-size:clamp(17px,2vw,20px); font-weight:600; }
-.faq summary::-webkit-details-marker { display:none; }
-.faq summary .pm { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--surface-warm); display:flex; align-items:center; justify-content:center; transition:transform .25s, background .25s; }
-.faq details[open] summary .pm { transform:rotate(45deg); background:var(--primary-soft); color:var(--primary); }
-.faq .a { padding:0 44px 20px 4px; color:var(--ink-muted); font-size:15px; overflow:hidden; transition:height .32s cubic-bezier(.4,0,.2,1); }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q { width:100%; background:none; border:none; cursor:pointer; text-align:left; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 4px; font-family:"Lora",serif; font-size:clamp(17px,2vw,20px); font-weight:600; }
+.faq-q .pm { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--surface-warm); display:flex; align-items:center; justify-content:center; transition:transform .3s cubic-bezier(.4,0,.2,1), background .3s, color .3s; }
+.faq-item.open .faq-q .pm { transform:rotate(45deg); background:var(--primary-soft); color:var(--primary); }
+/* grid-template-rows 0fr↔1fr — плавно толкает соседей, без наложений */
+.faq-a-wrap { display:grid; grid-template-rows:0fr; transition:grid-template-rows .32s cubic-bezier(.4,0,.2,1); }
+.faq-item.open .faq-a-wrap { grid-template-rows:1fr; }
+.faq-a { overflow:hidden; min-height:0; }
+.faq-a > div { padding:0 44px 20px 4px; color:var(--ink-muted); font-size:15px; }
+@media (prefers-reduced-motion: reduce){ .faq-a-wrap { transition:none; } }
 
 /* scroll-reveal */
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s cubic-bezier(.22,.8,.36,1), transform .6s cubic-bezier(.22,.8,.36,1); }
@@ -444,10 +448,22 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 <section class="sec">
   <div class="sec-head"><h2>Вопрос — ответ</h2></div>
   <div class="faq">
-    <details open><summary>Нужен ли опыт работы с животными?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary><div class="a">Главное — любовь к животным и ответственность. Опыт приветствуется, но не обязателен.</div></details>
-    <details><summary>Будут ли заказы?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary><div class="a">Мы запускаем рекламу для владельцев в Мадриде, а Founding-ситтеры получают приоритет в поиске первые 3 месяца.</div></details>
-    <details><summary>Как я получаю деньги?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary><div class="a">На вашу карту или счёт после завершения заказа.</div></details>
-    <details><summary>Когда запуск?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></summary><div class="a">Запускаемся в Мадриде осенью 2026. Оставьте email — сообщим первыми.</div></details>
+    <div class="faq-item open">
+      <button class="faq-q" aria-expanded="true">Нужен ли опыт работы с животными?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
+      <div class="faq-a-wrap"><div class="faq-a"><div>Главное — любовь к животным и ответственность. Опыт приветствуется, но не обязателен.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Будут ли заказы?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
+      <div class="faq-a-wrap"><div class="faq-a"><div>Мы запускаем рекламу для владельцев в Мадриде, а Founding-ситтеры получают приоритет в поиске первые 3 месяца.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Как я получаю деньги?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
+      <div class="faq-a-wrap"><div class="faq-a"><div>На вашу карту или счёт после завершения заказа.</div></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Когда запуск?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
+      <div class="faq-a-wrap"><div class="faq-a"><div>Запускаемся в Мадриде осенью 2026. Оставьте email — сообщим первыми.</div></div></div>
+    </div>
   </div>
 </section>
 
@@ -559,28 +575,12 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
     clearInterval(calcTimer); calcIdx = i; renderScenario(i);
   }));
 
-  // FAQ — плавное открытие/закрытие через Web Animations API (без рывков)
-  const EASE = 'cubic-bezier(.4,0,.2,1)', DUR = 300;
-  document.querySelectorAll('.faq details').forEach(d => {
-    const summary = d.querySelector('summary');
-    const content = d.querySelector('.a');
-    let anim = null;
-    summary.addEventListener('click', e => {
-      if (reduced) return;
-      e.preventDefault();
-      if (anim) anim.cancel();
-      if (d.open) {
-        const start = content.offsetHeight;
-        anim = content.animate([{ height: start + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: DUR, easing: EASE });
-        anim.onfinish = () => { d.open = false; anim = null; };
-      } else {
-        d.open = true;
-        const end = content.offsetHeight;
-        anim = content.animate([{ height: '0px', opacity: 0 }, { height: end + 'px', opacity: 1 }], { duration: DUR, easing: EASE });
-        anim.onfinish = () => { anim = null; };
-      }
-    });
-  });
+  // FAQ — toggle класса; анимацию делает CSS (grid-template-rows 0fr↔1fr), без рывков и наложений
+  document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
+    const item = q.closest('.faq-item');
+    const open = item.classList.toggle('open');
+    q.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }));
 
   // плавная прокрутка к форме по кнопкам founding/sticky
   const joinCard = document.getElementById('join');
@@ -604,7 +604,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   }
 
   if (!reduced && 'IntersectionObserver' in window) {
-    document.querySelectorAll('.sec-head, .fy, .step, .wcard, .tcard, .perk, .calc, .founding, .faq details, .final').forEach((el, i) => {
+    document.querySelectorAll('.sec-head, .fy, .step, .wcard, .tcard, .perk, .calc, .founding, .faq-item, .final').forEach((el, i) => {
       el.classList.add('reveal', 'd' + (1 + (i % 3)));
     });
     const io = new IntersectionObserver((entries) => {
