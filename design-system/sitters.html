@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyTails — Лендинг ситтеров (Мадрид)</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
@@ -76,7 +77,10 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   border-radius:var(--r-lg);
   box-shadow:var(--shadow);
   padding:clamp(24px,3.5vw,40px);
+  scroll-margin-top:90px;
 }
+@keyframes hcard-pulse { 0%,100%{ box-shadow:var(--shadow); } 35%{ box-shadow:0 0 0 4px var(--sage-soft), var(--shadow); } }
+.hcard.flash { animation:hcard-pulse 1s ease; }
 .eyebrow { display:inline-flex; gap:8px; align-items:center; font-size:13px; font-weight:800; color:var(--primary); background:var(--primary-soft); padding:6px 16px; border-radius:14px; }
 @media (max-width:480px){ .eyebrow { font-size:12px; padding:5px 12px; } .topbar .logo span { display:none; } }
 .hero h1 { font-family:"Lora",serif; font-size:clamp(30px,4.6vw,48px); font-weight:600; line-height:1.12; letter-spacing:-.01em; margin-top:18px; }
@@ -85,6 +89,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .income { display:flex; align-items:baseline; gap:10px; margin-top:22px; font-weight:700; }
 .income .num { font-family:"Lora",serif; font-size:clamp(34px,4vw,44px); font-weight:600; color:var(--sage); font-variant-numeric:tabular-nums; white-space:nowrap; }
 .income .cap { font-size:14px; color:var(--ink-muted); font-weight:600; max-width:260px; line-height:1.35; }
+@media (max-width:560px){ .income { flex-direction:column; align-items:flex-start; gap:4px; } .income .cap { max-width:none; } }
 .lead-form { display:flex; gap:10px; margin-top:24px; flex-wrap:wrap; }
 .lead-form input {
   flex:1; min-width:220px; font-family:inherit; font-size:15px; padding:14px 18px;
@@ -307,7 +312,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 <div class="hero">
   <div class="inner">
 
-    <div class="hcard">
+    <div class="hcard" id="join">
       <span class="eyebrow">Скоро запуск в Мадриде · первые 100 ситтеров</span>
       <h1>Любите животных? <em>Они в Мадриде уже ждут вас.</em></h1>
       <p class="sub">Гибкий график, честные выплаты и помощь на каждом шаге.</p>
@@ -316,7 +321,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
         <span class="cap">в месяц на свободном графике — вы сами выбираете заказы</span>
       </div>
       <form class="lead-form" onsubmit="return false">
-        <input type="email" placeholder="Ваш email" />
+        <input type="email" placeholder="Ваш email" id="join-email" />
         <button class="btn" type="submit">Хочу в первые 100 →</button>
       </form>
       <p class="micro">Бесплатно. Без обязательств.</p>
@@ -408,7 +413,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
       <div class="nums"><span class="claimed" id="f-claimed" data-count="24">0</span><span class="of">из 100 мест занято</span></div>
       <div class="fbar"><i id="f-bar" data-width="24"></i></div>
     </div>
-    <button class="btn">Хочу в первые 100 →</button>
+    <button class="btn js-to-form">Хочу в первые 100 →</button>
   </div>
 </section>
 
@@ -489,7 +494,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   </div>
 </footer>
 
-<div class="sticky-cta"><button class="btn">Хочу в первые 100 →</button></div>
+<div class="sticky-cta"><button class="btn js-to-form">Хочу в первые 100 →</button></div>
 
 <div class="cookie" id="cookie">
   <p>Мы используем cookies для работы сайта и аналитики. Несущественные скрипты — только с вашего согласия.</p>
@@ -554,28 +559,38 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
     clearInterval(calcTimer); calcIdx = i; renderScenario(i);
   }));
 
-  // FAQ — плавное открытие/закрытие
+  // FAQ — плавное открытие/закрытие через Web Animations API (без рывков)
+  const EASE = 'cubic-bezier(.4,0,.2,1)', DUR = 300;
   document.querySelectorAll('.faq details').forEach(d => {
     const summary = d.querySelector('summary');
     const content = d.querySelector('.a');
+    let anim = null;
     summary.addEventListener('click', e => {
-      if (reduced) return; // нативное поведение
+      if (reduced) return;
       e.preventDefault();
+      if (anim) anim.cancel();
       if (d.open) {
-        content.style.height = content.scrollHeight + 'px';
-        content.offsetHeight; // форс-reflow, чтобы зафиксировать стартовую высоту
-        content.style.height = '0px';
-        content.addEventListener('transitionend', function te(){ d.open = false; content.style.height = ''; content.removeEventListener('transitionend', te); }, { once:true });
+        const start = content.offsetHeight;
+        anim = content.animate([{ height: start + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: DUR, easing: EASE });
+        anim.onfinish = () => { d.open = false; anim = null; };
       } else {
         d.open = true;
-        const h = content.scrollHeight;
-        content.style.height = '0px';
-        content.offsetHeight; // форс-reflow перед анимацией к целевой высоте
-        content.style.height = h + 'px';
-        content.addEventListener('transitionend', function te(){ content.style.height = 'auto'; content.removeEventListener('transitionend', te); }, { once:true });
+        const end = content.offsetHeight;
+        anim = content.animate([{ height: '0px', opacity: 0 }, { height: end + 'px', opacity: 1 }], { duration: DUR, easing: EASE });
+        anim.onfinish = () => { anim = null; };
       }
     });
   });
+
+  // плавная прокрутка к форме по кнопкам founding/sticky
+  const joinCard = document.getElementById('join');
+  const joinEmail = document.getElementById('join-email');
+  document.querySelectorAll('.js-to-form').forEach(btn => btn.addEventListener('click', e => {
+    e.preventDefault();
+    joinCard.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    joinCard.classList.remove('flash'); void joinCard.offsetWidth; joinCard.classList.add('flash');
+    setTimeout(() => joinEmail && joinEmail.focus({ preventScroll: true }), reduced ? 0 : 650);
+  }));
 
   // секционные анимации запускаются по входу блока в экран
   let calcStarted = false, foundingStarted = false;
