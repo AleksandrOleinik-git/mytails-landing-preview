@@ -91,12 +91,12 @@
     q.setAttribute('aria-expanded', open ? 'true' : 'false');
   }));
 
-  // плавная прокрутка к форме по кнопкам founding/sticky
-  const joinCard = document.getElementById('join');
-  const joinEmail = document.getElementById('join-email');
+  // плавная прокрутка к нижней форме по кнопкам founding/sticky/меню
+  const joinCard = document.getElementById('join-final');
+  const joinEmail = document.getElementById('final-email');
   document.querySelectorAll('.js-to-form').forEach(btn => btn.addEventListener('click', e => {
     e.preventDefault();
-    joinCard.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    joinCard.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
     joinCard.classList.remove('flash'); void joinCard.offsetWidth; joinCard.classList.add('flash');
     setTimeout(() => joinEmail && joinEmail.focus({ preventScroll: true }), reduced ? 0 : 650);
   }));

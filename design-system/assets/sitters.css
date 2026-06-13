@@ -102,7 +102,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   scroll-margin-top:90px;
 }
 @keyframes hcard-pulse { 0%,100%{ box-shadow:var(--shadow); } 35%{ box-shadow:0 0 0 4px var(--sage-soft), var(--shadow); } }
-.hcard.flash { animation:hcard-pulse 1s ease; }
+.hcard.flash, .final.flash { animation:hcard-pulse 1s ease; }
 .eyebrow { display:inline-flex; gap:8px; align-items:center; font-size:13px; font-weight:800; color:var(--primary); background:var(--primary-soft); padding:6px 16px; border-radius:14px; }
 @media (max-width:480px){ .eyebrow { font-size:12px; padding:5px 12px; } .topbar .logo span { display:none; } }
 .hero h1 { font-family:"Lora",serif; font-size:clamp(30px,4.6vw,48px); font-weight:600; line-height:1.12; letter-spacing:-.01em; margin-top:18px; }
