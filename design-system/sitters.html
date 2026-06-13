@@ -563,13 +563,15 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
       e.preventDefault();
       if (d.open) {
         content.style.height = content.scrollHeight + 'px';
-        requestAnimationFrame(() => { content.style.height = '0px'; });
+        content.offsetHeight; // форс-reflow, чтобы зафиксировать стартовую высоту
+        content.style.height = '0px';
         content.addEventListener('transitionend', function te(){ d.open = false; content.style.height = ''; content.removeEventListener('transitionend', te); }, { once:true });
       } else {
         d.open = true;
         const h = content.scrollHeight;
         content.style.height = '0px';
-        requestAnimationFrame(() => { content.style.height = h + 'px'; });
+        content.offsetHeight; // форс-reflow перед анимацией к целевой высоте
+        content.style.height = h + 'px';
         content.addEventListener('transitionend', function te(){ content.style.height = 'auto'; content.removeEventListener('transitionend', te); }, { once:true });
       }
     });
