@@ -67,6 +67,23 @@
     }));
   }
 
+  // переключатель языка (UI; переводы — TODO i18n, маршрутизация локалей)
+  const lang = document.getElementById('lang');
+  const langBtn = document.getElementById('langBtn');
+  if (langBtn) {
+    langBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = lang.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', e => {
+      if (!lang.contains(e.target)) { lang.classList.remove('open'); langBtn.setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { lang.classList.remove('open'); langBtn.setAttribute('aria-expanded', 'false'); }
+    });
+  }
+
   // FAQ — toggle класса; анимацию делает CSS (grid-template-rows 0fr↔1fr), без рывков и наложений
   document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
     const item = q.closest('.faq-item');
