@@ -110,6 +110,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 /* trust bar */
 .trust { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
 .trust .inner { max-width:1080px; margin-inline:auto; padding:18px var(--sp-gutter); display:flex; gap:clamp(16px,4vw,48px); justify-content:center; flex-wrap:wrap; }
+@media (max-width:720px){ .trust .inner { flex-direction:column; justify-content:flex-start; align-items:flex-start; gap:14px; } .trust span { align-items:flex-start; } }
 .trust span { display:inline-flex; gap:10px; align-items:center; font-size:14px; font-weight:700; }
 .trust .tic { width:30px; height:30px; border-radius:9px; background:var(--sage-soft); color:var(--sage); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .trust .tic svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
