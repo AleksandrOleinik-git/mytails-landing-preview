@@ -1,0 +1,40 @@
+/* owners.css — дельта к sitters.css для лендинга владельцев (§25).
+   Подключается ПОСЛЕ sitters.css. Дизайн-токены и общие блоки — там. */
+
+/* район Мадрида — обязательный select в форме */
+.lead-form select {
+  flex:1; min-width:190px; font-family:inherit; font-size:15px;
+  padding:14px 44px 14px 18px;
+  border-radius:var(--r-md); border:1.5px solid var(--border);
+  background-color:var(--surface); color:var(--ink);
+  appearance:none; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7064' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 16px center; background-size:16px;
+}
+.lead-form select:focus { outline:none; border-color:var(--sage); box-shadow:0 0 0 3px var(--sage-soft); }
+.lead-form select.placeholder { color:var(--ink-muted); }
+[data-theme="dark"] .lead-form select {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B5AA99' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+/* в форме владельца кнопка — отдельной строкой, явный primary */
+.lead-form .btn.full { width:100%; }
+
+/* бонус-строка в hero (репереиспользуем .income, но с подарочной семантикой) */
+.income .num.gift { color:var(--primary); }
+
+/* 6 — локальный дефицит ситтеров по району */
+.scarcity {
+  background:var(--sage-soft); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:clamp(28px,4vw,48px);
+  text-align:center; max-width:680px; margin-inline:auto;
+}
+.scarcity .big {
+  font-family:"Lora",serif; font-weight:600; line-height:1.04;
+  font-size:clamp(46px,8vw,66px); color:var(--sage);
+  font-variant-numeric:tabular-nums; margin-bottom:4px;
+}
+.scarcity h2 { margin-bottom:8px; }
+.scarcity .cap {
+  font-size:13px; color:var(--ink-muted); margin-top:12px;
+  max-width:460px; margin-inline:auto; line-height:1.5;
+}
