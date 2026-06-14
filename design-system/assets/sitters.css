@@ -255,6 +255,16 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .founding .fbar i { display:block; height:100%; width:0; border-radius:var(--r-pill); background:linear-gradient(90deg,var(--gold),var(--primary)); transition:width 2.4s cubic-bezier(.22,.8,.36,1); }
 .founding .btn { margin-top:24px; }
 
+/* 4b — реальные сценарии заработка (персоны) */
+.cases { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+@media (max-width:760px){ .cases { grid-template-columns:1fr; } }
+.cases .wcard { display:block; }
+.cases .amt { font-family:"Lora",serif; font-size:34px; font-weight:600; color:var(--sage); font-variant-numeric:tabular-nums; line-height:1; }
+.cases .amt small { font-size:.42em; color:var(--ink-muted); font-weight:600; font-family:"Manrope",sans-serif; }
+.cases .wcard b { display:block; margin-top:12px; }
+.cases .wcard p { font-size:14px; color:var(--ink-muted); margin-top:6px; }
+.cases-disc { text-align:center; max-width:560px; margin:18px auto 0; }
+
 /* 7 — почему MyTails */
 .why { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
 @media (max-width:680px){ .why { grid-template-columns:1fr; } }

@@ -30,10 +30,14 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
-  background:var(--bg); color:var(--ink); min-height:100vh; min-width:320px;
+  background:var(--bg); color:var(--ink); min-height:100dvh; min-width:320px;
   font-family:"Manrope",sans-serif; line-height:1.6;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:clamp(40px,8vw,80px) 24px;
+  padding:clamp(24px,6vw,72px) 24px;
+}
+/* на низких/мобильных экранах — выравниваем к верху, чтобы плитки не уходили за край */
+@media (max-height:760px), (max-width:680px) {
+  body { justify-content:flex-start; }
 }
 .wrap { width:100%; max-width:980px; text-align:center; }
 .brand { display:inline-flex; }
