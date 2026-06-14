@@ -313,7 +313,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .site-footer { margin-top:var(--sp-section); background:var(--surface); border-top:1px solid var(--border); }
 .site-footer .inner { max-width:1080px; margin-inline:auto; padding:40px var(--sp-gutter); }
 .site-footer .top { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:flex-start; }
-.site-footer .slogan { font-family:"Lora",serif; font-style:italic; font-size:17px; color:var(--ink); margin-top:12px; max-width:280px; }
+.site-footer .slogan { font-family:"Lora",serif; font-style:italic; font-size:clamp(13px,3.6vw,17px); color:var(--ink); margin-top:12px; max-width:none; white-space:nowrap; }
 .site-footer .links { display:flex; gap:28px; flex-wrap:wrap; }
 .site-footer .links ul { list-style:none; }
 .site-footer .links li { margin-bottom:8px; }
