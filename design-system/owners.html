@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyTails — Лендинг для владельцев (Мадрид)</title>
-<meta name="description" content="Уезжаете? Питомец — в надёжных руках. Проверенные ситтеры в Мадриде, фото-отчёты каждый день, каждый заказ застрахован. Станьте Founding Owner.">
+<meta name="description" content="Уезжаете? Питомец — в надёжных руках. Проверенные ситтеры в Мадриде, фото-отчёты каждый день, нет скрытых комиссий. Станьте Founding Owner и получите €15 на счёт MyTails.">
 <meta name="theme-color" content="#FAF6EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#262119" media="(prefers-color-scheme: dark)">
 <!-- preview only: убрать на production (mytails.eu должен индексироваться) -->
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://aleksandroleinik-git.github.io/mytails-landing-preview/design-system/owners.html">
 <meta property="og:title" content="Уезжаете? Питомец — в надёжных руках — MyTails">
-<meta property="og:description" content="Проверенные ситтеры в Мадриде, фото-отчёты каждый день. Founding Owners выбирают лучших первыми.">
+<meta property="og:description" content="Проверенные ситтеры в Мадриде, фото-отчёты каждый день, нет скрытых комиссий. €15 на счёт MyTails для Founding Owner.">
 <meta property="og:image" content="https://aleksandroleinik-git.github.io/mytails-landing-preview/design-system/assets/og-owners-ru.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -43,22 +43,12 @@
     {
       "@type": "Question",
       "name": "Сколько это стоит?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Цену устанавливает ситтер, и вы видите её до бронирования. Founding Owner получает €15 в подарок на первый заказ." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Цену устанавливает ситтер, и вы видите её до бронирования. Founding Owner получает €15 на счёт MyTails — можно потратить до 20% от суммы каждого заказа." }
     },
     {
       "@type": "Question",
       "name": "Как вы проверяете ситтеров?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Подтверждение личности, статус autónomo и отзывы других владельцев. Профиль каждого ситтера открыт до бронирования." }
-    },
-    {
-      "@type": "Question",
-      "name": "Застрахован ли мой питомец?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Да. Каждый заказ на MyTails застрахован — вы спокойны за питомца, а ситтер защищён при непредвиденных ситуациях." }
-    },
-    {
-      "@type": "Question",
-      "name": "Что если что-то пойдёт не так?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Поддержка MyTails на вашей стороне: поможем связаться с ситтером, заменить его или решить спорную ситуацию." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Подтверждение личности и отзывы других владельцев. Профиль каждого ситтера открыт до бронирования." }
     }
   ]
 }
@@ -70,6 +60,7 @@
 
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-zero" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
   <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
   <symbol id="i-top" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
@@ -136,7 +127,7 @@
       <p class="sub">Проверенные ситтеры в Мадриде, фото-отчёты каждый день и поддержка на каждом шаге. Без тревоги за того, кто ждёт вас дома.</p>
       <div class="income">
         <span class="num gift">🎁 €<span data-static>15</span></span>
-        <span class="cap">в подарок на первый заказ — закрепляется за Founding Owner до запуска</span>
+        <span class="cap">на твоём счёте MyTails — до 20% от суммы любого заказа</span>
       </div>
       <form class="lead-form" onsubmit="return false">
         <input type="email" placeholder="Ваш email" id="join-email" required />
@@ -159,15 +150,14 @@
 
     <div class="fcard">
       <span class="flag">🎁 Только для ранних — Founding Owner</span>
-      <h2>Founding Owner — бонус и ранний доступ к лучшим ситтерам</h2>
-      <p class="what">Подтвердите email — статус и бонус закрепляются за вами до запуска.</p>
+      <h2>Зарегистрируйся сейчас. Когда откроемся — на твоём счёте уже будет €15.</h2>
+      <p class="what">Первые 100 человек в Мадриде получают статус Founding Owner — с условиями, которые больше не повторятся.</p>
       <ul class="perks">
-        <li><span class="ic"><svg><use href="#i-coins"/></svg></span><div>€15 в подарок на первый заказ<small>закрепляется за вами до самого запуска</small></div></li>
-        <li><span class="ic"><svg><use href="#i-star"/></svg></span><div>Ранний доступ к лучшим ситтерам<small>лучших ситтеров мало — Founding Owners выбирают первыми</small></div></li>
-        <li><span class="ic"><svg><use href="#i-badge"/></svg></span><div>Бейдж «Founding Owner»<small>вы с нами с первого дня — ситтеры это видят</small></div></li>
+        <li><span class="ic"><svg><use href="#i-coins"/></svg></span><div>€15 на твоём счёте MyTails<small>до 20% от суммы любого заказа; действует 12 месяцев с запуска</small></div></li>
+        <li><span class="ic"><svg><use href="#i-zero"/></svg></span><div>Нет скрытых комиссий<small>вы платите ровно столько, сколько указано при оформлении заказа</small></div></li>
       </ul>
       <div class="counter">
-        <div class="cap" style="margin-top:0">Лучших ситтеров в каждом районе ограниченное число — кто оставил email раньше, выбирает раньше.</div>
+        <div class="cap" style="margin-top:0">Пример: выгул за €12 → списываем €2,4 с баланса → платите €9,6.</div>
       </div>
     </div>
 
@@ -176,8 +166,8 @@
 
 <div class="trust">
   <div class="inner">
-    <span><span class="tic"><svg><use href="#i-badge"/></svg></span>Проверенные ситтеры — личность и autónomo</span>
-    <span><span class="tic"><svg><use href="#i-shield"/></svg></span>Каждый заказ застрахован</span>
+    <span><span class="tic"><svg><use href="#i-badge"/></svg></span>Проверенные ситтеры</span>
+    <span><span class="tic"><svg><use href="#i-zero"/></svg></span>Нет скрытых комиссий — платите ровно столько, сколько в заказе</span>
     <span><span class="tic"><svg><use href="#i-camera"/></svg></span>Фото-отчёты о питомце каждый день</span>
   </div>
 </div>
@@ -200,10 +190,10 @@
     <p class="lead">Мы убрали то, из-за чего страшно оставлять питомца.</p>
   </div>
   <div class="why">
-    <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-badge"/></svg></span><div><b>«Страшно оставить с незнакомцем»</b><p>Каждый ситтер проходит проверку личности и статус autónomo, а отзывы других владельцев открыты до бронирования.</p></div></div>
+    <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-badge"/></svg></span><div><b>«Страшно оставить с незнакомцем»</b><p>Каждый ситтер проходит проверку личности, а отзывы других владельцев открыты до бронирования.</p></div></div>
     <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-camera"/></svg></span><div><b>«Не вижу, что с питомцем»</b><p>Фото-отчёты приходят каждый день. Вы спокойны, даже если вы за тысячу километров.</p></div></div>
     <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-pin"/></svg></span><div><b>«Сложно быстро найти хорошего»</b><p>Подберём проверенных ситтеров рядом с вами — по вашему району Мадрида.</p></div></div>
-    <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-shield"/></svg></span><div><b>«А вдруг что-то пойдёт не так»</b><p>Каждый заказ застрахован, а поддержка MyTails всегда на вашей стороне.</p></div></div>
+    <div class="wcard"><span class="ic"><svg class="ic2"><use href="#i-heart"/></svg></span><div><b>«У меня особенный питомец»</b><p>Не волнуйтесь, у нас индивидуальный подход к каждому животному. Перед заказом вы сможете сообщить ваши пожелания и рассказать про особенности характера. Мы учтём всё и обеспечим вашего любимца максимальной заботой.</p></div></div>
   </div>
 </section>
 
@@ -213,8 +203,8 @@
     <span class="flag">🎁 Ограниченное предложение для ранних владельцев Мадрида</span>
     <h2>Станьте Founding Owner в Мадриде</h2>
     <div class="perks3">
-      <div class="perk"><span class="ic"><svg class="ic2"><use href="#i-coins"/></svg></span><b>€15 на первый заказ</b><small>в подарок — закрепляется за вами</small></div>
-      <div class="perk"><span class="ic"><svg class="ic2"><use href="#i-star"/></svg></span><b>Ранний доступ</b><small>выбираете лучших ситтеров первыми</small></div>
+      <div class="perk"><span class="ic"><svg class="ic2"><use href="#i-coins"/></svg></span><b>€15 на счёт MyTails</b><small>до 20% от суммы заказа, 12 месяцев</small></div>
+      <div class="perk"><span class="ic"><svg class="ic2"><use href="#i-zero"/></svg></span><b>Нет скрытых комиссий</b><small>платите ровно столько, сколько указано при заказе</small></div>
       <div class="perk"><span class="ic"><svg class="ic2"><use href="#i-badge"/></svg></span><b>Бейдж «Founding Owner»</b><small>вы с нами с первого дня</small></div>
     </div>
     <button class="btn js-to-form">Стать Founding Owner →</button>
@@ -226,7 +216,7 @@
   <div class="scarcity">
     <div class="big"><span id="sc-num" data-count="30">0</span>+</div>
     <h2>проверенных ситтеров уже готовятся к запуску в Мадриде</h2>
-    <p class="cap">Лучшие разбираются первыми. Оставьте email с районом — и при запуске вы увидите ситтеров рядом раньше остальных. Точное число зависит от вашего района.</p>
+    <p class="cap">Оставьте email с районом — и при запуске вы увидите ситтеров рядом раньше остальных. Точное число зависит от вашего района.</p>
   </div>
 </section>
 
@@ -252,19 +242,11 @@
     </div>
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">Сколько это стоит?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
-      <div class="faq-a-wrap"><div class="faq-a"><div>Цену устанавливает ситтер, и вы видите её до бронирования. Founding Owner получает €15 в подарок на первый заказ.</div></div></div>
+      <div class="faq-a-wrap"><div class="faq-a"><div>Цену устанавливает ситтер, и вы видите её до бронирования. Founding Owner получает €15 на счёт MyTails — можно потратить до 20% от суммы каждого заказа.</div></div></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">Как вы проверяете ситтеров?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
-      <div class="faq-a-wrap"><div class="faq-a"><div>Подтверждение личности, статус autónomo и отзывы других владельцев. Профиль каждого ситтера открыт до бронирования.</div></div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">Застрахован ли мой питомец?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
-      <div class="faq-a-wrap"><div class="faq-a"><div>Да. Каждый заказ на MyTails застрахован — вы спокойны за питомца, а ситтер защищён при непредвиденных ситуациях.</div></div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">Что если что-то пойдёт не так?<span class="pm"><svg class="ic2" style="width:15px;height:15px"><use href="#i-plus"/></svg></span></button>
-      <div class="faq-a-wrap"><div class="faq-a"><div>Поддержка MyTails на вашей стороне: поможем связаться с ситтером, заменить его или решить спорную ситуацию.</div></div></div>
+      <div class="faq-a-wrap"><div class="faq-a"><div>Подтверждение личности и отзывы других владельцев. Профиль каждого ситтера открыт до бронирования.</div></div></div>
     </div>
   </div>
 </section>
@@ -272,8 +254,8 @@
 <!-- 9 — Финальный CTA -->
 <section class="sec">
   <div class="final" id="join-final">
-    <h2>Уезжаете этим летом?</h2>
-    <p class="lead">Оставьте email и район — закрепим статус Founding Owner и €15 на первый заказ.</p>
+    <h2>Ваша собака заслуживает прогулки. Каждый день.</h2>
+    <p class="lead">Пока вы заняты — питомец на прогулке. Зарегистрируйтесь сейчас — получите приоритетный доступ и €15 на счёте MyTails.</p>
     <form class="lead-form" onsubmit="return false">
       <input type="email" placeholder="Ваш email" id="final-email" required />
       <select class="district" id="final-district" required aria-label="Ваш район Мадрида">
