@@ -77,6 +77,35 @@ body {
 }
 
 .foot { margin-top:clamp(36px,6vw,56px); font-size:13px; color:var(--ink-muted); }
+
+/* ПК ≥1200px: весь контент помещается в высоту экрана при любой высоте.
+   Страница — колонка height:100dvh; ряд плиток (flex:1) забирает остаток
+   высоты, а картинки сжимаются под доступное место (aspect-ratio снимаем). */
+@media (min-width:1200px) {
+  body {
+    height:100dvh; overflow:hidden;
+    justify-content:flex-start;
+    padding-block:clamp(18px,3.5vh,52px);
+  }
+  .wrap {
+    display:flex; flex-direction:column; align-items:center;
+    flex:1 1 auto; min-height:0; max-height:100%;
+  }
+  .brand img { height:clamp(44px,6vh,72px); }
+  .slogan { font-size:clamp(19px,3vh,30px); margin-top:clamp(8px,1.5vh,22px); }
+  .intro  { margin-top:clamp(6px,1.1vh,14px); }
+  .tiles {
+    align-self:stretch; width:100%;
+    flex:1 1 auto; min-height:0;
+    grid-template-rows:minmax(0,1fr);
+    margin-top:clamp(14px,2.6vh,40px);
+  }
+  .tile { display:flex; flex-direction:column; min-height:0; }
+  .tile .ph { aspect-ratio:auto; flex:1 1 auto; min-height:0; }
+  .tile .body { flex:0 0 auto; padding:clamp(10px,1.8vh,22px) clamp(20px,3vw,28px) clamp(12px,2vh,26px); }
+  .tile .go { margin-top:clamp(6px,1.3vh,18px); }
+  .foot { flex:0 0 auto; margin-top:clamp(8px,1.8vh,28px); }
+}
 @media (prefers-reduced-motion: reduce){
   html { scroll-behavior:auto; }
   .tile, .tile .ph img, .tile .go svg { transition:none; }
