@@ -14,6 +14,13 @@
   }
   function fillBar(el) { if (el) requestAnimationFrame(() => { el.style.width = el.dataset.width + '%'; }); }
 
+  // select района: серый плейсхолдер пока не выбран (как :invalid)
+  document.querySelectorAll('.district').forEach(sel => {
+    const sync = () => sel.classList.toggle('placeholder', sel.value === '');
+    sync();
+    sel.addEventListener('change', sync);
+  });
+
   // блок 4 — авто-цикл сценариев дохода (конфиг — массив, анимацию не трогаем)
   const SCENARIOS = [
     { tag: 'Выгул',        formula: '€12 × 20 заказов',     total: 240 },

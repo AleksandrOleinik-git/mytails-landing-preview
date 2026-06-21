@@ -142,7 +142,7 @@
   <div class="inner">
 
     <div class="hcard" id="join">
-      <span class="eyebrow">Скоро запуск в Мадриде · первые 100 ситтеров</span>
+      <span class="eyebrow"><a href="#founding-offer">Спецпредложение</a> для первых 100 ситтеров в Мадриде!</span>
       <h1>Любите животных? <em>Они в Мадриде уже ждут вас.</em></h1>
       <p class="sub">Гибкий график, честные выплаты и помощь на каждом шаге.</p>
       <div class="income">
@@ -150,7 +150,17 @@
         <span class="cap">в месяц на свободном графике — вы сами выбираете заказы</span>
       </div>
       <form class="lead-form" onsubmit="return false">
-        <input type="email" placeholder="Ваш email" id="join-email" />
+        <input type="email" placeholder="Ваш email" id="join-email" required />
+        <select class="district" id="join-district" required aria-label="Ваш район Мадрида">
+          <option value="" selected>Ваш район Мадрида</option>
+          <option>Arganzuela</option><option>Barajas</option><option>Carabanchel</option>
+          <option>Centro</option><option>Chamartín</option><option>Chamberí</option>
+          <option>Ciudad Lineal</option><option>Fuencarral-El Pardo</option><option>Hortaleza</option>
+          <option>Latina</option><option>Moncloa-Aravaca</option><option>Moratalaz</option>
+          <option>Puente de Vallecas</option><option>Retiro</option><option>Salamanca</option>
+          <option>San Blas-Canillejas</option><option>Tetuán</option><option>Usera</option>
+          <option>Vicálvaro</option><option>Villa de Vallecas</option><option>Villaverde</option>
+        </select>
         <button class="btn" type="submit">Хочу в первые 100 →</button>
       </form>
       <p class="micro">Бесплатно. Без обязательств.</p>
@@ -161,7 +171,7 @@
 </div>
 
 <!-- 2b — Founding спец-предложение (вынесено из первого экрана) -->
-<section class="sec founding-feature">
+<section class="sec founding-feature" id="founding-offer">
   <div class="fcard">
     <span class="flag">🔥 Спец-предложение для первых 100</span>
     <h2>Founding Sitter — стартовые бонусы первым ситтерам Мадрида</h2>
@@ -181,13 +191,17 @@
       <div class="cap">Когда места закончатся — регистрация останется открытой, но уже без Founding-бонусов.</div>
     </div>
   </div>
+  <div class="founding-photo">
+    <img src="assets/founding-girl-dog.webp" alt="Девушка обнимает собаку в парке Мадрида">
+  </div>
 </section>
 
 <div class="trust">
   <div class="inner">
-    <span><span class="tic"><svg><use href="#i-zero"/></svg></span>Без скрытых комиссий — видите сумму до заказа</span>
-    <span><span class="tic"><svg><use href="#i-coins"/></svg></span>Честные выплаты вовремя — на карту или счёт</span>
-    <span><span class="tic"><svg><use href="#i-heart"/></svg></span>Помощь на каждом шаге — с первого дня</span>
+    <span><span class="tic"><svg><use href="#i-zero"/></svg></span>Без скрытых комиссий</span>
+    <span><span class="tic"><svg><use href="#i-coins"/></svg></span>Честные выплаты вовремя</span>
+    <span><span class="tic"><svg><use href="#i-heart"/></svg></span>Помощь на каждом шаге</span>
+    <span><span class="tic"><svg><use href="#i-shield"/></svg></span>Страхование питомца</span>
   </div>
 </div>
 
@@ -352,7 +366,17 @@
     <h2>Специальные условия для первых 100 ситтеров в Мадриде!</h2>
     <p class="lead">Успевай зарегистрироваться на самых выгодных условиях!</p>
     <form class="lead-form" onsubmit="return false">
-      <input type="email" placeholder="Ваш email" id="final-email" />
+      <input type="email" placeholder="Ваш email" id="final-email" required />
+      <select class="district" id="final-district" required aria-label="Ваш район Мадрида">
+        <option value="" selected>Ваш район Мадрида</option>
+        <option>Arganzuela</option><option>Barajas</option><option>Carabanchel</option>
+        <option>Centro</option><option>Chamartín</option><option>Chamberí</option>
+        <option>Ciudad Lineal</option><option>Fuencarral-El Pardo</option><option>Hortaleza</option>
+        <option>Latina</option><option>Moncloa-Aravaca</option><option>Moratalaz</option>
+        <option>Puente de Vallecas</option><option>Retiro</option><option>Salamanca</option>
+        <option>San Blas-Canillejas</option><option>Tetuán</option><option>Usera</option>
+        <option>Vicálvaro</option><option>Villa de Vallecas</option><option>Villaverde</option>
+      </select>
       <button class="btn" type="submit">Хочу в первые 100 →</button>
     </form>
     <p class="next">После регистрации проверьте почту в течение 24 часов и подтвердите email — иначе место не сохранится. Сообщим, когда регистрация откроется.</p>
