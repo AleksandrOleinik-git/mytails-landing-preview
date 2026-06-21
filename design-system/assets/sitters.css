@@ -158,7 +158,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 
 /* founding спец-предложение — вынесено из первого экрана, центрированный блок */
 /* founding спец-предложение — отдельная секция: слева карточка, справа фото */
-.founding-feature { display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; margin-bottom:var(--sp-section); }
+.founding-feature { display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
 .founding-feature .fcard { max-width:none; width:100%; }
 .founding-photo { border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow); min-height:100%; }
 .founding-photo img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -183,7 +183,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 @media (prefers-reduced-motion: reduce) { .bar i { transition:none; } }
 
 /* ===== блоки 3–11 ===== */
-.sec { max-width:1080px; margin:var(--sp-section) auto 0; padding:0 var(--sp-gutter); }
+.sec { max-width:1080px; margin:var(--sp-section) auto; padding:0 var(--sp-gutter); }
 .sec-head { text-align:center; max-width:680px; margin:0 auto var(--sp-block); }
 .sec h2 { font-family:"Lora",serif; font-size:clamp(26px,3.6vw,38px); font-weight:600; letter-spacing:-.01em; line-height:1.15; }
 .sec h2 em { font-style:italic; color:var(--primary); }
