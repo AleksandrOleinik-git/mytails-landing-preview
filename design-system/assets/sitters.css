@@ -72,26 +72,16 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .hero {
   position:relative; overflow:hidden;
   background-color:var(--surface-warm);
-  background-image:
-    linear-gradient(rgba(243,236,224,.62), rgba(243,236,224,.62)),
-    url("hero-bg.webp");
+  background-image:url("hero-bg.webp");
   background-position:center bottom; background-size:cover; background-repeat:no-repeat;
-  padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(96px,14vw,170px);
+  min-height:calc(100svh - 70px);
+  display:flex; align-items:center; justify-content:center;
+  padding: clamp(40px,6vw,72px) var(--sp-gutter);
 }
-[data-theme="dark"] .hero { background-image:
-  linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
-  url("hero-bg.webp"); }
 @media (max-width:680px){
-  .hero { background-image:
-    linear-gradient(rgba(243,236,224,.42), rgba(243,236,224,.42)),
-    url("hero-bg-mobile.webp"); }
-  [data-theme="dark"] .hero { background-image:
-    linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
-    url("hero-bg-mobile.webp"); }
+  .hero { background-image:url("hero-bg-mobile.webp"); }
 }
-.hero .inner { position:relative; z-index:1; }
-.hero .inner { max-width:1080px; margin-inline:auto; display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(20px,3vw,36px); align-items:stretch; }
-@media (max-width:920px){ .hero .inner { grid-template-columns:1fr; } }
+.hero .inner { position:relative; z-index:1; max-width:600px; width:100%; margin-inline:auto; }
 
 .hcard {
   background:var(--surface);
@@ -150,6 +140,10 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .bar { height:10px; border-radius:var(--r-pill); background:var(--surface-warm); margin-top:10px; overflow:hidden; }
 .bar i { display:block; height:100%; width:0; border-radius:var(--r-pill); background:linear-gradient(90deg, var(--gold), var(--primary)); transition:width 2.4s cubic-bezier(.22,.8,.36,1); }
 .counter .cap { font-size:12.5px; color:var(--ink-muted); margin-top:8px; }
+
+/* founding спец-предложение — вынесено из первого экрана, центрированный блок */
+.founding-feature { display:flex; justify-content:center; }
+.founding-feature .fcard { max-width:600px; width:100%; }
 
 /* trust bar */
 .trust { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
