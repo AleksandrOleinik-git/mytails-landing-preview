@@ -311,7 +311,7 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 @media (max-width:776px){
   .team { grid-template-columns:1fr; }
   .tcard { grid-template-columns:1fr; }
-  .tcard img { height:auto; aspect-ratio:16/10; }
+  .tcard img { height:auto; aspect-ratio:10/10; }
 }
 .tcard b { font-size:19px; }
 .tcard .role { font-size:13px; font-weight:800; color:var(--primary); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
