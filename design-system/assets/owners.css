@@ -48,7 +48,7 @@
 .hero { background-image:url("hero-owners.webp"); }
 /* слоган на ПК — коричневый текст, белая тень (на ситтерах остаётся белый) */
 @media (min-width:681px){
-  .hero-slogan { color:var(--ink); text-shadow:1px 1px 4px #fff; }
+  .hero-slogan { color:var(--ink); text-shadow:1px 1px 1px #fff; max-width:100%; }
 }
 /* мобила: фон-«следы лап» без зверей, чуть темнее — карточка выделяется */
 @media (max-width:680px){ .hero { background-image:url("hero-owners-mobile.webp"); } }
