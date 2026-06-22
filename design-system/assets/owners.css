@@ -46,6 +46,8 @@
 
 /* собственный hero-фон у владельцев (sitters использует hero-bg.webp) */
 .hero { background-image:url("hero-owners.webp"); }
+/* мобила: фон-«следы лап» без зверей, чуть темнее — карточка выделяется */
+@media (max-width:680px){ .hero { background-image:url("hero-owners-mobile.webp"); } }
 
 /* 2-й блок Founding — наследует 2-колоночную раскладку ситтеров (карточка слева, фото справа) */
 
