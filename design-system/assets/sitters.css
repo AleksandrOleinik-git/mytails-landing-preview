@@ -88,7 +88,12 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
   max-width:600px; margin-bottom:clamp(20px,3vw,32px);
 }
 @media (max-width:680px){
-  .hero-slogan { color:var(--ink); text-shadow:none; }
+  .hero-slogan {
+    color:var(--ink); text-shadow:none;
+    background:rgba(255,255,255,.8);
+    border-radius:var(--r-lg);
+    padding:clamp(10px,3.5vw,40px);
+  }
 }
 @media (max-width:680px){
   .hero { background-image:url("hero-bg-mobile.webp"); }
