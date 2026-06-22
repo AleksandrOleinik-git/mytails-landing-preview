@@ -40,52 +40,16 @@
 }
 
 /* =========================================================================
-   Восстановление общих блоков, переписанных в sitters.css под лендинг ситтеров.
-   owners.html полагается на эти блоки в исходном виде. Грузится только тут —
-   на sitters не влияет.
+   Овнер-специфика (грузится только на owners.html, sitters не влияет).
+   hero / команда / footer теперь НАСЛЕДУЮТ дизайн ситтеров (overrides убраны).
    ========================================================================= */
 
-/* hero: у sitters теперь одна центрированная карточка; у владельцев — 2 колонки */
-.hero {
-  display:block; min-height:0;
-  background-image:
-    linear-gradient(rgba(243,236,224,.62), rgba(243,236,224,.62)),
-    url("hero-bg.webp");
-  padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(96px,14vw,170px);
-}
-[data-theme="dark"] .hero {
-  background-image:
-    linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
-    url("hero-bg.webp");
-}
-@media (max-width:680px){
-  .hero {
-    background-image:
-      linear-gradient(rgba(243,236,224,.42), rgba(243,236,224,.42)),
-      url("hero-bg-mobile.webp");
-  }
-  [data-theme="dark"] .hero {
-    background-image:
-      linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
-      url("hero-bg-mobile.webp");
-  }
-}
-.hero .inner {
-  max-width:1080px; width:auto;
-  display:grid; grid-template-columns:1.25fr 1fr;
-  gap:clamp(20px,3vw,36px); align-items:stretch;
-}
-@media (max-width:920px){ .hero .inner { grid-template-columns:1fr; } }
+/* 2-й блок Founding вынесен из hero — центрированная карточка (без фото справа) */
+.founding-feature { display:flex; justify-content:center; }
+.founding-feature .fcard { max-width:600px; width:100%; }
 
-/* команда: у владельцев фото сверху, текст снизу (sitters сделал фото слева) */
-.team { max-width:680px; margin-inline:auto; }
-.tcard { display:block; }
-.tcard img { width:100%; height:auto; aspect-ratio:1/1; }
-.tcard .body { align-self:auto; }
-@media (max-width:776px){ .team { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:560px){ .team { grid-template-columns:1fr; } }
-
-/* footer: вернуть сброс списков (sitters перешёл на инлайн-ссылки) */
-.site-footer .top { align-items:flex-start; }
-.site-footer .links ul { list-style:none; }
-.site-footer .links li { margin-bottom:8px; }
+/* «Почему спокойно» — фото вместо иконок, на всю ширину карточки */
+#why .wcard { padding:0; overflow:hidden; flex-direction:column; gap:0; }
+#why .wphoto { aspect-ratio:4/3; background:var(--surface-warm); }
+#why .wphoto img { width:100%; height:100%; object-fit:cover; display:block; }
+#why .wbody { padding:22px 24px 24px; }
