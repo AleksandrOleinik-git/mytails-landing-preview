@@ -39,7 +39,7 @@ body {
 @media (max-height:760px), (max-width:680px) {
   body { justify-content:flex-start; }
 }
-.wrap { width:100%; max-width:980px; text-align:center; }
+.wrap { width:100%; max-width:1080px; text-align:center; }
 .brand { display:inline-flex; }
 .brand img { height:clamp(56px,9vw,72px); width:auto; display:block; }
 .slogan {
@@ -48,7 +48,7 @@ body {
 }
 .intro { color:var(--ink-muted); font-size:clamp(14px,1.6vw,16px); margin-top:14px; }
 
-.tiles { display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.5vw,26px); margin-top:clamp(34px,5vw,52px); }
+.tiles { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,52px); margin-top:clamp(34px,5vw,52px); max-width:1080px; margin-inline:auto; }
 @media (max-width:680px){ .tiles { grid-template-columns:1fr; } }
 
 .tile {
@@ -92,7 +92,7 @@ body {
   .wrap {
     display:flex; flex-direction:column; align-items:center;
     flex:1 1 auto; min-height:0; max-height:100%;
-    max-width:none;
+    max-width:1080px;
   }
   .brand img { height:clamp(44px,6vh,72px); }
   .slogan { font-size:clamp(19px,3vh,30px); margin-top:clamp(8px,1.5vh,22px); }
@@ -128,7 +128,7 @@ body {
       <div class="body">
         <h2>Стать ситтером</h2>
         <p>Зарабатывайте, заботясь о питомцах. Гибкий график и стабильные заказы.</p>
-        <span class="go">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="go">Специальное предложение первым 100 ситтерам в Мадриде. <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -138,7 +138,7 @@ body {
       <div class="body">
         <h2>Владельцам питомцев</h2>
         <p>Найдите проверенного ситтера для вашего любимца рядом с домом.</p>
-        <span class="go">Подробнее <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="go">Получить бонус 15 евро <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </div>
     </a>
   </div>
