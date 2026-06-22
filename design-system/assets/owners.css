@@ -38,3 +38,54 @@
   font-size:13px; color:var(--ink-muted); margin-top:12px;
   max-width:460px; margin-inline:auto; line-height:1.5;
 }
+
+/* =========================================================================
+   Восстановление общих блоков, переписанных в sitters.css под лендинг ситтеров.
+   owners.html полагается на эти блоки в исходном виде. Грузится только тут —
+   на sitters не влияет.
+   ========================================================================= */
+
+/* hero: у sitters теперь одна центрированная карточка; у владельцев — 2 колонки */
+.hero {
+  display:block; min-height:0;
+  background-image:
+    linear-gradient(rgba(243,236,224,.62), rgba(243,236,224,.62)),
+    url("hero-bg.webp");
+  padding: clamp(36px,6vw,72px) var(--sp-gutter) clamp(96px,14vw,170px);
+}
+[data-theme="dark"] .hero {
+  background-image:
+    linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
+    url("hero-bg.webp");
+}
+@media (max-width:680px){
+  .hero {
+    background-image:
+      linear-gradient(rgba(243,236,224,.42), rgba(243,236,224,.42)),
+      url("hero-bg-mobile.webp");
+  }
+  [data-theme="dark"] .hero {
+    background-image:
+      linear-gradient(rgba(38,33,25,.64), rgba(38,33,25,.64)),
+      url("hero-bg-mobile.webp");
+  }
+}
+.hero .inner {
+  max-width:1080px; width:auto;
+  display:grid; grid-template-columns:1.25fr 1fr;
+  gap:clamp(20px,3vw,36px); align-items:stretch;
+}
+@media (max-width:920px){ .hero .inner { grid-template-columns:1fr; } }
+
+/* команда: у владельцев фото сверху, текст снизу (sitters сделал фото слева) */
+.team { max-width:680px; margin-inline:auto; }
+.tcard { display:block; }
+.tcard img { width:100%; height:auto; aspect-ratio:1/1; }
+.tcard .body { align-self:auto; }
+@media (max-width:776px){ .team { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .team { grid-template-columns:1fr; } }
+
+/* footer: вернуть сброс списков (sitters перешёл на инлайн-ссылки) */
+.site-footer .top { align-items:flex-start; }
+.site-footer .links ul { list-style:none; }
+.site-footer .links li { margin-bottom:8px; }
