@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1200px; height:630px; }
+  .card {
+    width:1200px; height:630px; position:relative; overflow:hidden;
+    background:#FAF6EF url("og-bg.webp") center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+  }
+  /* мягкое осветление центра — лого/слоган всегда читаются */
+  .glow {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 40% 56% at 50% 48%, rgba(255,250,243,.92) 0%, rgba(255,250,243,0) 70%);
+  }
+  /* безопасная зона ~600px по центру: при обрезке до квадрата (центральные 630px) не режется */
+  .center {
+    position:relative; z-index:1;
+    width:600px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:26px;
+  }
+  .center img { height:120px; width:auto; display:block; }
+  .slogan {
+    font-family:"Lora",serif; font-style:italic; font-weight:500;
+    font-size:34px; line-height:1.25; color:#5C4A3A;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="center">
+    <img src="logo-mark.svg" alt="MyTails">
+    <div class="slogan">Loving Care, While You're Not There.</div>
+  </div>
+</div>
+</body>
+</html>
