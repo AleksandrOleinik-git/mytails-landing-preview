@@ -44,9 +44,14 @@
    hero / команда / footer теперь НАСЛЕДУЮТ дизайн ситтеров (overrides убраны).
    ========================================================================= */
 
-/* 2-й блок Founding вынесен из hero — центрированная карточка (без фото справа) */
-.founding-feature { display:flex; justify-content:center; }
-.founding-feature .fcard { max-width:600px; width:100%; }
+/* собственный hero-фон у владельцев (sitters использует hero-bg.webp) */
+.hero { background-image:url("hero-owners.webp"); }
+
+/* 2-й блок Founding — наследует 2-колоночную раскладку ситтеров (карточка слева, фото справа) */
+
+/* trust-бар — по 2 пункта в строке, равные колонки */
+.trust .inner { display:grid; grid-template-columns:1fr 1fr; gap:16px clamp(24px,4vw,48px); max-width:780px; }
+@media (max-width:560px){ .trust .inner { grid-template-columns:1fr; } }
 
 /* «Почему спокойно» — фото вместо иконок, на всю ширину карточки */
 #why .wcard { padding:0; overflow:hidden; flex-direction:column; gap:0; }
