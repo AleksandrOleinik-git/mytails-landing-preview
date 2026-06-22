@@ -204,6 +204,14 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .fy p { font-size:13.5px; color:var(--ink-muted); margin-top:5px; }
 .foryou-note { text-align:center; color:var(--ink-muted); font-size:14px; margin-top:18px; font-style:italic; }
 
+/* услуги — фото вместо иконок, на всю ширину карточки */
+.services .fy { padding:0; overflow:hidden; display:flex; flex-direction:column; }
+.services .fy-photo { aspect-ratio:4/3; background:var(--surface-warm); }
+.services .fy-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.services .fy-body { padding:18px 20px 22px; }
+.services .fy-body b { font-size:16px; }
+.services .fy-body p { font-size:13.5px; color:var(--ink-muted); margin-top:5px; }
+
 /* 4 — калькулятор */
 .calc {
   background-color:var(--surface-warm);
