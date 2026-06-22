@@ -304,11 +304,12 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 .wcard p { font-size:14px; color:var(--ink-muted); margin-top:6px; }
 
 /* 8 — команда */
-.team { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:680px; margin-inline:auto; }
+.team { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
 @media (max-width:560px){ .team { grid-template-columns:1fr; } }
-.tcard { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
-.tcard img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
-.tcard .body { padding:20px 22px 24px; }
+.tcard { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; display:grid; grid-template-columns:190px 1fr; align-items:stretch; }
+.tcard img { width:100%; height:100%; object-fit:cover; display:block; }
+.tcard .body { padding:20px 22px 24px; align-self:center; }
+@media (max-width:400px){ .tcard { grid-template-columns:120px 1fr; } }
 .tcard b { font-size:19px; }
 .tcard .role { font-size:13px; font-weight:800; color:var(--primary); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
 .tcard p { font-size:13.5px; color:var(--ink-muted); margin-top:8px; }
@@ -342,14 +343,13 @@ body { background:var(--bg); color:var(--ink); font-family:"Manrope",sans-serif;
 /* 11 — footer */
 .site-footer { margin-top:var(--sp-section); background:var(--surface); border-top:1px solid var(--border); }
 .site-footer .inner { max-width:1080px; margin-inline:auto; padding:40px var(--sp-gutter); }
-.site-footer .top { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+.site-footer .top { display:flex; justify-content:flex-start; gap:clamp(40px,8vw,110px); flex-wrap:wrap; align-items:flex-start; }
 .site-footer .slogan { font-family:"Lora",serif; font-style:italic; font-size:clamp(13px,3.6vw,17px); color:var(--ink); margin-top:12px; max-width:none; white-space:nowrap; }
 .site-footer .links { display:flex; gap:28px; flex-wrap:wrap; }
-.site-footer .links ul { list-style:none; }
-.site-footer .links li { margin-bottom:8px; }
 .site-footer .links a { color:var(--ink-muted); text-decoration:none; font-size:13.5px; }
 .site-footer .links a:hover { color:var(--primary); }
-.site-footer .links .h { font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--ink); margin-bottom:12px; }
+.site-footer .links .h { display:block; font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--ink); margin-bottom:12px; }
+.site-footer .legal-row { display:flex; gap:24px; flex-wrap:wrap; }
 .site-footer .social { display:flex; gap:10px; margin-top:14px; }
 .site-footer .social a { width:36px; height:36px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--ink-muted); }
 .site-footer .social a:hover { color:var(--primary); border-color:var(--primary); }
